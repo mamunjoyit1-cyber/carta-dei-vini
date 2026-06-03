@@ -4,6 +4,31 @@ cat > /mnt/user-data/outputs/lago_bin_vini.html << 'ENDOFFILE'
 <!DOCTYPE html>
 <html lang="it">
 <head>
+  <style>
+.wine-icon{
+  width:22px;
+  height:22px;
+  object-fit:cover;
+  border-radius:3px;
+  vertical-align:middle;
+  margin-right:8px;
+}
+
+.wine-details{
+  display:none;
+  gap:20px;
+  align-items:flex-start;
+}
+
+.text{
+  flex:1;
+}
+
+.main-img{
+  width:160px;
+  cursor:pointer;
+}
+</style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lago Bin – Carta dei Vini</title>
@@ -331,6 +356,26 @@ cat > /mnt/user-data/outputs/lago_bin_vini.html << 'ENDOFFILE'
 </style>
 </head>
 <body>
+  <div class="wine">
+  <h3 onclick="toggleWine('lago')">
+    <img src="images/Lago Rosso.png" class="wine-icon">
+    Lago Rosso
+  </h3>
+
+  <div id="lago" class="wine-details">
+    <div class="text">
+      <p>
+        Vino rosso equilibrato con note di frutti rossi e spezie.
+      </p>
+    </div>
+
+    <div class="image">
+      <a href="images/Lago Rosso.png" target="_blank">
+        <img src="images/Lago Rosso.png" class="main-img">
+      </a>
+    </div>
+  </div>
+</div>
 
 <div class="header">
   <div class="header-eyebrow">✦ Hotel Ristorante ✦</div>
@@ -1750,6 +1795,17 @@ searchInput.addEventListener('input', function() {
     resultsBox.appendChild(wrap);
   });
 });
+  <script>
+function toggleWine(id){
+  const el=document.getElementById(id);
+
+  if(el.style.display==="flex"){
+    el.style.display="none";
+  }else{
+    el.style.display="flex";
+  }
+}
+</script>
 </script>
 </body>
 </html>
