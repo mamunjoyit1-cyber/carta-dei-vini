@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hotel Ristorante Lago Bin – Carta dei Vini</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Google Translate -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'it',
+    includedLanguages: 'it,en,fr,de,ru',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: false
+  }, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 <style>
 :root {
   --gold: #b8973a;
@@ -24,15 +38,15 @@
 html{scroll-behavior:smooth}
 body{
   font-family:'Montserrat',sans-serif;
-  background:var(--cream);
+  background:#f0ebe0;
   color:var(--text);
   min-height:100vh;
 }
 
-/* HEADER */
+/* ── HEADER ── */
 .header{
   background:var(--dark);
-  padding:28px 20px 20px;
+  padding:16px 20px 14px;
   text-align:center;
   position:sticky;
   top:0;
@@ -40,228 +54,280 @@ body{
   box-shadow:0 4px 20px rgba(0,0,0,0.5);
   border-bottom:2px solid var(--gold);
 }
-.header-logo{
+.header-top{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  margin-bottom:10px;
+}
+.header-logo-img{
+  height:48px;
+  width:auto;
+  object-fit:contain;
+  filter:brightness(1.1);
+}
+.header-logo-img-fallback{
+  height:48px;
+  width:48px;
+  background:var(--gold);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  color:var(--dark);
+  font-weight:700;
+  display:none;
+}
+.header-text{}
+.header-name{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(20px,5vw,32px);
+  font-size:clamp(18px,4.5vw,26px);
   font-weight:300;
-  letter-spacing:0.15em;
+  letter-spacing:0.12em;
   color:var(--gold-light);
   text-transform:uppercase;
-  margin-bottom:4px;
+  line-height:1.2;
 }
 .header-sub{
-  font-size:10px;
-  letter-spacing:0.3em;
+  font-size:9px;
+  letter-spacing:0.25em;
   color:#8a7550;
   text-transform:uppercase;
-  margin-bottom:14px;
+  margin-top:2px;
 }
-.header-controls{
+.header-bottom{
   display:flex;
   gap:10px;
   max-width:700px;
   margin:0 auto;
   align-items:center;
-  flex-wrap:wrap;
   justify-content:center;
+  flex-wrap:wrap;
 }
 .search-wrap{
   flex:1;
-  min-width:200px;
+  min-width:180px;
   position:relative;
 }
 .search-wrap svg{
   position:absolute;
-  left:12px;top:50%;
+  left:11px;top:50%;
   transform:translateY(-50%);
   color:#8a7550;
-  width:16px;height:16px;
+  width:15px;height:15px;
 }
 #searchInput{
   width:100%;
-  padding:9px 12px 9px 36px;
+  padding:8px 10px 8px 33px;
   border:1px solid var(--gold);
   border-radius:4px;
   background:rgba(255,255,255,0.07);
   color:var(--cream);
   font-family:'Montserrat',sans-serif;
-  font-size:13px;
+  font-size:12px;
   outline:none;
   transition:all 0.2s;
 }
 #searchInput::placeholder{color:#8a7550}
 #searchInput:focus{border-color:var(--gold-light);background:rgba(255,255,255,0.12)}
-.lang-select{
-  padding:9px 12px;
-  border:1px solid var(--gold);
+
+/* Google Translate widget styling */
+#google_translate_element{
+  display:inline-block;
+}
+#google_translate_element .goog-te-combo{
+  padding:8px 10px;
+  border:1px solid var(--gold) !important;
   border-radius:4px;
-  background:rgba(255,255,255,0.07);
-  color:var(--cream);
+  background:rgba(255,255,255,0.07) !important;
+  color:var(--cream) !important;
   font-family:'Montserrat',sans-serif;
   font-size:12px;
   outline:none;
   cursor:pointer;
-  min-width:110px;
+  min-width:120px;
 }
-.lang-select option{background:var(--dark2);color:var(--cream)}
+.goog-te-banner-frame{display:none!important}
+body{top:0!important}
 
-/* CATEGORY TABS */
-.cat-bar{
-  background:var(--dark2);
-  padding:0 16px;
+/* ── HINT BAR ── */
+.hint-bar{
+  background:var(--gold);
+  color:var(--dark);
+  text-align:center;
+  padding:9px 16px;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:0.06em;
+}
+
+/* ── MAIN ── */
+.main{max-width:800px;margin:0 auto;padding:16px 12px 60px}
+
+/* ── ACCORDION CATEGORY ── */
+.cat-section{
+  margin-bottom:8px;
+  border-radius:6px;
+  overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+.cat-header{
+  background:var(--gold);
+  color:var(--dark);
+  padding:14px 18px;
   display:flex;
-  gap:0;
-  overflow-x:auto;
-  scrollbar-width:none;
-  border-bottom:1px solid var(--border);
-}
-.cat-bar::-webkit-scrollbar{display:none}
-.cat-btn{
-  padding:12px 16px;
-  border:none;
-  background:none;
-  color:#8a7550;
-  font-family:'Montserrat',sans-serif;
-  font-size:11px;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
+  align-items:center;
+  justify-content:space-between;
   cursor:pointer;
-  white-space:nowrap;
-  border-bottom:2px solid transparent;
-  transition:all 0.2s;
+  user-select:none;
+  transition:background 0.2s;
 }
-.cat-btn:hover{color:var(--gold-light)}
-.cat-btn.active{color:var(--gold-light);border-bottom-color:var(--gold)}
-
-/* MAIN */
-.main{max-width:900px;margin:0 auto;padding:24px 16px 60px}
-
-/* SECTION */
-.section{margin-bottom:32px;animation:fadeIn 0.4s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.section-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:22px;
-  font-weight:300;
-  letter-spacing:0.1em;
-  color:var(--gold);
+.cat-header:hover{background:var(--gold-light)}
+.cat-header-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.cat-icon{font-size:17px}
+.cat-label{
+  font-family:'Montserrat',sans-serif;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.15em;
   text-transform:uppercase;
-  padding:12px 0 8px;
-  border-bottom:1px solid var(--border);
-  margin-bottom:12px;
 }
-.subsection-title{
-  font-size:11px;
+.cat-count{
+  font-size:10px;
+  background:rgba(0,0,0,0.15);
+  border-radius:10px;
+  padding:2px 8px;
+  font-weight:500;
+}
+.cat-arrow{
+  font-size:18px;
+  transition:transform 0.3s;
+  color:var(--dark2);
+}
+.cat-section.open .cat-arrow{transform:rotate(180deg)}
+.cat-body{
+  background:var(--white);
+  display:none;
+  animation:slideDown 0.25s ease;
+}
+.cat-section.open .cat-body{display:block}
+@keyframes slideDown{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SUBCATEGORY ── */
+.subcat-header{
+  padding:10px 18px 6px;
+  font-size:10px;
   letter-spacing:0.2em;
   color:var(--text-light);
   text-transform:uppercase;
-  margin:16px 0 10px;
-  font-weight:500;
+  font-weight:600;
+  border-bottom:1px solid #f0e8d8;
+  background:#fdfaf5;
 }
 
-/* WINE GRID */
-.wine-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+/* ── WINE LIST ROW ── */
+.wine-row{
+  display:flex;
+  align-items:center;
+  padding:12px 16px;
+  border-bottom:1px solid #f0e8d8;
+  cursor:pointer;
+  transition:background 0.15s;
   gap:14px;
 }
-
-/* WINE CARD */
-.wine-card{
-  background:var(--white);
-  border:1px solid #e8dcc8;
-  border-radius:6px;
-  overflow:hidden;
-  cursor:pointer;
-  transition:all 0.25s;
-  display:flex;
-  flex-direction:column;
-}
-.wine-card:hover{
-  border-color:var(--gold);
-  box-shadow:0 6px 24px rgba(184,151,58,0.15);
-  transform:translateY(-2px);
-}
-.card-img-wrap{
-  height:160px;
-  background:linear-gradient(135deg,#f5edd8,#ece0c6);
+.wine-row:last-child{border-bottom:none}
+.wine-row:hover{background:#fdf7ec}
+.wine-row-img{
+  width:42px;
+  flex-shrink:0;
   display:flex;
   align-items:center;
   justify-content:center;
-  position:relative;
-  overflow:hidden;
 }
-.card-img{
-  max-height:150px;
-  max-width:90px;
+.wine-row-img img{
+  width:36px;
+  height:72px;
   object-fit:contain;
-  filter:drop-shadow(0 4px 8px rgba(0,0,0,0.15));
-  transition:transform 0.3s;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,0.15));
 }
-.wine-card:hover .card-img{transform:scale(1.04)}
-.card-img-placeholder{
-  width:50px;height:100px;
-  background:linear-gradient(180deg,#c8b07a,#8a6a30);
-  border-radius:4px 4px 2px 2px;
-  opacity:0.35;
+.wine-row-img-placeholder{
+  width:28px;
+  height:58px;
+  background:linear-gradient(180deg,#d4af5a,#8a6a30);
+  border-radius:3px 3px 2px 2px;
+  opacity:0.4;
 }
-.zoom-btn{
-  position:absolute;
-  top:8px;right:8px;
-  width:28px;height:28px;
-  background:rgba(26,20,16,0.7);
-  border:1px solid var(--gold);
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--gold-light);
-  font-size:12px;
-  cursor:pointer;
-  opacity:0;
-  transition:opacity 0.2s;
-  z-index:2;
-}
-.wine-card:hover .zoom-btn{opacity:1}
-.card-body{
-  padding:12px 14px;
+.wine-row-info{
   flex:1;
-  display:flex;
-  flex-direction:column;
-  gap:4px;
+  min-width:0;
 }
-.card-name{
+.wine-row-name{
   font-family:'Cormorant Garamond',serif;
-  font-size:16px;
+  font-size:15px;
   font-weight:600;
   color:var(--dark);
   line-height:1.3;
+  margin-bottom:2px;
 }
-.card-sub{
-  font-size:11px;
-  color:var(--text-light);
-  letter-spacing:0.05em;
-}
-.card-footer{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:8px 14px 12px;
-  border-top:1px solid #f0e8d8;
-  margin-top:auto;
-}
-.card-price{
-  font-family:'Cormorant Garamond',serif;
-  font-size:18px;
-  font-weight:600;
-  color:var(--gold);
-}
-.card-region{
+.wine-row-sub{
   font-size:10px;
-  color:var(--text-light);
-  letter-spacing:0.08em;
-  text-transform:uppercase;
+  color:var(--gold);
+  font-style:italic;
+  letter-spacing:0.03em;
+}
+.wine-row-right{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-shrink:0;
+}
+.wine-row-price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:16px;
+  font-weight:600;
+  color:var(--text);
+}
+.wine-row-arrow{
+  color:#c8b07a;
+  font-size:18px;
+  font-weight:300;
 }
 
-/* MODAL */
+/* ── SEARCH RESULTS ── */
+.search-results{
+  background:var(--white);
+  border-radius:6px;
+  overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom:8px;
+  display:none;
+}
+.search-results.visible{display:block}
+.search-results-title{
+  background:var(--dark2);
+  color:var(--gold-light);
+  padding:10px 16px;
+  font-size:11px;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  font-weight:500;
+}
+
+/* ── NO RESULTS ── */
+.no-results{
+  text-align:center;
+  padding:50px 20px;
+  color:var(--text-light);
+}
+.no-results p{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic}
+
+/* ── MODAL ── */
 .modal-overlay{
   position:fixed;inset:0;
   background:rgba(10,8,5,0.85);
@@ -271,13 +337,11 @@ body{
   justify-content:center;
   padding:16px;
   backdrop-filter:blur(6px);
-  animation:fadeOverlay 0.2s ease;
 }
-@keyframes fadeOverlay{from{opacity:0}to{opacity:1}}
 .modal-overlay.open{display:flex}
 .modal{
   background:var(--white);
-  max-width:560px;
+  max-width:540px;
   width:100%;
   border-radius:10px;
   overflow:hidden;
@@ -289,7 +353,7 @@ body{
 @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .modal-img-area{
   background:linear-gradient(135deg,#f5edd8,#e8d8b8);
-  height:260px;
+  height:240px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -297,8 +361,8 @@ body{
   flex-shrink:0;
 }
 .modal-img{
-  max-height:240px;
-  max-width:160px;
+  max-height:220px;
+  max-width:150px;
   object-fit:contain;
   filter:drop-shadow(0 8px 20px rgba(0,0,0,0.2));
   cursor:zoom-in;
@@ -316,59 +380,58 @@ body{
   font-size:18px;
   cursor:pointer;
   transition:background 0.2s;
+  z-index:2;
 }
 .modal-close:hover{background:var(--dark)}
 .modal-body{
-  padding:20px 24px 24px;
+  padding:18px 22px 22px;
   overflow-y:auto;
   flex:1;
 }
 .modal-name{
   font-family:'Cormorant Garamond',serif;
-  font-size:24px;
+  font-size:22px;
   font-weight:600;
   color:var(--dark);
-  margin-bottom:4px;
+  margin-bottom:3px;
   line-height:1.2;
 }
 .modal-price{
   font-family:'Cormorant Garamond',serif;
-  font-size:22px;
+  font-size:20px;
   color:var(--gold);
   font-weight:600;
-  margin-bottom:16px;
+  margin-bottom:14px;
 }
 .modal-details{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:8px 16px;
+  gap:8px 14px;
   margin-bottom:14px;
 }
-.detail-item{}
 .detail-label{
-  font-size:10px;
+  font-size:9px;
   letter-spacing:0.15em;
   color:#8a7550;
   text-transform:uppercase;
   margin-bottom:2px;
 }
 .detail-value{
-  font-size:13px;
+  font-size:12px;
   color:var(--text);
   font-weight:500;
 }
 .modal-desc{
-  font-size:13px;
+  font-size:12px;
   line-height:1.7;
   color:var(--text-light);
   border-top:1px solid #f0e8d8;
   padding-top:12px;
-  margin-top:4px;
 }
 .modal-desc p{margin-bottom:8px}
-.modal-desc strong{color:var(--mid);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;display:block;margin-bottom:2px}
+.modal-desc strong{color:var(--mid);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;display:block;margin-bottom:2px}
 
-/* ZOOM LIGHTBOX */
+/* ── LIGHTBOX ── */
 .lightbox{
   position:fixed;inset:0;
   background:rgba(0,0,0,0.95);
@@ -379,84 +442,66 @@ body{
   cursor:zoom-out;
 }
 .lightbox.open{display:flex}
-.lightbox img{
-  max-width:90vw;
-  max-height:90vh;
-  object-fit:contain;
-  filter:drop-shadow(0 0 40px rgba(184,151,58,0.2));
-}
+.lightbox img{max-width:90vw;max-height:90vh;object-fit:contain}
 .lightbox-close{
   position:absolute;top:20px;right:24px;
-  color:var(--gold);
-  font-size:36px;
-  cursor:pointer;
-  line-height:1;
+  color:var(--gold);font-size:36px;cursor:pointer;line-height:1;
 }
 
-/* NO RESULTS */
-.no-results{
-  text-align:center;
-  padding:60px 20px;
-  color:var(--text-light);
-}
-.no-results svg{margin-bottom:16px;opacity:0.3}
-.no-results p{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic}
-
-/* FOOTER */
+/* ── FOOTER ── */
 .footer{
   text-align:center;
-  padding:24px;
-  font-size:10px;
+  padding:20px;
+  font-size:9px;
   letter-spacing:0.2em;
-  color:#8a7550;
   text-transform:uppercase;
   border-top:1px solid var(--border);
   background:var(--dark);
   color:#5c4a2a;
 }
 
-/* RESPONSIVE */
+/* ── RESPONSIVE ── */
 @media(max-width:480px){
-  .wine-grid{grid-template-columns:1fr 1fr}
   .modal-details{grid-template-columns:1fr}
-}
-@media(max-width:340px){
-  .wine-grid{grid-template-columns:1fr}
+  .cat-label{font-size:10px;letter-spacing:0.1em}
 }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="header-logo">Hotel Ristorante Lago Bin</div>
-  <div class="header-sub">Carta dei Vini &nbsp;·&nbsp; Wine List &nbsp;·&nbsp; Carte des Vins</div>
-  <div class="header-controls">
+  <div class="header-top">
+    <img class="header-logo-img" 
+         src="https://raw.githubusercontent.com/AbdullahBin2023/lago-bin/main/images.png"
+         alt="Lago Bin Logo"
+         onerror="this.style.display='none';document.getElementById('logoFallback').style.display='flex'">
+    <div class="header-logo-img-fallback" id="logoFallback">LB</div>
+    <div class="header-text">
+      <div class="header-name">Hotel Ristorante Lago Bin</div>
+      <div class="header-sub">Carta dei Vini &nbsp;·&nbsp; Wine List &nbsp;·&nbsp; Carte des Vins</div>
+    </div>
+  </div>
+  <div class="header-bottom">
     <div class="search-wrap">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
       <input type="text" id="searchInput" placeholder="Cerca vino / Search wine…" oninput="filterWines()">
     </div>
-    <select class="lang-select" id="langSelect" onchange="setLang(this.value)">
-      <option value="it">🇮🇹 Italiano</option>
-      <option value="en">🇬🇧 English</option>
-      <option value="fr">🇫🇷 Français</option>
-      <option value="de">🇩🇪 Deutsch</option>
-      <option value="bn">🇧🇩 বাংলা</option>
-    </select>
+    <div id="google_translate_element"></div>
   </div>
 </div>
 
-<div class="cat-bar" id="catBar"></div>
+<div class="hint-bar" id="hintBar">Tocca la categoria per espandere · Tocca il vino per i dettagli</div>
 
 <div class="main" id="mainContent"></div>
 
-<div class="footer">© Hotel Ristorante Lago Bin &nbsp;·&nbsp; Powered by Wineappy</div>
+<div class="footer">© Hotel Ristorante Lago Bin &nbsp;·&nbsp; Carta dei Vini Digitale</div>
 
 <!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal" id="modal">
+  <div class="modal">
     <div class="modal-img-area">
       <button class="modal-close" onclick="closeModalBtn()">×</button>
-      <img class="modal-img" id="modalImg" src="" alt="" onclick="openLightbox(this.src)">
+      <img class="modal-img" id="modalImg" src="" alt="" onclick="openLightbox(this.src)" style="display:none">
     </div>
     <div class="modal-body">
       <div class="modal-name" id="modalName"></div>
@@ -469,40 +514,13 @@ body{
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <span class="lightbox-close" onclick="closeLightbox()">×</span>
+  <span class="lightbox-close">×</span>
   <img id="lightboxImg" src="" alt="">
 </div>
 
 <script>
-// ── TRANSLATIONS ──────────────────────────────────────────────
-const T = {
-  it:{ paese:"Paese", regione:"Regione", gradazione:"Gradazione", uve:"Uve", colore:"Colore",
-       gusto:"Gusto", desc:"Descrizione", vinif:"Vinificazione", sigla:"Sigla", prezzo:"Prezzo",
-       search:"Cerca vino…", all:"Tutti", noRes:"Nessun vino trovato" },
-  en:{ paese:"Country", regione:"Region", gradazione:"Alcohol", uve:"Grapes", colore:"Colour",
-       gusto:"Taste", desc:"Description", vinif:"Winemaking", sigla:"Label", prezzo:"Price",
-       search:"Search wine…", all:"All", noRes:"No wines found" },
-  fr:{ paese:"Pays", regione:"Région", gradazione:"Alcool", uve:"Cépages", colore:"Couleur",
-       gusto:"Goût", desc:"Description", vinif:"Vinification", sigla:"Appellation", prezzo:"Prix",
-       search:"Chercher un vin…", all:"Tous", noRes:"Aucun vin trouvé" },
-  de:{ paese:"Land", regione:"Region", gradazione:"Alkohol", uve:"Trauben", colore:"Farbe",
-       gusto:"Geschmack", desc:"Beschreibung", vinif:"Weinbereitung", sigla:"Bezeichnung", prezzo:"Preis",
-       search:"Wein suchen…", all:"Alle", noRes:"Keine Weine gefunden" },
-  bn:{ paese:"দেশ", regione:"অঞ্চল", gradazione:"অ্যালকোহল", uve:"আঙুর", colore:"রঙ",
-       gusto:"স্বাদ", desc:"বিবরণ", vinif:"ওয়াইন তৈরি", sigla:"লেবেল", prezzo:"মূল্য",
-       search:"ওয়াইন খুঁজুন…", all:"সব", noRes:"কোনো ওয়াইন পাওয়া যায়নি" }
-};
-let lang = 'it';
-function t(k){ return T[lang][k]||T.it[k]||k }
-function setLang(l){
-  lang=l;
-  document.getElementById('searchInput').placeholder=t('search');
-  renderAll();
-}
-
 // ── WINE DATA ──────────────────────────────────────────────────
 const WINES = [
-
   // ─── VINI DEL LAGO BIN ────────────────────────────────────
   { id:'bollicine-lago', cat:'lago', subcat:'Selezioni Vini Lago Bin',
     name:'Le Bollicine del Lago', price:16, img:'images/le-bollicine-del-lago.png',
@@ -610,38 +628,38 @@ const WINES = [
   },
 
   // ─── VINI DEL TERRITORIO – BIANCHI ────────────────────────
-  { id:'vermentino-poggio-elmo', cat:'territorio', subcat:'Selezione vini bianchi del territorio',
+  { id:'vermentino-poggio-elmo', cat:'territorio', subcat:'Vini Bianchi del Territorio',
     name:'Vermentino RLP – Poggio dell\' Elmo', price:25, img:'images/vermentino-poggio-elmo.png',
     sigla:'Vermentino DOC', paese:'Italia', regione:'Liguria', gradazione:'12,5%', uve:'100% Vermentino', colore:'Giallo paglierino con riflessi verdolini',
     desc:'Al naso si apre con un bouquet elegante e delicato: fiori di campo che evocano la natura incontaminata, note erbacee fresche e un accenno vivace di mela verde croccante. Al palato si distingue per una fresca acidità, che dona slancio e vivacità al sorso',
     vinif:'5 ore a contatto con le bucce con controllo della temperatura 5 mesi in acciaio'
   },
-  { id:'vermentino-terre-bianche', cat:'territorio', subcat:'Selezione vini bianchi del territorio',
+  { id:'vermentino-terre-bianche', cat:'territorio', subcat:'Vini Bianchi del Territorio',
     name:'Vermentino RLP – Terre Bianche', price:33, img:'images/vermentino-terre-bianche.png',
     paese:'Italia', regione:'Liguria', uve:'Vermentino', colore:'Giallo scarico con riflessi verde ramarro',
     gusto:'Sapore fresco e persistente, gradevolmente morbido e scorrevole, su una stoffa delicata e continua',
     desc:'Fiori bianchi e mare, un connubio ligure d\'eccellenza in apertura, sapido ma gentile e piacevole al gusto. Ottimo per un aperitivo in riva al mare, magari con grigliata di pesce',
     vinif:'Ottenuto dalla pressatura soffice delle uve Vermentino e vinificato a temperatura controllata con lieviti selezionati e permanenza sulle fecce fini'
   },
-  { id:'vermentino-foresti', cat:'territorio', subcat:'Selezione vini bianchi del territorio',
+  { id:'vermentino-foresti', cat:'territorio', subcat:'Vini Bianchi del Territorio',
     name:'Vermentino RLP – Foresti – 100% Vermentino', price:26, img:'images/vermentino-foresti.png',
     paese:'Italia', regione:'Liguria', gradazione:'12%', uve:'100% Vermentino', colore:'Colore giallo paglierino intenso con riflessi dorati',
     gusto:'Profumo intenso e persistente, fine ed elegante, con sentori di erbe e fiori freschi di campo'
   },
-  { id:'pigato-soli-foresti', cat:'territorio', subcat:'Selezione vini bianchi del territorio',
+  { id:'pigato-soli-foresti', cat:'territorio', subcat:'Vini Bianchi del Territorio',
     name:'Pigato RLP – I Soli – Foresti', price:26, img:'images/pigato-foresti.png',
     paese:'Italia', regione:'Liguria', gradazione:'12%', uve:'100% Pigato', colore:'Giallo paglierino intenso con riflessi verdognoli',
     gusto:'Di buon corpo e continuità, con un caratteristico fondo amarognolo',
     desc:'Intenso e persistente, con sentori di pesca, miele, fiori e muschio',
     vinif:'Macerazione pellicolare a temperatura ambiente per circa 12 ore. Chiarifica a freddo del mosto con enzimi selezionati. Affinamento in vasche di acciaio inox per 5 mesi, di cui 3 "sur lie"'
   },
-  { id:'pigato-nemu', cat:'territorio', subcat:'Selezione vini bianchi del territorio',
+  { id:'pigato-nemu', cat:'territorio', subcat:'Vini Bianchi del Territorio',
     name:'Pigato RLP – Nemu', price:24, img:'images/pigato-nemu.png',
     paese:'Italia', regione:'Liguria', uve:'Pigato', colore:'Giallo paglierino, che può evolvere verso tonalità dorate con l\'invecchiamento',
     gusto:'Moderata struttura e buona freschezza, di buona persistenza aromatica',
     desc:'Intenso e caratteristico, con note di macchia mediterranea e frutti a polpa gialla'
   },
-  { id:'pigato-cygnus', cat:'territorio', subcat:'Selezione vini bianchi del territorio',
+  { id:'pigato-cygnus', cat:'territorio', subcat:'Vini Bianchi del Territorio',
     name:'Pigato RLP Cygnus – Poggio dei Gorleri', price:38, img:'images/pigato-cygnus-gorleri.png',
     gradazione:'13%', uve:'100% Pigato', colore:'Giallo paglierino luminoso',
     gusto:'Morbido, sapido, equilibrato e fresco, con una viva acidità che ne esalta la freschezza',
@@ -650,14 +668,14 @@ const WINES = [
   },
 
   // ─── VINI DEL TERRITORIO – ROSSI ──────────────────────────
-  { id:'rossese-poggi-elmo-2022', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'rossese-poggi-elmo-2022', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Rossese di Dolceacqua – Poggi dell\' Elmo 2022', price:28, img:'images/poggi-dellelmo-rossese-di-dolceacqua-2022.png',
     paese:'Italia', regione:'Liguria', gradazione:'13%', uve:'100% Rossese', colore:'Rosso rubino con riflessi violacei',
     gusto:'Fresco in bocca con sentori di ciliegia sotto spirito',
     desc:'Rosa canina, spezie che ricordano il pepe nero. Accompagna piatti tipici della cucina ligure, va servito ad un temperatura abbastanza fresca intorno ai 16°',
     vinif:'In acciaio con controllo della temperatura'
   },
-  { id:'rossese-pini-2022', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'rossese-pini-2022', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Rossese di Dolceacqua Superiore Pini – Poggi dell\'Elmo 2022', price:36,
     img:'images/rossese-pini-2022.png',
     paese:'Italia', regione:'Liguria', gradazione:'14,5%', uve:'100% Rossese', colore:'Rosso rubino con riflessi violacei',
@@ -665,162 +683,143 @@ const WINES = [
     desc:'Note di ciliegia ben matura, mentuccia, speziato, balsamico e pepe nero. Accompagna formaggi piccanti, coniglio alla ligure, cinghiale e capra e fagioli',
     vinif:'15 giorni sulle bucce in acciaio con controllo della temperatura. Periodo di affinamento: 12 mesi in acciaio'
   },
-  { id:'rossese-cima-tramontina', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'rossese-cima-tramontina', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Rossese di Dolceacqua Cima Tramontina – Du Nemu 2022', price:24,
     img:'images/rossese-cima-tramontina-2022.png',
     paese:'Italia', regione:'Liguria', gradazione:'12,5%', uve:'100% Rossese Di Dolceacqua', colore:'Rosso rubino tenue',
     gusto:'Asciutto, sapido, minerale, con tannini moderati e un finale amarognolo tipico del Rossese',
-    desc:'Note di fragole di bosco, lamponi, nespole e pepe nero. Si sposa perfettamente con piatti tipici della cucina ligure, come: Coniglio alla ligure Torte di verdure Affettati e formaggi freschi o di media stagionatura Tonno scottato',
+    desc:'Note di fragole di bosco, lamponi, nespole e pepe nero. Si sposa perfettamente con piatti tipici della cucina ligure',
     vinif:'Fermentazione in acciaio inox a temperatura controllata (28°C), macerazione di 4–6 giorni con rimontaggi e delestage, fermentazione malolattica e affinamento in acciaio inox'
   },
-  { id:'rossese-superiore-nemu-2021', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'rossese-superiore-nemu-2021', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Rossese di Dolceacqua Superiore – Du Nemu 2021', price:34,
     img:'images/rossese-superiore-du-nemu-2021.png',
     paese:'Italia', regione:'Liguria', gradazione:'14%', uve:'100% Rossese Di Dolceacqua', colore:'Rosso rubino intenso',
     gusto:'Asciutto, sapido, minerale, con tannini eleganti e un finale lungo e amarognolo',
-    desc:'Note di lamponi, ribes, fragoline di bosco e una piacevole sfumatura speziata. Si sposa perfettamente con piatti tipici della cucina ligure, come: Cacciagione Capra e fagioli Formaggi di media e lunga stagionatura. Ottimo anche da solo, dopo cena, per accompagnare una conversazione tra amici'
+    desc:'Note di lamponi, ribes, fragoline di bosco e una piacevole sfumatura speziata.'
   },
-  { id:'rossese-foresti-2022', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'rossese-foresti-2022', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Rossese di Dolceacqua – Foresti 2022', price:26, img:'images/foresti-rossese-di-dolceacqua-2022.png',
     paese:'Italia', regione:'Liguria', gradazione:'13%', uve:'100% Rossese Di Ventimiglia', colore:'Rosso rubino chiaro, che tende al granato con l\'invecchiamento',
     gusto:'Asciutto, di medio corpo, con un piacevole retrogusto di mandorla e una buona persistenza',
-    desc:'Aromi floreali di rosa e viola, con sentori fruttati. Si abbina perfettamente a piatti tipici della cucina ligure, come: Antipasti all\'italiana Pasta con fagioli e cozze Minestre ripiene Arrosti e selvaggina Coniglio in umido Brasati e lepri in salmi',
+    desc:'Aromi floreali di rosa e viola, con sentori fruttati.',
     vinif:'Affinamento: 5 mesi in vasche di acciaio inox'
   },
-  { id:'rossese-luvaira-foresti', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'rossese-luvaira-foresti', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Rossese di Dolceacqua Luvaira – Foresti 2021', price:32, img:'images/rossese-luvaira-foresti-2021.png',
     paese:'Italia', regione:'Liguria', gradazione:'13%', uve:'100% Rossese Di Dolceacqua', colore:'Colore rosso rubino',
     gusto:'Buona acidità e freschezza, con tannini morbidi e retrogusto fruttato, con buona nota minerale',
-    desc:'È prodotto con uve di un vigneto centenario coltivato su terreni scoscesi e ben esposti al sole',
-    vinif:'Prodotto da una singola vigna di un ttarp situata nel comune di San Biagio della Cima impiantata nel 1913. La fermentazione avviene in acciaio ad opera di lieviN indigeni, con una macerazione di 10-12 giorni. Successivamente il vino affina almeno 6 mesi in barriques usate'
+    desc:'È prodotto con uve di un vigneto centenario coltivato su terreni scoscesi e ben esposti al sole'
   },
-  { id:'rossese-beragna-ka-mancine', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'rossese-beragna-ka-mancine', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Rossese di Dolceacqua Beragna – Ka Mancine 2021', price:32,
     img:'images/rossese-beragna-ka-mancine-2021.png',
     paese:'Italia', regione:'Liguria', gradazione:'13%', uve:'100% Rossese', colore:'Rubino brillante',
     gusto:'Di medio corpo, fresco e fragrante, con tannini delicati e un finale sapido',
-    desc:'Eleganti note di pepe nero, frutta rossa matura e tabacco. Si abbina perfettamente a piatti a base di pesce, come risotto ai frutti di mare, zuppe e pesce in umido. È ottimo anche con carne rossa in umido',
-    vinif:'Fermentazione in acciaio a temperatura controllata con macerazione sulle bucce; maturazione in acciaio per alcuni mesi'
+    desc:'Eleganti note di pepe nero, frutta rossa matura e tabacco.'
   },
-  { id:'rossese-galeae-2022', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'rossese-galeae-2022', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Rossese di Dolceacqua Galeae – Ka Mancine 2022', price:36,
     img:'images/rossese-galeae-ka-mancine-2022.png',
     sigla:'DOC Rossese', paese:'Italia', regione:'Liguria', gradazione:'13,5%', uve:'100% Rossese', colore:'Rosso rubino intenso',
     gusto:'Secco, caldo, morbido, discretamente strutturato, con ottima persistenza e finale fresco e sapido',
-    desc:'Aromi di melograno, pepe bianco e note speziate. Si abbina perfettamente a piatti a base di carne rossa, selvaggina e formaggi stagionati ed erborinati',
-    vinif:'Vendemmia tardiva, diraspatura immediata, fermentazione con macerazione lunga sulle bucce, affinamento in acciaio'
+    desc:'Aromi di melograno, pepe bianco e note speziate.'
   },
-  { id:'rossese-ange-2024', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'rossese-ange-2024', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Rossese di Dolceacqua Ange – Ka Mancine 2024', price:44,
     img:'images/ka-mancine-rossese-di-dolceacqua-ange-2024.png',
     paese:'Italia', regione:'Liguria', gradazione:'13%', uve:'Rossese', colore:'Rosso rubino brillante, tipico dei Rossese, con riflessi violacei',
     gusto:'In bocca il vino si presenta elegante e bilanciato, con una buona struttura e freschezza',
-    desc:'Il bouquet è complesso e ricco, con note di frutti rossi (come ciliegia e fragola), spezie (pepe nero e note di tabacco) e una leggera sfumatura di erbe mediterranee',
-    vinif:'Fermentazione in acciaio a temperatura controllata, con macerazione sulle bucce per estrarre colore e aromi. Affinamento in acciaio per alcuni mesi per preservare la freschezza e il frutto'
+    desc:'Il bouquet è complesso e ricco, con note di frutti rossi, spezie e una leggera sfumatura di erbe mediterranee'
   },
-  { id:'rossese-terre-bianche-2022', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'rossese-terre-bianche-2022', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Rossese di Dolceacqua – Terre Bianche 2022', price:32,
     img:'images/terre-bianche-rossese-di-dolceacqua-2022.png',
-    paese:'Italia', regione:'Liguria', gradazione:'13,5%', uve:'100% Rossese', colore:'Rosso rubino con riflessi granati, che possono accentuarsi con l\'invecchiamento',
+    paese:'Italia', regione:'Liguria', gradazione:'13,5%', uve:'100% Rossese', colore:'Rosso rubino con riflessi granati',
     gusto:'Al palato si presenta sapido, elegante, caldo e di buona freschezza, con una nota amarognola',
-    desc:'Bouquet ampio e intenso con sentori di frutti rossi di bosco, ciliegia, rosa canina e spezie. Ideale con pesce azzurro, carni bianche, coniglio, stoccafisso e torte di verdura',
-    vinif:'La vinificazione avviene con macerazione di uve totalmente diraspate, utilizzando lieviti autoctoni e a temperature controllate sotto i 29°C'
+    desc:'Bouquet ampio e intenso con sentori di frutti rossi di bosco, ciliegia, rosa canina e spezie.'
   },
-  { id:'rossese-bricco-arcagna', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'rossese-bricco-arcagna', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Rossese di Dolceacqua Bricco Arcagna – Terre Bianche 2017', price:64,
     img:'images/rossese-bricco-arcagna-terre-bianche-2017.png',
     paese:'Italia', regione:'Liguria', gradazione:'13,5%', uve:'100% Rossese', colore:'Rosso rubino con riflessi granati',
     gusto:'Tannini setosi, sapidità equilibrata e finale leggermente amarognolo',
-    desc:'Note di ciliegia sotto spirito, spezie dolci, incenso e un accenno balsamico. Ideale con carni rosse alla griglia, selvaggina da piuma, coniglio alla ligure e capra con fagioli',
-    vinif:'Fermentazione con lieviti indigeni, macerazione a temperatura controllata e affinamento in barrique da 225 litri'
+    desc:'Note di ciliegia sotto spirito, spezie dolci, incenso e un accenno balsamico.'
   },
-  { id:'rossese-testalonga', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'rossese-testalonga', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Rossese di Dolceacqua Testalonga', price:56, img:'images/rossese-testalonga.png',
     paese:'Italia', regione:'Liguria', uve:'100% Rossese', colore:'Rosso chiaro, quasi trasparente',
     gusto:'Elegante e leggero, con tannini setosi e una vivace acidità. Il finale è lungo, con richiami salini',
-    desc:'Note floreali di violetta e rosa, frutti rossi come ciliegia e ribes, con sfumature mediterranee di erbe aromatiche e spezie',
-    vinif:'La vinificazione avviene in modo artigianale: fermentazione spontanea con grappoli interi, pigiatura con i piedi, macerazione di circa due settimane e affinamento in vecchie botti di rovere, senza filtrazioni né aggiunta di solfiti'
+    desc:'Note floreali di violetta e rosa, frutti rossi come ciliegia e ribes, con sfumature mediterranee di erbe aromatiche e spezie'
   },
-  { id:'roccese-masala', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'roccese-masala', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Roccese – Masala', price:49, img:'images/roccese-masala.png',
     paese:'Italia', regione:'Liguria', gradazione:'13%', uve:'Uve Rossese E Altri Vitigni Autoctoni', colore:'Rosso rubino intenso',
-    gusto:'Equilibrato, persistente, con una struttura che riflette il terroir roccioso e le condizioni estreme',
-    desc:'Note di erbe aromatiche come rosmarino, salvia e finocchio selvatico, derivanti dalla flora spontanea che cresce tra i filari',
-    vinif:'Fermentazione in acciaio per 12 mesi'
+    gusto:'Equilibrato, persistente, con una struttura che riflette il terroir roccioso',
+    desc:'Note di erbe aromatiche come rosmarino, salvia e finocchio selvatico'
   },
-  { id:'roccese-barricato-masala', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'roccese-barricato-masala', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Roccese Barricato – Masala', price:63, img:'images/roccese-barricato-masala.png',
     paese:'Italia', regione:'Liguria', uve:'Rossese E Altri Vitigni Autoctoni', colore:'Rosso rubino intenso, tendente al granato',
     gusto:'Ben equilibrato, ricco e strutturato, con tannini morbidi e una lunga persistenza',
-    desc:'Intenso e complesso, con note di erbe aromatiche e officinali tipiche del territorio, arricchite da sfumature legnose derivanti dall\'affinamento in botte. Si abbina perfettamente a piatti strutturati e saporiti, come: Carni rosse alla griglia o in umido. Formaggi stagionati. Piatti tipici della cucina ligure, come il coniglio alla ligure o lo stoccafisso',
-    vinif:'Il vino viene trasferito in botti di legno esauste per un ulteriore affinamento di 15 mesi'
+    desc:'Intenso e complesso, con note di erbe aromatiche e officinali tipiche del territorio'
   },
-  { id:'rossese-dolceacqua-generic', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'rossese-dolceacqua-generic', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Rossese di Dolceacqua', price:45,
     paese:'Italia', regione:'Liguria', gradazione:'14%', uve:'100% Rossese', colore:'Rosso rubino chiaro con riflessi violacei',
-    gusto:'Fresco, con tannini morbidi e una buona acidità che conferisce eleganza e longevità al vino',
-    desc:'Note di frutti rossi maturi, erbe aromatiche, sottobosco e una leggera mineralità',
-    vinif:'Affinamento: In acciaio per circa 10 mesi'
+    gusto:'Fresco, con tannini morbidi e una buona acidità',
+    desc:'Note di frutti rossi maturi, erbe aromatiche, sottobosco e una leggera mineralità'
   },
-  { id:'rossese-peverelli', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'rossese-peverelli', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Rossese di Dolceacqua Superiore Peverelli – Luigi Mauro 2021', price:39,
     img:'images/rossese-peverelli-luigi-mauro-2021.png',
-    paese:'Italia', regione:'Liguria', gradazione:'13,5%', uve:'100% Rossese', colore:'Rosso rubino intenso e brillante, tipico della varietà Rossese',
+    paese:'Italia', regione:'Liguria', gradazione:'13,5%', uve:'100% Rossese', colore:'Rosso rubino intenso e brillante',
     gusto:'Equilibrato, con una buona acidità che ne esalta la freschezza',
-    desc:'Il bouquet olfattivo è fresco e complesso, con note floreali di petali di rosa e sentori di macchia mediterranea (rosmarino, timo, pino ed elicriso)'
+    desc:'Il bouquet olfattivo è fresco e complesso, con note floreali di petali di rosa e sentori di macchia mediterranea'
   },
-  { id:'roccese-masala-2', cat:'territorio', subcat:'Selezione vini rossi del territorio',
-    name:'Roccese – Masala (2)', price:49,
-    paese:'Italia', regione:'Liguria', gradazione:'13%', uve:'Uve Rossese E Altri Vitigni Autoctoni', colore:'Rosso rubino intenso',
-    gusto:'Equilibrato, persistente',
-    desc:'Note di erbe aromatiche come rosmarino, salvia e finocchio selvatico',
-    vinif:'Fermentazione in acciaio per 12 mesi'
-  },
-  { id:'roccese-du-nemu', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'roccese-du-nemu', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Roccese dolceacqua et rossa du nemu', price:24, img:'images/roccese-rossa-du-nemu.png',
     paese:'Italia', regione:'Liguria', gradazione:'12,5%', uve:'Rossese 100%', colore:'Rosso rubino leggero',
     gusto:'Tannico, asciutto e preciso, sapido, minerale sul finale',
-    desc:'Al palato, si rivela vivace e armonioso, con tannini soffici e un finale lungo e memorabile',
-    vinif:'Fermentazione alcolica in acciaio Affinamento di alcuni mesi in acciaio'
+    desc:'Al palato, si rivela vivace e armonioso, con tannini soffici e un finale lungo e memorabile'
   },
-  { id:'roccese-bucciardino', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'roccese-bucciardino', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Roccese dolceacqua bucciardino ka mancine 2023', price:39, img:'images/roccese-bucciardino-ka-mancine-2023.png',
     paese:'Italia', regione:'Liguria', gradazione:'13%', uve:'Rossese',
     desc:'Persistente e di discreta struttura, risulta caldo, morbido, fine e con una buona sapidità'
   },
-  { id:'rossese-maccario-ringenberg', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'rossese-maccario-ringenberg', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Rossese di dolceacqua 2021 Maccario Dringenberg', price:37,
     img:'images/rossese-maccario-ringenberg-2021.png',
     sigla:'Rossese Di Dolceacqua DOC', paese:'Italia', regione:'Liguria', gradazione:'13,5%', uve:'100% Rossese', colore:'Rosso Rubino con riflessi violacei',
     gusto:'Fresco e piacevolmente fruttato',
     desc:'Al palato è di medio corpo, elegante e con una bella freschezza'
   },
-  { id:'rossese-fratelli-maccario', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'rossese-fratelli-maccario', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Rossese di Dolceacqua Fratelli Macario', price:45, img:'images/rossese-fratelli-maccario.png',
     paese:'Italia', regione:'Liguria', gradazione:'13,5%', uve:'Rossese 100%', colore:'Rosso rubino trasparente e luminoso',
     gusto:'Un corredo fruttato denso e deciso',
-    desc:'Al palato, il Fratelli Maccario apre con note fruttate dolci e si sviluppa in un ricco ventaglio speziato. Esprime con nitidezza l\'austerità dell\'annata calda e siccitosa',
-    vinif:'Fermentazione spontanea in acciaio. Affinamento, sempre in acciaio, per circa 10 mesi'
+    desc:'Al palato, il Fratelli Maccario apre con note fruttate dolci e si sviluppa in un ricco ventaglio speziato.'
   },
-  { id:'rossese-curli', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+  { id:'rossese-curli', cat:'territorio', subcat:'Vini Rossi del Territorio',
     name:'Rossese Curli', price:54, img:'images/rossese-curli.png',
     paese:'Italia', regione:'Liguria', gradazione:'14%', uve:'Rossese 100%', colore:'Rosso rubino',
     desc:'Sottobosco, bacche, frutti di bosco. Intenso, sapido, corposo'
   },
 
   // ─── VINI DEL TERRITORIO – ROSATI ─────────────────────────
-  { id:'rossese-rosato-du-nemu', cat:'territorio', subcat:'Selezione vini rosati del territorio',
+  { id:'rossese-rosato-du-nemu', cat:'territorio', subcat:'Vini Rosati del Territorio',
     name:'Rossese di Dolceacqua Rosato – Du Nemu', price:21, img:'images/rossese-rosato-du-nemu.png',
     paese:'Italia', regione:'Liguria', uve:'100% Rossese', colore:'Rosa scarico',
     desc:'Il vino, fresco e fruttato ricorda le sensazioni varietali del vitigno da cui deriva, ciliegia, rosa, piccoli frutti rossi',
-    vinif:'Le uve rosse di Rossese di Dolceacqua vinificate in bianco per esaltare le note fruttate e la freschezza del vino con una macerazione di due ore in pressa per ottenere un colore rosa scarico'
+    vinif:'Le uve rosse di Rossese di Dolceacqua vinificate in bianco per esaltare le note fruttate e la freschezza del vino'
   },
-  { id:'rossese-rosato-ka-mancine', cat:'territorio', subcat:'Selezione vini rosati del territorio',
+  { id:'rossese-rosato-ka-mancine', cat:'territorio', subcat:'Vini Rosati del Territorio',
     name:'Rossese di Dolceacqua Rosato – Ka Mancine', price:23, img:'images/rossese-rosato-ka-mancine.png',
     paese:'Italia', regione:'Liguria', gusto:'Finale dolce con una punta di amarognolo',
-    desc:'Al palato risulta secco, caldo, morbido, discretamente strutturato con ottima la persistenza, equilibrato finale fresco, abbastanza sapido'
+    desc:'Al palato risulta secco, caldo, morbido, discretamente strutturato con ottima la persistenza'
   },
-  { id:'rossese-rosato-poggi-elmo', cat:'territorio', subcat:'Selezione vini rosati del territorio',
+  { id:'rossese-rosato-poggi-elmo', cat:'territorio', subcat:'Vini Rosati del Territorio',
     name:'Rossese di Dolceacqua Rosato – Poggi dell\' Elmo', price:21,
     img:'images/rossese-rosato-poggi-del-elmo.png',
     paese:'Italia', regione:'Liguria', colore:'Rosa tenue',
@@ -838,9 +837,8 @@ const WINES = [
   { id:'falanghina-2022', cat:'bianchi', subcat:'Selezione vini Bianchi Nazionali',
     name:'Falanghina Beneventano – Vinosia 2022', price:18, img:'images/vinosia-falanghina-beneventano-2022.png',
     sigla:'Falanghina IGT', gradazione:'12,5%', uve:'Falanghina', colore:'Giallo paglierino intenso',
-    gusto:'Buon corpo, rotondo, con un sorso perfettamente equilibrato. Una lunghezza finale. Interessante in',
-    desc:'Note fruttate, anche esotici, sentori di banana, ananas, kiwi',
-    vinif:'Pigiatura soffice, pressatura dei grappoli interi, fermentazione aiutata con lieviti autoctoni, manolattica non svolta completamente'
+    gusto:'Buon corpo, rotondo, con un sorso perfettamente equilibrato.',
+    desc:'Note fruttate, anche esotici, sentori di banana, ananas, kiwi'
   },
   { id:'gewurztraminer-2022', cat:'bianchi', subcat:'Selezione vini Bianchi Nazionali',
     name:'A.A. Gewürztraminer – Muri-Gries 2022', price:27, img:'images/aa-gewurztraminer-muri-gries-2022.png',
@@ -853,15 +851,12 @@ const WINES = [
     name:'Soave (Garganega 100%) – Latium 2021', price:18, img:'images/soave-latium-2021.png',
     paese:'Italia', regione:'Veneto', uve:'Garganega 100%', colore:'Giallo paglierino intenso e luminoso',
     gusto:'Al palato morbido, intenso ed avvolgente con una piacevole acidità sul finale',
-    desc:'Profumi fruttati tendenti al maturo, pesca gialla, accenni di mela cotogna e bergamotto con ricordi tipici di frutta esotica',
-    vinif:'L\'uva appassita per 30/40 giorni, viene diraspata e macerata in pressa per 12 ore. Seguono pulizia statica e fermentazione controllata a max. 15 °C per 15/20 gg in acciaio inox'
+    desc:'Profumi fruttati tendenti al maturo, pesca gialla, accenni di mela cotogna e bergamotto'
   },
   { id:'sauvignon', cat:'bianchi', subcat:'Selezione vini Bianchi Nazionali',
     name:'Sauvignon', price:21, img:'images/sauvignon.png',
     paese:'Italia', regione:'Friuli Venezia Giulia', gradazione:'12%', uve:'Sauvignon', colore:'Colore giallo paglierino luminoso',
-    gusto:'In bocca, il vino è equilibrato, con una freschezza che lo rende incredibilmente bevibile e un corp',
-    desc:'Al gusto si presenta aromatico, delicato, asciutto',
-    vinif:'VINIFICAZIONE: pressatura soffice e fermentazione a temperatura controllata di 18°C in assenza di solfiti. MATURAZIONE: in vasche di acciaio inox'
+    desc:'Al gusto si presenta aromatico, delicato, asciutto'
   },
 
   // ─── VINI ROSATI NAZIONALI ─────────────────────────────────
@@ -882,77 +877,74 @@ const WINES = [
     name:'Barbaresco Biologico – Nada 2019', price:59, img:'images/barbaresco-biologico-nada-2019.png',
     paese:'Italia', regione:'Piemonte', gradazione:'14%', uve:'100% Nebbiolo', colore:'Rosso granato brillante',
     gusto:'Elegante, sapido, con tannini levigati e una lunga persistenza',
-    desc:'Intensi sentori floreali, con note di frutti rossi e spezie. Ideale con arrosti, formaggi stagionati e piatti a base di carne',
+    desc:'Intensi sentori floreali, con note di frutti rossi e spezie.',
     vinif:'Affinamento: 24 mesi in botti di rovere, seguito da 6 mesi in bottiglia'
   },
   { id:'barbera-pio-cesare', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
     name:'Barbera d\'Alba – Pio Cesare 2019', price:32, img:'images/barbera-dalba-pio-cesare-2019.png',
     paese:'Italia', regione:'Piemonte', gradazione:'14,5%', uve:'Barbera Al 100%', colore:'Rosso rubino intenso con riflessi violacei',
     gusto:'Pieno e corposo, con una piacevole freschezza e tannini morbidi; finale persistente e armonioso',
-    desc:'Bouquet complesso con note di frutti rossi maturi (ciliegie, prugne), sentori floreali (viola) e speziati (pepe nero). Ideale con primi piatti con sugo di carne, salumi, arrosti, grigliate e formaggi'
+    desc:'Bouquet complesso con note di frutti rossi maturi (ciliegie, prugne), sentori floreali (viola) e speziati (pepe nero).'
   },
   { id:'barbera-clavesana', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
     name:'Barbera d\'Alba – Clavesana 2019', price:24, img:'images/barbera-dalba-clavesana-2019.png',
     paese:'Italia', regione:'Piemonte', gradazione:'14,5%', uve:'100% Barbera', colore:'Rosso rubino intenso',
     gusto:'Morbido, elegante, con una piacevole acidità e un finale persistente',
-    desc:'Note di frutta rossa (ciliegia, prugna) e spezie. Abbinamenti consigliati: Primi piatti con sughi di carne, stufati, arrosti e formaggi stagionati'
+    desc:'Note di frutta rossa (ciliegia, prugna) e spezie.'
   },
   { id:'barolo-palladino', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
     name:'Barolo Serralunga – Palladino 2019', price:64, img:'images/barolo-serralunga-palladino-2019.png',
     paese:'Italia', regione:'Piemonte', gradazione:'14,5%', uve:'Nebbiolo 100%', colore:'Rosso rubino con riflessi granata',
     gusto:'Morbido, strutturato, con tannini ben integrati e una lunga persistenza',
-    desc:'Note di frutti rossi maturi, spezie, liquirizia e una leggera nota floreale. Abbinamenti consigliati: Arrosti, brasati, selvaggina e formaggi stagionati',
+    desc:'Note di frutti rossi maturi, spezie, liquirizia e una leggera nota floreale.',
     vinif:'Affinamento: 24 mesi in grandi botti di rovere, seguito da 6 mesi in cemento'
   },
   { id:'dolcetto-palladino', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
     name:'Dolcetto d\'Alba – Palladino 2022', price:24, img:'images/dolcetto-dalba-palladino-2022.png',
     paese:'Italia', regione:'Piemonte', gradazione:'13%', uve:'100% Dolcetto', colore:'Rosso rubino intenso',
     gusto:'Asciutto, armonico, equilibrato, con tannini fini e finale fresco',
-    desc:'Fruttato, con note di lampone, prugna e violette. Abbinamenti consigliati: Carni bianche, antipasti, salumi, pasta al pomodoro, piatti della cucina piemontese',
-    vinif:'Vinificazione: Fermentazione e affinamento in acciaio inox, senza passaggi in legno'
+    desc:'Fruttato, con note di lampone, prugna e violette.'
   },
   { id:'nebbiolo-clavesana', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
     name:'Nebbiolo d\'Alba Nhe – Clavesana 2021', price:24, img:'images/nebbiolo-dalba-nhe-clavesana-2021.png',
     paese:'Italia', regione:'Piemonte', gradazione:'14%', uve:'100% Nebbiolo', colore:'Rosso rubino con riflessi granata',
     gusto:'Morbido, con tannini ben integrati e una persistenza piacevole',
-    desc:'Sentori di frutti rossi sotto spirito, note speziate e toni eterei. Abbinamenti consigliati: Risotti di carne, secondi piatti a base di manzo e maiale'
+    desc:'Sentori di frutti rossi sotto spirito, note speziate e toni eterei.'
   },
   { id:'amarone-latium', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
     name:'Amarone della Valpolicella Campo Leòn – Latium 2017', price:92,
     img:'images/amarone-della-valpolicella-campo-leon-latium-2017.png',
     sigla:'DOCG', paese:'Italia', regione:'Veneto', uve:'Selezione Di Vitigni Tipici Della Valpolicella', colore:'Rosso granato intenso con riflessi rubino',
     gusto:'Gusto corposo, vellutato, con tannini maturi e ben integrati',
-    desc:'Profumo ricco e complesso, con sentori di ciliegia sotto spirito, prugna matura, liquirizia, vaniglia, tabacco e spezie dolci. È un vino da bere con calma, perfetto per accompagnare piatti importanti o per essere gustato da solo nelle occasioni speciali',
-    vinif:'Le uve vengono sottoposte al tradizionale processo di appassimento, durante il quale perdono circa il 40% del loro peso, concentrando zuccheri e aromi'
+    desc:'Profumo ricco e complesso, con sentori di ciliegia sotto spirito, prugna matura, liquirizia, vaniglia, tabacco e spezie dolci.',
+    vinif:'Le uve vengono sottoposte al tradizionale processo di appassimento, durante il quale perdono circa il 40% del loro peso'
   },
   { id:'bellaja-bolgheri', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
     name:'Bell\'Aja Bolgheri – San Felice 2021', price:44, img:'images/bellaja-bolgheri-san-felice-2021.png',
-    sigla:'DOC', paese:'Italia', regione:'Toscana', gradazione:'4,5%', uve:'90% Merlot, 10% Cabernet Sauvignon', colore:'Rosso rubino intenso con riflessi granati',
+    sigla:'DOC', paese:'Italia', regione:'Toscana', uve:'90% Merlot, 10% Cabernet Sauvignon', colore:'Rosso rubino intenso con riflessi granati',
     gusto:'Strutturato e armonioso, con tannini levigati e una vivace acidità',
-    desc:'Profumi di ciliegia matura, prugna, liquirizia, cioccolato fondente e spezie dolci. Ideale con piatti ricchi come bistecca alla fiorentina, selvaggina, arrosti di maiale o agnello alla griglia',
-    vinif:'Affinamento: circa 18 mesi. Contenitori: barrique francese (in parte nuove e in parte di secondo passaggio). Successivo affinamento in bottiglia per almeno 6 mesi prima della commercializzazione'
+    desc:'Profumi di ciliegia matura, prugna, liquirizia, cioccolato fondente e spezie dolci.'
   },
   { id:'brunello-campogiovanni', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
     name:'Brunello di Montalcino Campogiovanni – San Felice 2016', price:70,
     img:'images/brunello-campogiovanni-san-felice-2016.png',
-    paese:'Italia', regione:'TOscana', uve:'100% Brunello', colore:'Rosso rubino profondo',
+    paese:'Italia', regione:'Toscana', uve:'100% Brunello', colore:'Rosso rubino profondo',
     gusto:'Strutturato e avvolgente, con tannini morbidi e una persistenza dolce e speziata',
-    desc:'Ciliegia matura, cuoio, tabacco dolce, erbe mediterranee (rosmarino, timo), liquirizia e spezie. Ideale con carni rosse, selvaggina, arrosti e formaggi stagionati come il pecorino toscano',
-    vinif:'Affinamento: Circa 36 mesi in botti di rovere di Slavonia da 60 e 80 hl Successivo affinamento in bottiglia di almeno 12 mesi prima della commercializzazione'
+    desc:'Ciliegia matura, cuoio, tabacco dolce, erbe mediterranee, liquirizia e spezie.'
   },
   { id:'chianti-classico-grigio', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
     name:'Chianti Classico Riserva il Grigio da San Felice – San Felice 2018', price:33,
     img:'images/hianti-classico-riserva-grigio-2018.png',
     paese:'Italia', regione:'Toscana', gradazione:'13,5%', uve:'100% Sangiovese', colore:'Rosso rubino profondo',
     gusto:'Corposo e austero, con tannini succosi e una fresca acidità',
-    desc:'Aroma intenso e persistente, con note di viola mammola e frutti di bosco. Si abbina perfettamente a piatti di carne alla griglia, arrosti, selvaggina e formaggi stagionati'
+    desc:'Aroma intenso e persistente, con note di viola mammola e frutti di bosco.'
   },
   { id:'le-volte-ornellaia', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
     name:'Le Volte dell\'Ornellaia – Tenuta dell\'Ornellaia 2021', price:43,
     img:'images/le-volte-dellornellaia-2021.png',
     sigla:'IGT Toscana', paese:'Italia', regione:'Toscana', gradazione:'13,5%', uve:'70% Merlot, 15% Sangiovese, 15% Cabernet Sauvignon', colore:'Rosso rubino intenso, con riflessi violacei',
     gusto:'Equilibrato e rotondo: tannini morbidi ma presenti',
-    desc:'Note fruttate di ciliegia matura, mora, ribes nero. Si abbina bene a pappardelle al ragù, risotti ai funghi, lasagne, carni come tagliata o coniglio alla cacciatora, pecorino stagionato, salumi toscani, bruschette rustiche e pizze saporite'
+    desc:'Note fruttate di ciliegia matura, mora, ribes nero.'
   },
   { id:'rosso-montalcino-casanova', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
     name:'Rosso di Montalcino – Casanova di Neri 2021', price:45,
@@ -966,15 +958,13 @@ const WINES = [
     img:'images/rosso-montepulciano-sabazio-2021.png',
     paese:'Italia', regione:'Toscana', gradazione:'14%', uve:'Sangiovese E Merlot', colore:'Rosso rubino brillante',
     gusto:'Morbido e fresco, con tannini vellutati e un finale sapido',
-    desc:'Note fruttate di amarena, lampone, fragola e ciliegia, con accenni floreali e balsamici',
-    vinif:'Affinamento: Acciaio inox per circa 4 mesi'
+    desc:'Note fruttate di amarena, lampone, fragola e ciliegia, con accenni floreali e balsamici'
   },
   { id:'ruit-hora-bolgheri', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
     name:'Ruit Hora Bolgheri – Caccia al Piano 2020', price:63, img:'images/ruit-hora-bolgheri-caccia-al-piano-2020.png',
     gradazione:'14%', uve:'60% Merlot, 30% Cabernet Sauvignon, 5% Petit Verdot, 5% Syrah', colore:'Rosso rubino intenso e brillante',
     gusto:'Tannini setosi, struttura equilibrata e un finale persistente con sentori fruttati',
-    desc:'Note di ciliegie mature, petali di rosa e un accenno di spezie. Ideale con arrosti, brasati di carne rossa, selvaggina, salumi stagionati e formaggi a media o lunga stagionatura',
-    vinif:'Affinamento: Circa 16 mesi in botti di rovere da 35–50 hl e anfore di ceramica, seguiti da 6 mesi in bottiglia'
+    desc:'Note di ciliegie mature, petali di rosa e un accenno di spezie.'
   },
   { id:'tignanello-antinori', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
     name:'Tignanello – Marchesi Antinori 2016', price:170, img:'images/tignanello-antinori-2016.png',
@@ -988,36 +978,32 @@ const WINES = [
     img:'images/montepulciano-abruzzo-masciarelli-2020.png',
     sigla:'DOC Montepulciano', paese:'Italia', regione:'Abruzzo', gradazione:'13,5%', uve:'100% Montepulciano', colore:'Rosso rubino intenso',
     gusto:'Corposo e succoso, con sapori di frutti rossi maturi, ciliegie e prugne',
-    desc:'Note complesse di ciliegie nere mature, prugne, violette e un accenno di tabacco',
-    vinif:'Fermentazione e affinamento in acciaio inox per preservare la freschezza e la vivacità del frutto'
+    desc:'Note complesse di ciliegie nere mature, prugne, violette e un accenno di tabacco'
   },
   { id:'aglianico-neromora', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
     name:'Aglianico Neromora – Vinosia 2019', price:21, img:'images/aglianico-neromora-vinosia-2019.png',
     paese:'Italia', regione:'Campania', gradazione:'13,5%', uve:'100% Aglianico', colore:'Rosso rubino intenso, con riflessi violacei quando è giovane',
     gusto:'In bocca è secco, avvolgente, con tannini ben integrati e un finale persistente',
-    desc:'Un vino elegante ma ancora profondamente territoriale. Ottimo con piatti ricchi o da meditazione',
-    vinif:'Affinamento: 6 mesi in barrique di rovere francese'
+    desc:'Un vino elegante ma ancora profondamente territoriale.'
   },
   { id:'primitivo-salento', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
     name:'Primitivo Salento Orus – Vinosia 2022', price:18, img:'images/primitivo-salento-orus-vinosia-2022.png',
     sigla:'Salento IGT', paese:'Italia', regione:'Puglia', gradazione:'13,5%', uve:'100% Primitivo', colore:'Rosso rubino profondo con riflessi violacei',
     gusto:'Vellutato e concentrato, con tannini morbidi e una buona acidità che conferisce equilibrio',
-    desc:'Intenso e fruttato, con note di amarene, more, mirtilli e un accenno di liquirizia',
-    vinif:'Affinamento: In acciaio per circa 6 mesi, senza passaggio in legno'
+    desc:'Intenso e fruttato, con note di amarene, more, mirtilli e un accenno di liquirizia'
   },
   { id:'nero-davola', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
     name:'Nero d\'Avola – Musita 2022', price:22, img:'images/nero-davola-musita-2022.png',
     paese:'Italia', regione:'Sicilia', gradazione:'14%', uve:'Nero D\'Avola Al 100%', colore:'Colore rosso rubino carico',
     gusto:'Al palato, si distingue per l\'eleganza e l\'armonia dei tannini',
-    desc:'Il Musita Nero d\'Avola 2022 presenta un colore rosso rubino carico e un bouquet olfattivo che richiama note di ciliegia e marasca',
-    vinif:'Affinamento: Per alcuni mesi in vasche di acciaio e cemento'
+    desc:'Il Musita Nero d\'Avola 2022 presenta un colore rosso rubino carico e un bouquet olfattivo che richiama note di ciliegia e marasca'
   },
   { id:'brunello-poggio-oro', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
     name:'Brunello di Montalcino "Poggio all\' Oro" 2007', price:180,
     img:'images/brunello-poggio-alloro-2007.png',
     paese:'Italia', regione:'Toscana', gradazione:'15%', uve:'Sangiovese 100%', colore:'Rosso rubino intenso',
     desc:'Sapore: pieno, austero, vellutato e giustamente tannico',
-    vinif:'La macerazione si svolge a temperatura controllata in tini combinati in acciaio e legno per 12-14 giorni. Maturato in barriques 2 anni e mezzo, si affina in bottiglia per almeno 12-18 mesi'
+    vinif:'La macerazione si svolge a temperatura controllata per 12-14 giorni. Maturato in barriques 2 anni e mezzo, si affina in bottiglia per almeno 12-18 mesi'
   },
   { id:'5050-avignonesi', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
     name:'50 & 50 del 2015 – Capannelle Avignonesi', price:170,
@@ -1028,194 +1014,188 @@ const WINES = [
   },
 ];
 
-// ── CATEGORY CONFIG ────────────────────────────────────────────
+// ── CATEGORIES CONFIG ─────────────────────────────────────────
 const CATS = [
-  { id:'all',       label:'Tutti' },
-  { id:'lago',      label:'Vini del Lago Bin' },
-  { id:'bollicine', label:'Bollicine' },
-  { id:'territorio',label:'Vini del Territorio' },
-  { id:'bianchi',   label:'Vini Bianchi' },
-  { id:'rosati',    label:'Vini Rosati' },
-  { id:'rossi',     label:'Vini Rossi' },
+  { id:'lago',       label:'Vini del Lago Bin',    icon:'🏔️' },
+  { id:'bollicine',  label:'Bollicine',             icon:'🥂' },
+  { id:'territorio', label:'Vini del Territorio',   icon:'🌿' },
+  { id:'bianchi',    label:'Vini Bianchi',          icon:'🍋' },
+  { id:'rosati',     label:'Vini Rosati',           icon:'🌸' },
+  { id:'rossi',      label:'Vini Rossi',            icon:'🍷' },
 ];
 
-// ── STATE ──────────────────────────────────────────────────────
-let activeCat = 'all';
+// ── STATE ─────────────────────────────────────────────────────
+let openCats = new Set();
 let searchQ = '';
 
-// ── RENDER ─────────────────────────────────────────────────────
-function renderAll(){
-  renderCatBar();
-  renderWines();
-}
-
-function renderCatBar(){
-  const bar = document.getElementById('catBar');
-  bar.innerHTML = CATS.map(c=>`
-    <button class="cat-btn${activeCat===c.id?' active':''}" onclick="setCat('${c.id}')">
-      ${c.id==='all'?t('all'):c.label}
-    </button>`).join('');
-}
-
-function filterWines(){
-  searchQ = document.getElementById('searchInput').value.toLowerCase();
-  renderWines();
-}
-
-function setCat(id){
-  activeCat = id;
-  searchQ = '';
-  document.getElementById('searchInput').value = '';
-  renderAll();
-}
-
-function getFilteredWines(){
-  return WINES.filter(w=>{
-    const matchCat = activeCat==='all' || w.cat===activeCat;
-    const matchQ = !searchQ ||
-      w.name.toLowerCase().includes(searchQ) ||
-      (w.uve||'').toLowerCase().includes(searchQ) ||
-      (w.regione||'').toLowerCase().includes(searchQ) ||
-      (w.paese||'').toLowerCase().includes(searchQ) ||
-      (w.desc||'').toLowerCase().includes(searchQ);
-    return matchCat && matchQ;
-  });
-}
-
-function renderWines(){
-  const wines = getFilteredWines();
+// ── RENDER ────────────────────────────────────────────────────
+function renderAll() {
   const main = document.getElementById('mainContent');
+  const isSearch = searchQ.trim().length > 0;
 
-  if(wines.length===0){
-    main.innerHTML=`<div class="no-results">
-      <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="#b8973a"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-      <p>${t('noRes')}</p>
-    </div>`;
+  if (isSearch) {
+    // Search mode: flat list
+    const results = getFilteredWines();
+    if (results.length === 0) {
+      main.innerHTML = `<div class="no-results"><p>Nessun vino trovato</p></div>`;
+      return;
+    }
+    let html = `<div class="cat-section open">
+      <div class="cat-header" style="cursor:default">
+        <div class="cat-header-left">
+          <span class="cat-icon">🔍</span>
+          <span class="cat-label">Risultati ricerca</span>
+          <span class="cat-count">${results.length}</span>
+        </div>
+      </div>
+      <div class="cat-body">`;
+    results.forEach(w => { html += wineRow(w); });
+    html += `</div></div>`;
+    main.innerHTML = html;
     return;
   }
 
-  // Group by subcat
-  const groups = {};
-  wines.forEach(w=>{
-    const g = w.subcat||'—';
-    if(!groups[g]) groups[g]=[];
-    groups[g].push(w);
-  });
-
+  // Normal accordion mode
   let html = '';
-  // Also group by main cat if showing all
-  let lastCat = null;
-  Object.entries(groups).forEach(([sub,ws])=>{
-    const cat = ws[0].cat;
-    if(activeCat==='all' && cat!==lastCat){
-      const catLabel = CATS.find(c=>c.id===cat);
-      if(catLabel){
-        html += `<div class="section"><div class="section-title">${catLabel.label}</div>`;
-        lastCat = cat;
-      }
-    } else if(activeCat!=='all' && lastCat===null){
-      const catLabel = CATS.find(c=>c.id===activeCat);
-      html += `<div class="section"><div class="section-title">${catLabel?catLabel.label:''}</div>`;
-      lastCat = activeCat;
-    }
-    html += `<div class="subsection-title">${sub}</div>`;
-    html += `<div class="wine-grid">`;
-    ws.forEach(w=>{ html += wineCard(w); });
-    html += `</div>`;
+  CATS.forEach(cat => {
+    const wines = WINES.filter(w => w.cat === cat.id);
+    if (wines.length === 0) return;
+    const isOpen = openCats.has(cat.id);
+
+    // Group by subcat
+    const groups = {};
+    wines.forEach(w => {
+      const g = w.subcat || '—';
+      if (!groups[g]) groups[g] = [];
+      groups[g].push(w);
+    });
+
+    html += `<div class="cat-section${isOpen ? ' open' : ''}" id="cat-${cat.id}">
+      <div class="cat-header" onclick="toggleCat('${cat.id}')">
+        <div class="cat-header-left">
+          <span class="cat-icon">${cat.icon}</span>
+          <span class="cat-label">${cat.label}</span>
+          <span class="cat-count">${wines.length}</span>
+        </div>
+        <span class="cat-arrow">▾</span>
+      </div>
+      <div class="cat-body">`;
+
+    Object.entries(groups).forEach(([sub, ws]) => {
+      html += `<div class="subcat-header">${sub}</div>`;
+      ws.forEach(w => { html += wineRow(w); });
+    });
+
+    html += `</div></div>`;
   });
-  if(lastCat) html += `</div>`;
 
   main.innerHTML = html;
 }
 
-function wineCard(w){
-  const imgTag = w.img
-    ? `<img class="card-img" src="${w.img}" alt="${w.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">`
-    : '';
-  const placeholder = `<div class="card-img-placeholder" ${w.img?'style="display:none"':''}></div>`;
+function toggleCat(id) {
+  if (openCats.has(id)) {
+    openCats.delete(id);
+  } else {
+    openCats.add(id);
+  }
+  renderAll();
+}
+
+function filterWines() {
+  searchQ = document.getElementById('searchInput').value.toLowerCase();
+  renderAll();
+}
+
+function getFilteredWines() {
+  return WINES.filter(w => {
+    return !searchQ ||
+      w.name.toLowerCase().includes(searchQ) ||
+      (w.uve || '').toLowerCase().includes(searchQ) ||
+      (w.regione || '').toLowerCase().includes(searchQ) ||
+      (w.paese || '').toLowerCase().includes(searchQ) ||
+      (w.desc || '').toLowerCase().includes(searchQ) ||
+      (w.subcat || '').toLowerCase().includes(searchQ);
+  });
+}
+
+function wineRow(w) {
+  const subLabel = [w.uve, w.regione ? w.regione : w.paese].filter(Boolean).join(' · ');
+  const imgHtml = w.img
+    ? `<img src="${w.img}" alt="${w.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="wine-row-img-placeholder" style="display:none"></div>`
+    : `<div class="wine-row-img-placeholder"></div>`;
   return `
-  <div class="wine-card" onclick="openModal('${w.id}')">
-    <div class="card-img-wrap">
-      ${imgTag}${placeholder}
-      <button class="zoom-btn" onclick="event.stopPropagation();openZoom('${w.img||''}')">⤢</button>
+  <div class="wine-row" onclick="openModal('${w.id}')">
+    <div class="wine-row-img">${imgHtml}</div>
+    <div class="wine-row-info">
+      <div class="wine-row-name">${w.name}</div>
+      ${subLabel ? `<div class="wine-row-sub">${subLabel}</div>` : ''}
     </div>
-    <div class="card-body">
-      <div class="card-name">${w.name}</div>
-      <div class="card-sub">${[w.paese,w.regione].filter(Boolean).join(' · ')}</div>
-      ${w.uve?`<div class="card-sub" style="font-style:italic">${w.uve}</div>`:''}
-    </div>
-    <div class="card-footer">
-      <div class="card-price">€ ${w.price}</div>
-      ${w.gradazione?`<div class="card-region">${w.gradazione}</div>`:''}
+    <div class="wine-row-right">
+      <div class="wine-row-price">€ ${w.price}</div>
+      <div class="wine-row-arrow">›</div>
     </div>
   </div>`;
 }
 
-// ── MODAL ──────────────────────────────────────────────────────
-function openModal(id){
-  const w = WINES.find(x=>x.id===id);
-  if(!w) return;
+// ── MODAL ─────────────────────────────────────────────────────
+function openModal(id) {
+  const w = WINES.find(x => x.id === id);
+  if (!w) return;
 
   const img = document.getElementById('modalImg');
-  if(w.img){ img.src=w.img; img.style.display='block'; }
-  else { img.style.display='none'; }
+  if (w.img) { img.src = w.img; img.style.display = 'block'; }
+  else { img.style.display = 'none'; }
 
   document.getElementById('modalName').textContent = w.name;
-  document.getElementById('modalPrice').textContent = `€ ${w.price} · 75 Cl`;
+  document.getElementById('modalPrice').textContent = `€ ${w.price} · 75 cl`;
 
   const details = [
-    w.paese && [t('paese'), w.paese],
-    w.regione && [t('regione'), w.regione],
-    w.gradazione && [t('gradazione'), w.gradazione],
-    w.uve && [t('uve'), w.uve],
-    w.colore && [t('colore'), w.colore],
-    w.sigla && [t('sigla'), w.sigla],
+    w.paese     && ['Paese', w.paese],
+    w.regione   && ['Regione', w.regione],
+    w.gradazione && ['Gradazione', w.gradazione],
+    w.uve       && ['Uve', w.uve],
+    w.colore    && ['Colore', w.colore],
+    w.sigla     && ['Sigla', w.sigla],
   ].filter(Boolean);
 
-  document.getElementById('modalDetails').innerHTML = details.map(([l,v])=>`
-    <div class="detail-item">
+  document.getElementById('modalDetails').innerHTML = details.map(([l, v]) => `
+    <div>
       <div class="detail-label">${l}</div>
       <div class="detail-value">${v}</div>
     </div>`).join('');
 
   let descHtml = '';
-  if(w.gusto) descHtml += `<p><strong>${t('gusto')}</strong>${w.gusto}</p>`;
-  if(w.desc)  descHtml += `<p><strong>${t('desc')}</strong>${w.desc}</p>`;
-  if(w.vinif) descHtml += `<p><strong>${t('vinif')}</strong>${w.vinif}</p>`;
+  if (w.gusto) descHtml += `<p><strong>Gusto</strong>${w.gusto}</p>`;
+  if (w.desc)  descHtml += `<p><strong>Descrizione</strong>${w.desc}</p>`;
+  if (w.vinif) descHtml += `<p><strong>Vinificazione</strong>${w.vinif}</p>`;
   document.getElementById('modalDesc').innerHTML = descHtml;
 
   document.getElementById('modalOverlay').classList.add('open');
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
 }
 
-function closeModal(e){
-  if(e.target===document.getElementById('modalOverlay')) closeModalBtn();
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModalBtn();
 }
-function closeModalBtn(){
+function closeModalBtn() {
   document.getElementById('modalOverlay').classList.remove('open');
-  document.body.style.overflow='';
+  document.body.style.overflow = '';
 }
 
-// ── ZOOM ───────────────────────────────────────────────────────
-function openZoom(src){
-  if(!src) return;
+function openLightbox(src) {
+  if (!src) return;
   document.getElementById('lightboxImg').src = src;
   document.getElementById('lightbox').classList.add('open');
 }
-function openLightbox(src){ openZoom(src); }
-function closeLightbox(){
+function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
 }
 
-// ── KEYBOARD ──────────────────────────────────────────────────
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){
-    closeModalBtn();
-    closeLightbox();
-  }
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeModalBtn(); closeLightbox(); }
 });
 
-// ── INIT ───────────────────────────────────────────────────────
+// ── INIT ──────────────────────────────────────────────────────
 renderAll();
 </script>
 </body>
