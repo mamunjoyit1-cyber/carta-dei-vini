@@ -3,1841 +3,1220 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lago Bin – Carta dei Vini</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Hotel Ristorante Lago Bin – Carta dei Vini</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --burgundy: #5c1a1a;
-    --burgundy-deep: #3a0e0e;
-    --gold: #c9a455;
-    --gold-light: #e8d5a3;
-    --cream: #faf6f0;
-    --cream-dark: #f2ebe0;
-    --text: #2a1a0e;
-    --text-muted: #7a6550;
-    --border: rgba(201,164,85,0.25);
-  }
+:root {
+  --gold: #b8973a;
+  --gold-light: #d4af5a;
+  --gold-pale: #f5edd8;
+  --dark: #1a1410;
+  --dark2: #2c2318;
+  --dark3: #3d3020;
+  --mid: #5c4a2a;
+  --cream: #f9f4ec;
+  --text: #2c2318;
+  --text-light: #6b5840;
+  --white: #ffffff;
+  --border: rgba(184,151,58,0.3);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Montserrat',sans-serif;
+  background:var(--cream);
+  color:var(--text);
+  min-height:100vh;
+}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+/* HEADER */
+.header{
+  background:var(--dark);
+  padding:28px 20px 20px;
+  text-align:center;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 4px 20px rgba(0,0,0,0.5);
+  border-bottom:2px solid var(--gold);
+}
+.header-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(20px,5vw,32px);
+  font-weight:300;
+  letter-spacing:0.15em;
+  color:var(--gold-light);
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+.header-sub{
+  font-size:10px;
+  letter-spacing:0.3em;
+  color:#8a7550;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+.header-controls{
+  display:flex;
+  gap:10px;
+  max-width:700px;
+  margin:0 auto;
+  align-items:center;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.search-wrap{
+  flex:1;
+  min-width:200px;
+  position:relative;
+}
+.search-wrap svg{
+  position:absolute;
+  left:12px;top:50%;
+  transform:translateY(-50%);
+  color:#8a7550;
+  width:16px;height:16px;
+}
+#searchInput{
+  width:100%;
+  padding:9px 12px 9px 36px;
+  border:1px solid var(--gold);
+  border-radius:4px;
+  background:rgba(255,255,255,0.07);
+  color:var(--cream);
+  font-family:'Montserrat',sans-serif;
+  font-size:13px;
+  outline:none;
+  transition:all 0.2s;
+}
+#searchInput::placeholder{color:#8a7550}
+#searchInput:focus{border-color:var(--gold-light);background:rgba(255,255,255,0.12)}
+.lang-select{
+  padding:9px 12px;
+  border:1px solid var(--gold);
+  border-radius:4px;
+  background:rgba(255,255,255,0.07);
+  color:var(--cream);
+  font-family:'Montserrat',sans-serif;
+  font-size:12px;
+  outline:none;
+  cursor:pointer;
+  min-width:110px;
+}
+.lang-select option{background:var(--dark2);color:var(--cream)}
 
-  body {
-    font-family: 'Jost', sans-serif;
-    background: var(--cream);
-    color: var(--text);
-    min-height: 100vh;
-  }
+/* CATEGORY TABS */
+.cat-bar{
+  background:var(--dark2);
+  padding:0 16px;
+  display:flex;
+  gap:0;
+  overflow-x:auto;
+  scrollbar-width:none;
+  border-bottom:1px solid var(--border);
+}
+.cat-bar::-webkit-scrollbar{display:none}
+.cat-btn{
+  padding:12px 16px;
+  border:none;
+  background:none;
+  color:#8a7550;
+  font-family:'Montserrat',sans-serif;
+  font-size:11px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  cursor:pointer;
+  white-space:nowrap;
+  border-bottom:2px solid transparent;
+  transition:all 0.2s;
+}
+.cat-btn:hover{color:var(--gold-light)}
+.cat-btn.active{color:var(--gold-light);border-bottom-color:var(--gold)}
 
-  /* ── HEADER ── */
-  .header {
-    background: var(--burgundy-deep);
-    padding: 40px 20px 32px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 0%, rgba(201,164,85,0.15) 0%, transparent 70%);
-  }
-  .header-eyebrow {
-    color: var(--gold);
-    font-family: 'Jost', sans-serif;
-    font-size: 10px;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    opacity: 0.8;
-    margin-bottom: 14px;
-  }
-  .header h1 {
-    font-family: 'Cormorant Garamond', serif;
-    color: #f5ece0;
-    font-size: clamp(38px, 9vw, 60px);
-    font-weight: 300;
-    letter-spacing: 6px;
-    line-height: 1;
-  }
-  .header-rule {
-    width: 80px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    margin: 16px auto;
-  }
-  .header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    color: var(--gold);
-    font-size: clamp(14px, 3.5vw, 18px);
-    font-weight: 400;
-    letter-spacing: 3px;
-    font-style: italic;
-  }
+/* MAIN */
+.main{max-width:900px;margin:0 auto;padding:24px 16px 60px}
 
-  /* ── SEARCH ── */
-  .search-bar {
-    background: var(--burgundy-deep);
-    padding: 0 20px 22px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .search-inner {
-    max-width: 680px;
-    margin: 0 auto;
-    position: relative;
-  }
-  .search-inner input {
-    width: 100%;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(201,164,85,0.4);
-    border-radius: 4px;
-    padding: 11px 44px 11px 16px;
-    color: #f5ece0;
-    font-family: 'Jost', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.5px;
-    outline: none;
-    transition: border-color 0.2s, background 0.2s;
-  }
-  .search-inner input::placeholder { color: rgba(245,236,224,0.4); }
-  .search-inner input:focus {
-    border-color: var(--gold);
-    background: rgba(255,255,255,0.1);
-  }
-  .search-icon {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--gold);
-    opacity: 0.7;
-    pointer-events: none;
-    font-size: 16px;
-  }
-  .search-count {
-    text-align: center;
-    margin-top: 8px;
-    font-size: 11px;
-    color: rgba(201,164,85,0.6);
-    letter-spacing: 1px;
-    height: 14px;
-  }
+/* SECTION */
+.section{margin-bottom:32px;animation:fadeIn 0.4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;
+  font-weight:300;
+  letter-spacing:0.1em;
+  color:var(--gold);
+  text-transform:uppercase;
+  padding:12px 0 8px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:12px;
+}
+.subsection-title{
+  font-size:11px;
+  letter-spacing:0.2em;
+  color:var(--text-light);
+  text-transform:uppercase;
+  margin:16px 0 10px;
+  font-weight:500;
+}
 
-  /* ── CONTENT ── */
-  .content {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 20px 16px 60px;
-  }
+/* WINE GRID */
+.wine-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:14px;
+}
 
-  /* ── CATEGORY ── */
-  .cat-wrap { margin-bottom: 10px; }
-  .cat-header {
-    background: var(--burgundy);
-    color: #f5ece0;
-    padding: 14px 20px;
-    border-radius: 6px 6px 0 0;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    user-select: none;
-    transition: background 0.2s;
-  }
-  .cat-header:not(.open) { border-radius: 6px; }
-  .cat-header:hover { background: #6e2020; }
-  .cat-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 17px;
-    font-weight: 400;
-    letter-spacing: 1.5px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .cat-icon { font-size: 15px; opacity: 0.8; }
-  .cat-arrow {
-    color: var(--gold);
-    font-size: 13px;
-    transition: transform 0.3s;
-    opacity: 0.8;
-  }
-  .cat-header.open .cat-arrow { transform: rotate(180deg); }
-  .cat-body {
-    display: none;
-    border: 1px solid var(--border);
-    border-top: none;
-    border-radius: 0 0 6px 6px;
-    overflow: hidden;
-    background: #fff;
-  }
-  .cat-body.open { display: block; }
+/* WINE CARD */
+.wine-card{
+  background:var(--white);
+  border:1px solid #e8dcc8;
+  border-radius:6px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:all 0.25s;
+  display:flex;
+  flex-direction:column;
+}
+.wine-card:hover{
+  border-color:var(--gold);
+  box-shadow:0 6px 24px rgba(184,151,58,0.15);
+  transform:translateY(-2px);
+}
+.card-img-wrap{
+  height:160px;
+  background:linear-gradient(135deg,#f5edd8,#ece0c6);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+.card-img{
+  max-height:150px;
+  max-width:90px;
+  object-fit:contain;
+  filter:drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+  transition:transform 0.3s;
+}
+.wine-card:hover .card-img{transform:scale(1.04)}
+.card-img-placeholder{
+  width:50px;height:100px;
+  background:linear-gradient(180deg,#c8b07a,#8a6a30);
+  border-radius:4px 4px 2px 2px;
+  opacity:0.35;
+}
+.zoom-btn{
+  position:absolute;
+  top:8px;right:8px;
+  width:28px;height:28px;
+  background:rgba(26,20,16,0.7);
+  border:1px solid var(--gold);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold-light);
+  font-size:12px;
+  cursor:pointer;
+  opacity:0;
+  transition:opacity 0.2s;
+  z-index:2;
+}
+.wine-card:hover .zoom-btn{opacity:1}
+.card-body{
+  padding:12px 14px;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.card-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:16px;
+  font-weight:600;
+  color:var(--dark);
+  line-height:1.3;
+}
+.card-sub{
+  font-size:11px;
+  color:var(--text-light);
+  letter-spacing:0.05em;
+}
+.card-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:8px 14px 12px;
+  border-top:1px solid #f0e8d8;
+  margin-top:auto;
+}
+.card-price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;
+  font-weight:600;
+  color:var(--gold);
+}
+.card-region{
+  font-size:10px;
+  color:var(--text-light);
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+}
 
-  /* ── SUBCATEGORY ── */
-  .subcat-header {
-    background: #1e0a0a;
-    color: var(--gold-light);
-    padding: 10px 20px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    user-select: none;
-    transition: background 0.2s;
-  }
-  .subcat-header:hover { background: #2c0f0f; }
-  .subcat-arrow { font-size: 11px; transition: transform 0.3s; opacity: 0.6; }
-  .subcat-header.open .subcat-arrow { transform: rotate(90deg); }
-  .subcat-body { display: none; }
-  .subcat-body.open { display: block; }
+/* MODAL */
+.modal-overlay{
+  position:fixed;inset:0;
+  background:rgba(10,8,5,0.85);
+  z-index:1000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  backdrop-filter:blur(6px);
+  animation:fadeOverlay 0.2s ease;
+}
+@keyframes fadeOverlay{from{opacity:0}to{opacity:1}}
+.modal-overlay.open{display:flex}
+.modal{
+  background:var(--white);
+  max-width:560px;
+  width:100%;
+  border-radius:10px;
+  overflow:hidden;
+  max-height:92vh;
+  display:flex;
+  flex-direction:column;
+  animation:slideUp 0.25s ease;
+}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.modal-img-area{
+  background:linear-gradient(135deg,#f5edd8,#e8d8b8);
+  height:260px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  flex-shrink:0;
+}
+.modal-img{
+  max-height:240px;
+  max-width:160px;
+  object-fit:contain;
+  filter:drop-shadow(0 8px 20px rgba(0,0,0,0.2));
+  cursor:zoom-in;
+  transition:transform 0.3s;
+}
+.modal-img:hover{transform:scale(1.06)}
+.modal-close{
+  position:absolute;top:12px;right:12px;
+  width:34px;height:34px;
+  background:rgba(26,20,16,0.75);
+  border:1px solid var(--gold);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold-light);
+  font-size:18px;
+  cursor:pointer;
+  transition:background 0.2s;
+}
+.modal-close:hover{background:var(--dark)}
+.modal-body{
+  padding:20px 24px 24px;
+  overflow-y:auto;
+  flex:1;
+}
+.modal-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:24px;
+  font-weight:600;
+  color:var(--dark);
+  margin-bottom:4px;
+  line-height:1.2;
+}
+.modal-price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;
+  color:var(--gold);
+  font-weight:600;
+  margin-bottom:16px;
+}
+.modal-details{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px 16px;
+  margin-bottom:14px;
+}
+.detail-item{}
+.detail-label{
+  font-size:10px;
+  letter-spacing:0.15em;
+  color:#8a7550;
+  text-transform:uppercase;
+  margin-bottom:2px;
+}
+.detail-value{
+  font-size:13px;
+  color:var(--text);
+  font-weight:500;
+}
+.modal-desc{
+  font-size:13px;
+  line-height:1.7;
+  color:var(--text-light);
+  border-top:1px solid #f0e8d8;
+  padding-top:12px;
+  margin-top:4px;
+}
+.modal-desc p{margin-bottom:8px}
+.modal-desc strong{color:var(--mid);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;display:block;margin-bottom:2px}
 
-  /* ── WINE ITEM ── */
-  .wine-item { border-bottom: 1px solid #f0e8dc; }
-  .wine-item:last-child { border-bottom: none; }
-  .wine-item.hidden { display: none; }
+/* ZOOM LIGHTBOX */
+.lightbox{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.95);
+  z-index:2000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  cursor:zoom-out;
+}
+.lightbox.open{display:flex}
+.lightbox img{
+  max-width:90vw;
+  max-height:90vh;
+  object-fit:contain;
+  filter:drop-shadow(0 0 40px rgba(184,151,58,0.2));
+}
+.lightbox-close{
+  position:absolute;top:20px;right:24px;
+  color:var(--gold);
+  font-size:36px;
+  cursor:pointer;
+  line-height:1;
+}
 
-  .wine-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 13px 20px;
-    cursor: pointer;
-    background: #fff;
-    transition: background 0.15s;
-    gap: 12px;
-  }
-  .wine-row:hover { background: #fdf8f2; }
-  .wine-row.active { background: #fdf4e8; }
+/* NO RESULTS */
+.no-results{
+  text-align:center;
+  padding:60px 20px;
+  color:var(--text-light);
+}
+.no-results svg{margin-bottom:16px;opacity:0.3}
+.no-results p{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic}
 
-  .wine-left { flex: 1; min-width: 0; }
-  .wine-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.3;
-  }
-  .wine-right {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-  }
-  .wine-price {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--burgundy);
-    white-space: nowrap;
-  }
-  .wine-chevron {
-    color: var(--gold);
-    font-size: 10px;
-    transition: transform 0.3s;
-    opacity: 0.7;
-  }
-  .wine-row.active .wine-chevron { transform: rotate(180deg); }
+/* FOOTER */
+.footer{
+  text-align:center;
+  padding:24px;
+  font-size:10px;
+  letter-spacing:0.2em;
+  color:#8a7550;
+  text-transform:uppercase;
+  border-top:1px solid var(--border);
+  background:var(--dark);
+  color:#5c4a2a;
+}
 
-
-  /* ── WINE BOTTLE IMAGE ── */
-  .wine-detail {
-    display: none;
-    padding: 4px 20px 16px;
-    background: #fdf8f2;
-    border-top: 1px solid #f0e8dc;
-    flex-direction: row;
-    gap: 14px;
-    align-items: flex-start;
-  }
-  .wine-detail.open { display: flex; }
-  .wine-bottle-img {
-    flex-shrink: 0;
-    padding-top: 10px;
-  }
-  .wine-bottle-img img {
-    width: 60px;
-    height: 130px;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.18));
-    border-radius: 3px;
-  }
-
-
-  .wine-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin: 10px 0 8px;
-  }
-  .wine-tag {
-    background: var(--cream-dark);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 3px 9px;
-    font-size: 11px;
-    color: var(--text-muted);
-    letter-spacing: 0.3px;
-  }
-  .wine-tag strong { color: var(--burgundy-deep); }
-
-  .wine-desc {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13.5px;
-    line-height: 1.7;
-    color: #4a3828;
-    font-style: italic;
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px dotted #e8d5b7;
-  }
-  .wine-vinif {
-    font-size: 11.5px;
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin-top: 6px;
-  }
-  .wine-vinif strong { color: #4a2e1a; }
-
-  /* ── SEARCH RESULTS ── */
-  #search-results { display: none; padding: 10px 0; }
-  #search-results .result-wine {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    margin-bottom: 8px;
-    overflow: hidden;
-  }
-  .result-category-badge {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold);
-    background: var(--burgundy-deep);
-    padding: 3px 10px;
-    display: inline-block;
-  }
-  .no-results {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--text-muted);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    font-style: italic;
-  }
-
-  /* ── FOOTER ── */
-  .footer {
-    background: var(--burgundy-deep);
-    color: var(--gold);
-    text-align: center;
-    padding: 20px;
-    font-size: 11px;
-    letter-spacing: 2px;
-  }
-  .footer p { color: rgba(201,164,85,0.5); font-size: 10px; margin-top: 5px; font-style: italic; letter-spacing: 1px; }
-
-  /* search highlight */
-  mark { background: rgba(201,164,85,0.3); color: inherit; border-radius: 2px; padding: 0 1px; }
+/* RESPONSIVE */
+@media(max-width:480px){
+  .wine-grid{grid-template-columns:1fr 1fr}
+  .modal-details{grid-template-columns:1fr}
+}
+@media(max-width:340px){
+  .wine-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="header-eyebrow">✦ Hotel Ristorante ✦</div>
-  <h1>LAGO BIN</h1>
-  <div class="header-rule"></div>
-  <h2>Carta dei Vini</h2>
+  <div class="header-logo">Hotel Ristorante Lago Bin</div>
+  <div class="header-sub">Carta dei Vini &nbsp;·&nbsp; Wine List &nbsp;·&nbsp; Carte des Vins</div>
+  <div class="header-controls">
+    <div class="search-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      <input type="text" id="searchInput" placeholder="Cerca vino / Search wine…" oninput="filterWines()">
+    </div>
+    <select class="lang-select" id="langSelect" onchange="setLang(this.value)">
+      <option value="it">🇮🇹 Italiano</option>
+      <option value="en">🇬🇧 English</option>
+      <option value="fr">🇫🇷 Français</option>
+      <option value="de">🇩🇪 Deutsch</option>
+      <option value="bn">🇧🇩 বাংলা</option>
+    </select>
+  </div>
 </div>
 
-<div class="search-bar">
-  <div class="search-inner">
-    <input type="text" id="searchInput" placeholder="Cerca vino, vitigno, regione, prezzo…" autocomplete="off">
-    <span class="search-icon">⌕</span>
+<div class="cat-bar" id="catBar"></div>
+
+<div class="main" id="mainContent"></div>
+
+<div class="footer">© Hotel Ristorante Lago Bin &nbsp;·&nbsp; Powered by Wineappy</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-img-area">
+      <button class="modal-close" onclick="closeModalBtn()">×</button>
+      <img class="modal-img" id="modalImg" src="" alt="" onclick="openLightbox(this.src)">
+    </div>
+    <div class="modal-body">
+      <div class="modal-name" id="modalName"></div>
+      <div class="modal-price" id="modalPrice"></div>
+      <div class="modal-details" id="modalDetails"></div>
+      <div class="modal-desc" id="modalDesc"></div>
+    </div>
   </div>
-  <div class="search-count" id="searchCount"></div>
 </div>
 
-<div class="content">
-
-  <div id="search-results"></div>
-  <div id="catalog">
-
-  <!-- ═══════════════════════════════════════════════
-       BOLLICINE
-  ═══════════════════════════════════════════════ -->
-  <div class="cat-wrap">
-  <div class="cat-header" onclick="toggleCat(this)">
-    <span class="cat-title"><span class="cat-icon">🥂</span> Bollicine</span>
-    <span class="cat-arrow">▾</span>
-  </div>
-  <div class="cat-body">
-
-    <!-- Italiane -->
-    <div class="subcat-header" onclick="toggleSubcat(this)">Selezione Bollicine Italiane <span class="subcat-arrow">›</span></div>
-    <div class="subcat-body">
-
-      <div class="wine-item" data-name="Prosecco di Valdobbiadene Superiore Extra Brut Maschio dei Cavalieri" data-cat="Bollicine" data-price="23">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Prosecco di Valdobbiadene Superiore Extra Brut – Maschio dei Cavalieri</div></div>
-          <div class="wine-right"><span class="wine-price">€ 23,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/Prosecco-di-Valdobbiadene.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Paese:</strong> Italia</span>
-            <span class="wine-tag"><strong>Regione:</strong> Veneto</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Glera</span>
-            <span class="wine-tag"><strong>Colore:</strong> Giallo paglierino brillante con riflessi verdolini</span>
-          </div>
-          <div class="wine-desc">Fondo floreale fresco e vivace, con espressioni fragranti di mela verde e pera abate, intervallate da note eleganti di lime e agrumi. Si abbina perfettamente a piatti di pescato al forno, gratinati di capesante e grigliate di prelibati crostacei.</div>
-          <div class="wine-vinif"><strong>Gusto:</strong> Fresco, asciutto, deciso; una bollicina di grande pulizia.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Prosecco Rosé Extra Dry Maschio dei Cavalieri" data-cat="Bollicine" data-price="22">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Prosecco Rosé Extra Dry – Maschio dei Cavalieri</div></div>
-          <div class="wine-right"><span class="wine-price">€ 22,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/prosecco-rose-extra-dry-maschio-dei-cavalieri.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Paese:</strong> Italia</span>
-            <span class="wine-tag"><strong>Regione:</strong> Veneto</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 11%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 85–90% Glera; 10–15% Pinot Nero Vinificato In Rosso</span>
-            <span class="wine-tag"><strong>Colore:</strong> Rosato tenue con eleganti riflessi ramati</span>
-          </div>
-          <div class="wine-desc">Sentori floreali di acacia tipici del Glera, accompagnati da note di viola e lampone derivanti dal Pinot Nero. Si presta bene come aperitivo e accompagna egregiamente piatti di mare, antipasti leggeri, risotti delicati e carni bianche.</div>
-          <div class="wine-vinif"><strong>Gusto:</strong> Al palato è fresco, armonico e di buona struttura.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Franciacorta Brut 61 Berlucchi" data-cat="Bollicine" data-price="39">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Franciacorta Brut '61 – Berlucchi</div></div>
-          <div class="wine-right"><span class="wine-price">€ 39,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/berlucchi-franciacorta-brut-61.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Gradazione:</strong> 12,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 85% Chardonnay, 15% Pinot Nero</span>
-            <span class="wine-tag"><strong>Colore:</strong> Giallo paglierino con riflessi dorati</span>
-          </div>
-          <div class="wine-desc">Aromi di frutta a polpa bianca, agrumi, crosta di pane e delicate note minerali. Si presta bene come aperitivo e accompagna egregiamente piatti delicati come crudi di pesce, sushi, carpacci di carne, formaggi stagionati e primi piatti leggeri.</div>
-          <div class="wine-vinif"><strong>Gusto:</strong> Secco, fresco, sapido, con un finale lungo e persistente.<br><strong>Vinificazione:</strong> Affinamento: 24 mesi sui lieviti.</div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Champagne -->
-    <div class="subcat-header" onclick="toggleSubcat(this)">Selezione Champagne <span class="subcat-arrow">›</span></div>
-    <div class="subcat-body">
-
-      <div class="wine-item" data-name="Cuveè Lago Bin" data-cat="Champagne" data-price="55">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Cuveè Lago Bin</div></div>
-          <div class="wine-right"><span class="wine-price">€ 55,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/cuvee-lago-bin.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Paese:</strong> Italia</span>
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-          </div>
-          <div class="wine-desc">Il nostro Cuveè Lago Bin.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Gardet Tradition" data-cat="Champagne" data-price="65">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Gardet "Tradition"</div></div>
-          <div class="wine-right"><span class="wine-price">€ 65,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/gardet-tradition.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Sigla:</strong> Champagne AOC</span>
-            <span class="wine-tag"><strong>Paese:</strong> Francia</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 45% Pinot Nero, 10% Chardonnay, 45% Pinot Meunier</span>
-            <span class="wine-tag"><strong>Colore:</strong> Giallo miele</span>
-          </div>
-          <div class="wine-desc">In bocca si presenta con una bella acidità e un equilibrio tra flessibilità e durezza, tra la dolcezza vellutata.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Veuve Cliquot" data-cat="Champagne" data-price="80">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Veuve Cliquot</div></div>
-          <div class="wine-right"><span class="wine-price">€ 80,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/veuve-clicquot.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Sigla:</strong> Champagne AOC</span>
-            <span class="wine-tag"><strong>Paese:</strong> Francia</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Pinot Noir 50-55%, Chardonnay 28-33%, Pinot Meunier 15-20%</span>
-            <span class="wine-tag"><strong>Colore:</strong> Giallo intenso con riflessi dorati e perlage ricco ed elegante</span>
-          </div>
-          <div class="wine-desc">Armonioso e ricco, ha una fine sfaccettatura aromatica che si traduce in un sorso lungo e profondo, che anticipa un finale di vivace freschezza.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> Affinamento dai 3 ai 4 anni sui lieviti.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Michel Tixier" data-cat="Champagne" data-price="60">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Michel Tixier</div></div>
-          <div class="wine-right"><span class="wine-price">€ 60,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/michel-tixier.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Sigla:</strong> Champagne AOC</span>
-            <span class="wine-tag"><strong>Paese:</strong> Francia</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 60% Pinot Meunier, 20% Pinot Noir, 20% Chardonnay</span>
-            <span class="wine-tag"><strong>Colore:</strong> Bianco oro</span>
-          </div>
-          <div class="wine-desc">Champagne ricco di gusto, dal perlage fine e delicato. In bocca è pieno ed elegante con note di frutta matura, mela cotogna e albicocca; il finale è generoso con sentori tostati e di brioche.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Deutz" data-cat="Champagne" data-price="90">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Deutz</div></div>
-          <div class="wine-right"><span class="wine-price">€ 90,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/deutz.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Paese:</strong> Francia</span>
-            <span class="wine-tag"><strong>Regione:</strong> Aÿ</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Chardonnay 34%, Pinot Noir 33%, Pinot Meunier 33%</span>
-            <span class="wine-tag"><strong>Colore:</strong> Giallo paglierino brillante</span>
-          </div>
-          <div class="wine-desc">Al palato è fresco e ben strutturato, con un finale lungo e persistente.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> 36 mesi sui lieviti.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="G H Mumm" data-cat="Champagne" data-price="70">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">G H Mumm</div></div>
-          <div class="wine-right"><span class="wine-price">€ 70,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/gh-mumm.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Sigla:</strong> Champagne AOC</span>
-            <span class="wine-tag"><strong>Paese:</strong> Francia</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Pinot Noir 45%, Chardonnay 30%, Pinot Meunier 25%</span>
-            <span class="wine-tag"><strong>Colore:</strong> Dorato con perlage fine e persistente</span>
-          </div>
-          <div class="wine-desc">In bocca ha una bella acidità e morbidezza, equilibrata fino alla lunga chiusura.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Ruinart Magnum" data-cat="Champagne" data-price="190">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Ruinart "Magnum" <small style="font-size:11px;opacity:0.6;">1,5 L</small></div></div>
-          <div class="wine-right"><span class="wine-price">€ 190,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/Ruinart "Magnum" .png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Sigla:</strong> Champagne AOC</span>
-            <span class="wine-tag"><strong>Paese:</strong> Francia</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12%</span>
-            <span class="wine-tag"><strong>Colore:</strong> Giallo con brillanti riflessi dorati</span>
-          </div>
-          <div class="wine-desc">Al palato è ricco e intenso, con un sorso profondo e persistente, che chiude su note fresche e sapide.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Laurent Perrier" data-cat="Champagne" data-price="75">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Laurent Perrier</div></div>
-          <div class="wine-right"><span class="wine-price">€ 75,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/laurent-perrier.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Sigla:</strong> Champagne AOC</span>
-            <span class="wine-tag"><strong>Paese:</strong> Francia</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Chardonnay 55%, Pinot Nero 35%, Pinot Meunier 10%</span>
-            <span class="wine-tag"><strong>Colore:</strong> Giallo dorato</span>
-          </div>
-          <div class="wine-desc">L'assaggio è fragrante, armonioso ed equilibrato, di ottima lunghezza.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Heidsieck Monopole" data-cat="Champagne" data-price="70">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Heidsieck "Monopole"</div></div>
-          <div class="wine-right"><span class="wine-price">€ 70,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/heidsieck-monopole.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Paese:</strong> Francia</span>
-            <span class="wine-tag"><strong>Regione:</strong> Champagne</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 70% Pinot Nero, 10% Pinot Meunier, 20% Chardonnay</span>
-            <span class="wine-tag"><strong>Colore:</strong> Giallo tenue con riflessi verdi</span>
-          </div>
-          <div class="wine-desc">Palato fine, definito da sentori fruttati e vinosi conferiti dal Pinot. Con una bella struttura e pienezza. Finale armonioso.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> Metodo Champenoise, permanenza sui lieviti 36 mesi, brut.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Don Perignon Dom Pérignon" data-cat="Champagne" data-price="280">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Dom Pérignon</div></div>
-          <div class="wine-right"><span class="wine-price">€ 280,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/don-perignon.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Sigla:</strong> Champagne AOC</span>
-            <span class="wine-tag"><strong>Paese:</strong> Francia</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Pinot Noir, Chardonnay</span>
-            <span class="wine-tag"><strong>Colore:</strong> Giallo paglierino brillante con riflessi dorati</span>
-          </div>
-          <div class="wine-desc">Al palato rivela un impeccabile equilibrio, giocato tra la cremosa finezza delle bollicine, la rotondità del corpo, la minerale freschezza del terroir e la ricchezza del gusto.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> Affinamento almeno 72 mesi sui lieviti.<br><strong>Gusto:</strong> Energico, potente, pieno e avvolgente, vellutato e cremoso, finale intenso e balsamico.</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════
-       VINI DEL LAGO BIN
-  ═══════════════════════════════════════════════ -->
-  <div class="cat-wrap">
-  <div class="cat-header" onclick="toggleCat(this)">
-    <span class="cat-title"><span class="cat-icon">🍾</span> Vini del Lago Bin</span>
-    <span class="cat-arrow">▾</span>
-  </div>
-  <div class="cat-body">
-    <div class="subcat-header" onclick="toggleSubcat(this)">Selezione Vini Lago Bin <span class="subcat-arrow">›</span></div>
-    <div class="subcat-body">
-
-      <div class="wine-item" data-name="Le Bollicine del Lago Chardonnay frizzante" data-cat="Vini del Lago Bin" data-price="16">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Le Bollicine del Lago</div></div>
-          <div class="wine-right"><span class="wine-price">€ 16,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/le-bollicine-del-lago.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Veneto</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 11,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Chardonnay Veneto</span>
-            <span class="wine-tag"><strong>Colore:</strong> Giallo paglierino con riflessi verdolini</span>
-          </div>
-          <div class="wine-desc">Un vino bianco frizzante che esprime note floreali fresche e fruttate che ricordano sensazioni esotiche e mediterranee.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> Fermentazione naturale. Sosta in vasca due mesi prima dell'imbottigliamento.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Lago Bianco Pinot Grigio" data-cat="Vini del Lago Bin" data-price="12">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Lago Bianco</div></div>
-          <div class="wine-right"><span class="wine-price">€ 12,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/lago-bianco.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Veneto</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Pinot Grigio</span>
-            <span class="wine-tag"><strong>Colore:</strong> Giallo paglierino con leggeri riflessi ramati</span>
-          </div>
-          <div class="wine-desc">Profumo delicato, fruttato e dal gusto asciutto ed armonico. Piacevoli sensazioni minerali e di frutta fresca.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Lago Rosè Raboso rosato" data-cat="Vini del Lago Bin" data-price="12">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Lago Rosè</div></div>
-          <div class="wine-right"><span class="wine-price">€ 12,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/lago-rose.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Veneto</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 11,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Raboso</span>
-            <span class="wine-tag"><strong>Colore:</strong> Cerasuolo acceso e brillante con riflessi rosei</span>
-          </div>
-          <div class="wine-desc">Al palato è molto gradevole, morbido e piacevolmente rotondo. Profumi di rosa, glicine, biancospino e sambuco.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Lago Rosso rosso" data-cat="Vini del Lago Bin" data-price="12">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Lago Rosso</div></div>
-          <div class="wine-right"><span class="wine-price">€ 12,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/lago-rosso.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Veneto</span>
-            <span class="wine-tag"><strong>Colore:</strong> Rosso</span>
-          </div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> Fermentazione alcolica seguita da malolattica, riposo circa 5 mesi in vasche d'acciaio.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Le Bolle del Lago Glera Prosecco" data-cat="Vini del Lago Bin" data-price="21">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Le Bolle del Lago</div></div>
-          <div class="wine-right"><span class="wine-price">€ 21,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/le-bolle-del-lago.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Veneto</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 11%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Glera</span>
-            <span class="wine-tag"><strong>Colore:</strong> Giallo paglierino</span>
-          </div>
-          <div class="wine-desc">Note minerali e floreali molto delicate accompagnano una sensazione di piacevolezza al palato. Profumo fine ed elegante, gusto intenso sapido e delicato.</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════
-       VINI DEL TERRITORIO
-  ═══════════════════════════════════════════════ -->
-  <div class="cat-wrap">
-  <div class="cat-header" onclick="toggleCat(this)">
-    <span class="cat-title"><span class="cat-icon">🌿</span> Vini del Territorio</span>
-    <span class="cat-arrow">▾</span>
-  </div>
-  <div class="cat-body">
-
-    <div class="subcat-header" onclick="toggleSubcat(this)">Selezione Vini Bianchi del Territorio <span class="subcat-arrow">›</span></div>
-    <div class="subcat-body">
-
-      <div class="wine-item" data-name="Vermentino RLP Poggio dell'Elmo Liguria bianco" data-cat="Vini del Territorio – Bianchi" data-price="25">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Vermentino RLP – Poggio dell'Elmo</div></div>
-          <div class="wine-right"><span class="wine-price">€ 25,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/vermentino-poggio-elmo.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Sigla:</strong> Vermentino DOC</span>
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Vermentino</span>
-          </div>
-          <div class="wine-desc">Al naso si apre con fiori di campo, note erbacee fresche e un accenno vivace di mela verde croccante. Fresca acidità, struttura snella e scorrevole.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> 5 ore a contatto con le bucce, 5 mesi in acciaio.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Vermentino RLP Terre Bianche Liguria bianco" data-cat="Vini del Territorio – Bianchi" data-price="33">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Vermentino RLP – Terre Bianche</div></div>
-          <div class="wine-right"><span class="wine-price">€ 33,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/vermentino-terre-bianche.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Uve:</strong> Vermentino</span>
-            <span class="wine-tag"><strong>Colore:</strong> Giallo scarico con riflessi verde ramarro</span>
-          </div>
-          <div class="wine-desc">Fiori bianchi e mare, un connubio ligure d'eccellenza. Sapido ma gentile e piacevole al gusto. Ottimo per un aperitivo in riva al mare, magari con grigliata di pesce.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Vermentino RLP Foresti Liguria bianco" data-cat="Vini del Territorio – Bianchi" data-price="26">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Vermentino RLP Foresti – 100% Vermentino</div></div>
-          <div class="wine-right"><span class="wine-price">€ 26,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/vermentino-foresti.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Vermentino</span>
-            <span class="wine-tag"><strong>Colore:</strong> Giallo paglierino intenso con riflessi dorati</span>
-          </div>
-          <div class="wine-desc">Profumo intenso e persistente, fine ed elegante, con sentori di erbe e fiori freschi di campo.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Pigato RLP I Soli Foresti Liguria bianco" data-cat="Vini del Territorio – Bianchi" data-price="26">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Pigato RLP – I Soli – Foresti</div></div>
-          <div class="wine-right"><span class="wine-price">€ 26,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/pigato-foresti.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Pigato</span>
-            <span class="wine-tag"><strong>Colore:</strong> Giallo paglierino intenso con riflessi verdognoli</span>
-          </div>
-          <div class="wine-desc">Intenso e persistente, con sentori di pesca, miele, fiori e muschio. Di buon corpo e continuità, con un caratteristico fondo amarognolo.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Pigato RLP Nemu Liguria bianco" data-cat="Vini del Territorio – Bianchi" data-price="24">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Pigato RLP – Nemu</div></div>
-          <div class="wine-right"><span class="wine-price">€ 24,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/pigato-nemu.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Uve:</strong> Pigato</span>
-          </div>
-          <div class="wine-desc">Intenso e caratteristico, con note di macchia mediterranea e frutti a polpa gialla.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Pigato RLP Cygnus Poggio dei Gorleri Liguria bianco" data-cat="Vini del Territorio – Bianchi" data-price="38">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Pigato RLP Cygnus – Poggio dei Gorleri</div></div>
-          <div class="wine-right"><span class="wine-price">€ 38,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/pigato-cygnus-gorleri.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Gradazione:</strong> 13%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Pigato</span>
-            <span class="wine-tag"><strong>Colore:</strong> Giallo paglierino luminoso</span>
-          </div>
-          <div class="wine-desc">Aromi intensi di frutta matura (nespola, mela), agrumi, camomilla, lavanda e leggera nota minerale. Morbido, sapido, equilibrato e fresco.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> 8 mesi in acciaio.</div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="subcat-header" onclick="toggleSubcat(this)">Selezione Vini Rossi del Territorio <span class="subcat-arrow">›</span></div>
-    <div class="subcat-body">
-
-      <div class="wine-item" data-name="Rossese di Dolceacqua Poggi dell'Elmo 2022 Liguria rosso" data-cat="Vini del Territorio – Rossi" data-price="28">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua – Poggi dell'Elmo 2022</div></div>
-          <div class="wine-right"><span class="wine-price">€ 28,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/poggi-dellelmo-rossese-di-dolceacqua-2022.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Rossese</span>
-            <span class="wine-tag"><strong>Colore:</strong> Rosso rubino con riflessi violacei</span>
-          </div>
-          <div class="wine-desc">Rosa canina, spezie che ricordano il pepe nero. Fresco in bocca con sentori di ciliegia sotto spirito. Servire a circa 16°C.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rossese di Dolceacqua Superiore Pini Poggi dell'Elmo 2022 Liguria rosso" data-cat="Vini del Territorio – Rossi" data-price="36">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua Superiore Pini – Poggi dell'Elmo 2022</div></div>
-          <div class="wine-right"><span class="wine-price">€ 36,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/rossese-pini-2022.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 14,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Rossese</span>
-          </div>
-          <div class="wine-desc">Note di ciliegia ben matura, mentuccia, speziato, balsamico e pepe nero. Pieno, carnoso, fruttato in bocca.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> 15 giorni sulle bucce; affinamento 12 mesi in acciaio.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rossese di Dolceacqua Cima Tramontina Du Nemu 2022 Liguria rosso" data-cat="Vini del Territorio – Rossi" data-price="24">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua Cima Tramontina – Du Nemu 2022</div></div>
-          <div class="wine-right"><span class="wine-price">€ 24,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/rossese-cima-tramontina-2022.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Rossese di Dolceacqua</span>
-          </div>
-          <div class="wine-desc">Note di fragole di bosco, lamponi, nespole e pepe nero. Asciutto, sapido, minerale, con tannini moderati e finale amarognolo.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rossese di Dolceacqua Superiore Du Nemu 2021 Liguria rosso" data-cat="Vini del Territorio – Rossi" data-price="34">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua Superiore – Du Nemu 2021</div></div>
-          <div class="wine-right"><span class="wine-price">€ 34,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/rossese-superiore-du-nemu-2021.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 14%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Rossese di Dolceacqua</span>
-          </div>
-          <div class="wine-desc">Note di lamponi, ribes, fragoline di bosco e una piacevole sfumatura speziata. Asciutto, sapido, minerale, con tannini eleganti e finale lungo e amarognolo.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rossese di Dolceacqua Foresti 2022 Liguria rosso" data-cat="Vini del Territorio – Rossi" data-price="26">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua – Foresti 2022</div></div>
-          <div class="wine-right"><span class="wine-price">€ 26,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/foresti-rossese-di-dolceacqua-2022.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Rossese di Ventimiglia</span>
-          </div>
-          <div class="wine-desc">Aromi floreali di rosa e viola, con sentori fruttati. Asciutto, di medio corpo, con un piacevole retrogusto di mandorla.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rossese di Dolceacqua Luvaira Foresti 2021 Liguria rosso" data-cat="Vini del Territorio – Rossi" data-price="32">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua Luvaira – Foresti 2021</div></div>
-          <div class="wine-right"><span class="wine-price">€ 32,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/rossese-luvaira-foresti-2021.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Rossese di Dolceacqua</span>
-          </div>
-          <div class="wine-desc">Prodotto con uve di un vigneto centenario. Microclima, vicinanza col mare e terreno ricco di minerali creano un vino fine, elegante ed armonioso.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> Vigna del 1913; fermentazione con lieviti indigeni; affinamento almeno 6 mesi in barriques usate.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rossese di Dolceacqua Beragna Ka Mancine 2021 Liguria rosso" data-cat="Vini del Territorio – Rossi" data-price="32">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua Beragna – Ka Mancine 2021</div></div>
-          <div class="wine-right"><span class="wine-price">€ 32,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/rossese-beragna-ka-mancine-2021.png.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Rossese</span>
-          </div>
-          <div class="wine-desc">Eleganti note di pepe nero, frutta rossa matura e tabacco. Di medio corpo, fresco e fragrante, con tannini delicati e finale sapido.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rossese di Dolceacqua Galeae Ka Mancine 2022 Liguria rosso DOC" data-cat="Vini del Territorio – Rossi" data-price="36">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua Galeae – Ka Mancine 2022</div></div>
-          <div class="wine-right"><span class="wine-price">€ 36,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/rossese-galeae-ka-mancine-2022.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Sigla:</strong> DOC Rossese</span>
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Rossese</span>
-          </div>
-          <div class="wine-desc">Aromi di melograno, pepe bianco e note speziate. Secco, caldo, morbido, discretamente strutturato, con ottima persistenza e finale fresco e sapido.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rossese di Dolceacqua Ange Ka Mancine 2024 Liguria rosso" data-cat="Vini del Territorio – Rossi" data-price="44">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua Ange – Ka Mancine 2024</div></div>
-          <div class="wine-right"><span class="wine-price">€ 44,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/ka-mancine-rossese-di-dolceacqua-ange-2024.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Rossese</span>
-          </div>
-          <div class="wine-desc">Bouquet complesso con note di frutti rossi (ciliegia, fragola), spezie (pepe nero, tabacco) e erbe mediterranee. Elegante e bilanciato con buona struttura e freschezza.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rossese di Dolceacqua Terre Bianche 2022 Liguria rosso" data-cat="Vini del Territorio – Rossi" data-price="32">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua – Terre Bianche 2022</div></div>
-          <div class="wine-right"><span class="wine-price">€ 32,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/terre-bianche-rossese-di-dolceacqua-2022.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Rossese</span>
-          </div>
-          <div class="wine-desc">Bouquet ampio con sentori di frutti rossi di bosco, ciliegia, rosa canina e spezie. Sapido, elegante, caldo e di buona freschezza.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rossese di Dolceacqua Bricco Arcagna Terre Bianche 2017 Liguria rosso" data-cat="Vini del Territorio – Rossi" data-price="64">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua Bricco Arcagna – Terre Bianche 2017</div></div>
-          <div class="wine-right"><span class="wine-price">€ 64,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/rossese-bricco-arcagna-terre-bianche-2017.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Rossese</span>
-          </div>
-          <div class="wine-desc">Note di ciliegia sotto spirito, spezie dolci, incenso e accenno balsamico. Tannini setosi, sapidità equilibrata e finale leggermente amarognolo.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> Lieviti indigeni, macerazione a temperatura controllata, affinamento in barrique da 225 litri.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rossese di Dolceacqua Testalonga Liguria rosso" data-cat="Vini del Territorio – Rossi" data-price="56">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua – Testalonga</div></div>
-          <div class="wine-right"><span class="wine-price">€ 56,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/rossese-testalonga.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Rossese</span>
-            <span class="wine-tag"><strong>Colore:</strong> Rosso chiaro, quasi trasparente</span>
-          </div>
-          <div class="wine-desc">Note floreali di violetta e rosa, frutti rossi come ciliegia e ribes, sfumature di erbe aromatiche. Elegante e leggero, tannini setosi, vivace acidità, finale lungo con richiami salini.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> Fermentazione spontanea con grappoli interi, pigiatura con i piedi, macerazione ~2 settimane, affinamento in vecchie botti di rovere. Senza filtrazioni né solfiti aggiunti.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Roccese Masala Liguria rosso autoctono" data-cat="Vini del Territorio – Rossi" data-price="49">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Roccese – Masala</div></div>
-          <div class="wine-right"><span class="wine-price">€ 49,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/roccese-masala.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Rossese e Altri Vitigni Autoctoni</span>
-          </div>
-          <div class="wine-desc">Note di erbe aromatiche come rosmarino, salvia e finocchio selvatico. Equilibrato, persistente, con una struttura che riflette il terroir roccioso.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> Fermentazione in acciaio per 12 mesi.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Roccese Barricato Masala Liguria rosso barriques" data-cat="Vini del Territorio – Rossi" data-price="63">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Roccese Barricato – Masala</div></div>
-          <div class="wine-right"><span class="wine-price">€ 63,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/roccese-barricato-masala.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Uve:</strong> Rossese e Altri Vitigni Autoctoni</span>
-            <span class="wine-tag"><strong>Colore:</strong> Rosso rubino intenso, tendente al granato</span>
-          </div>
-          <div class="wine-desc">Intenso e complesso, con note di erbe aromatiche e officinali tipiche del territorio, arricchite da sfumature legnose. Ben equilibrato, ricco e strutturato, con tannini morbidi e lunga persistenza.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> Affinamento in botti di legno esauste per 15 mesi.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rossese di Dolceacqua Posaú rosso Liguria" data-cat="Vini del Territorio – Rossi" data-price="45">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua "Posaú"</div></div>
-          <div class="wine-right"><span class="wine-price">€ 45,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 14%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Rossese</span>
-          </div>
-          <div class="wine-desc">Note di frutti rossi maturi, erbe aromatiche, sottobosco e leggera mineralità. Fresco, con tannini morbidi e buona acidità.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> Affinamento in acciaio per circa 10 mesi.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rossese di Dolceacqua Superiore Peverelli Luigi Mauro 2021 Liguria rosso" data-cat="Vini del Territorio – Rossi" data-price="39">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua Superiore Peverelli – Luigi Mauro 2021</div></div>
-          <div class="wine-right"><span class="wine-price">€ 39,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/rossese-peverelli-luigi-mauro-2021.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Rossese</span>
-          </div>
-          <div class="wine-desc">Profilo olfattivo fresco e complesso, con petali di rosa e macchia mediterranea (rosmarino, timo, pino). Equilibrato, con buona acidità e freschezza.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Roccese dolceacqua rossa Du Nemu rosso Liguria" data-cat="Vini del Territorio – Rossi" data-price="24">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua Rossa – Du Nemu</div></div>
-          <div class="wine-right"><span class="wine-price">€ 24,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/roccese-rossa-du-nemu.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Rossese 100%</span>
-          </div>
-          <div class="wine-desc">Vivace e armonioso, con tannini soffici e un finale lungo. Tannico, asciutto, sapido e minerale.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rossese dolceacqua bucciardino Ka Mancine 2023 Liguria rosso" data-cat="Vini del Territorio – Rossi" data-price="39">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua Bucciardino – Ka Mancine 2023</div></div>
-          <div class="wine-right"><span class="wine-price">€ 39,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/roccese-bucciardino-ka-mancine-2023.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Rossese</span>
-          </div>
-          <div class="wine-desc">Persistente e di discreta struttura, caldo, morbido, fine e con una buona sapidità.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rossese di dolceacqua 2021 Maccario Dringenberg DOC Liguria rosso" data-cat="Vini del Territorio – Rossi" data-price="37">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua – Maccario Dringenberg 2021</div></div>
-          <div class="wine-right"><span class="wine-price">€ 37,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/rossese-maccario-ringenberg-2021.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Sigla:</strong> Rossese di Dolceacqua DOC</span>
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Rossese</span>
-            <span class="wine-tag"><strong>Colore:</strong> Rosso Rubino con riflessi violacei</span>
-          </div>
-          <div class="wine-desc">Di medio corpo, elegante e con una bella freschezza. Fresco e piacevolmente fruttato.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rossese di Dolceacqua Fratelli Maccario Liguria rosso" data-cat="Vini del Territorio – Rossi" data-price="45">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua – Fratelli Maccario</div></div>
-          <div class="wine-right"><span class="wine-price">€ 45,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/rossese-fratelli-maccario.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Rossese 100%</span>
-          </div>
-          <div class="wine-desc">Apre con note fruttate dolci e si sviluppa in un ricco ventaglio speziato. Corredo fruttato denso e deciso.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> Fermentazione spontanea in acciaio; affinamento in acciaio per circa 10 mesi.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rossese Curli Liguria rosso" data-cat="Vini del Territorio – Rossi" data-price="54">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese Curli</div></div>
-          <div class="wine-right"><span class="wine-price">€ 54,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/rossese-curli.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 14%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Rossese 100%</span>
-            <span class="wine-tag"><strong>Colore:</strong> Rosso rubino</span>
-          </div>
-          <div class="wine-desc">Sottobosco, bacche, frutti di bosco. Intenso, sapido, corposo.</div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="subcat-header" onclick="toggleSubcat(this)">Selezione Vini Rosati del Territorio <span class="subcat-arrow">›</span></div>
-    <div class="subcat-body">
-
-      <div class="wine-item" data-name="Rossese di Dolceacqua Rosato Du Nemu Liguria rosato" data-cat="Vini del Territorio – Rosati" data-price="21">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua Rosato – Du Nemu</div></div>
-          <div class="wine-right"><span class="wine-price">€ 21,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/rossese-rosato-du-nemu.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Rossese</span>
-            <span class="wine-tag"><strong>Colore:</strong> Rosa scarico</span>
-          </div>
-          <div class="wine-desc">Fresco e fruttato, ricorda ciliegia, rosa, piccoli frutti rossi.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rossese di Dolceacqua Rosato Ka Mancine Liguria rosato" data-cat="Vini del Territorio – Rosati" data-price="23">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua Rosato – Ka Mancine</div></div>
-          <div class="wine-right"><span class="wine-price">€ 23,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/rossese-rosato-ka-mancine.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-          </div>
-          <div class="wine-desc">Secco, caldo, morbido, discretamente strutturato con ottima persistenza, equilibrato finale fresco, abbastanza sapido. Finale dolce con una punta di amarognolo.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rossese di Dolceacqua Rosato Poggi dell'Elmo Liguria rosato" data-cat="Vini del Territorio – Rosati" data-price="21">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rossese di Dolceacqua Rosato – Poggi dell'Elmo</div></div>
-          <div class="wine-right"><span class="wine-price">€ 21,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/rossese-rosato-poggi-del-elmo.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Liguria</span>
-            <span class="wine-tag"><strong>Colore:</strong> Rosa tenue</span>
-          </div>
-          <div class="wine-desc">Morbido e sapido, delicato con profumi di rosa.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> Uva rossa vinificata in bianco, 12 ore di macerazione a contatto con le bucce.</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════
-       VINI BIANCHI NAZIONALI
-  ═══════════════════════════════════════════════ -->
-  <div class="cat-wrap">
-  <div class="cat-header" onclick="toggleCat(this)">
-    <span class="cat-title"><span class="cat-icon">🥂</span> Vini Bianchi</span>
-    <span class="cat-arrow">▾</span>
-  </div>
-  <div class="cat-body">
-    <div class="subcat-header" onclick="toggleSubcat(this)">Selezione Vini Bianchi Nazionali <span class="subcat-arrow">›</span></div>
-    <div class="subcat-body">
-
-      <div class="wine-item" data-name="Roero Arneis Ero Clavesana 2023 Piemonte bianco DOCG" data-cat="Vini Bianchi" data-price="23">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Roero Arneis Ero – Clavesana 2023</div></div>
-          <div class="wine-right"><span class="wine-price">€ 23,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/clavesana-roero-arneis-ero-2023.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Sigla:</strong> Roero DOCG</span>
-            <span class="wine-tag"><strong>Regione:</strong> Piemonte</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Arneis 100%</span>
-          </div>
-          <div class="wine-desc">Sentori fruttati, note floreali e cenni vegetali. Fresco, di piacevole sapidità ed equilibrato.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Falanghina Beneventano Vinosia 2022 Campania bianco IGT" data-cat="Vini Bianchi" data-price="18">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Falanghina Beneventano – Vinosia 2022</div></div>
-          <div class="wine-right"><span class="wine-price">€ 18,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/vinosia-falanghina-beneventano-2022.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Sigla:</strong> Falanghina IGT</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Falanghina</span>
-          </div>
-          <div class="wine-desc">Note fruttate, anche esotici, sentori di banana, ananas, kiwi. Buon corpo, rotondo, con un sorso perfettamente equilibrato.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Gewürztraminer AA Muri-Gries 2022 Alto Adige bianco" data-cat="Vini Bianchi" data-price="27">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">A.A. Gewürztraminer – Muri-Gries 2022</div></div>
-          <div class="wine-right"><span class="wine-price">€ 27,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/aa-gewurztraminer-muri-gries-2022.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Alto Adige</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 14,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Gewürztraminer</span>
-          </div>
-          <div class="wine-desc">Aromi eleganti di petali di rosa, garofano e leggera nota affumicata. Struttura piena e accessibile, elegante, giovane e di piacevole beva.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Soave Garganega Latium 2021 Veneto bianco" data-cat="Vini Bianchi" data-price="18">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Soave (Garganega 100%) – Latium 2021</div></div>
-          <div class="wine-right"><span class="wine-price">€ 18,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/soave-latium-2021.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Veneto</span>
-            <span class="wine-tag"><strong>Uve:</strong> Garganega 100%</span>
-          </div>
-          <div class="wine-desc">Profumi fruttati di pesca gialla, accenni di mela cotogna e bergamotto. Morbido, intenso ed avvolgente con una piacevole acidità sul finale.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Sauvignon Friuli Venezia Giulia bianco" data-cat="Vini Bianchi" data-price="21">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Sauvignon – Friuli Venezia Giulia</div></div>
-          <div class="wine-right"><span class="wine-price">€ 21,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/sauvignon.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Friuli Venezia Giulia</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Sauvignon</span>
-          </div>
-          <div class="wine-desc">Aromatico, delicato, asciutto. Equilibrato, con una freschezza che lo rende incredibilmente bevibile.</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════
-       VINI ROSATI NAZIONALI
-  ═══════════════════════════════════════════════ -->
-  <div class="cat-wrap">
-  <div class="cat-header" onclick="toggleCat(this)">
-    <span class="cat-title"><span class="cat-icon">🌸</span> Vini Rosati</span>
-    <span class="cat-arrow">▾</span>
-  </div>
-  <div class="cat-body">
-    <div class="subcat-header" onclick="toggleSubcat(this)">Selezione Vini Rosati Nazionali <span class="subcat-arrow">›</span></div>
-    <div class="subcat-body">
-
-      <div class="wine-item" data-name="Bardolino Chiaretto Classico Negrar Domini Veneti 2021 Veneto rosato DOC" data-cat="Vini Rosati" data-price="16">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Bardolino Chiaretto Classico – Negrar Domini Veneti 2021</div></div>
-          <div class="wine-right"><span class="wine-price">€ 16,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/bardolino-chiaretto-classico-negrar-2021.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Sigla:</strong> DOC Bardolino</span>
-            <span class="wine-tag"><strong>Regione:</strong> Veneto</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Corvina, Rondinella e Molinara</span>
-          </div>
-          <div class="wine-desc">Profumo delicato di frutti rossi, rosa tea e violetta. Fragrante, ricorda le fragole e i lamponi. Si abbina a pesce alla griglia, carni bianche e formaggi molli.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Pallido Capecci Marche Montepulciano rosato" data-cat="Vini Rosati" data-price="27">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Pallido – Capecci</div></div>
-          <div class="wine-right"><span class="wine-price">€ 27,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/pallido-capecci.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Marche</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 12%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Montepulciano</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════
-       VINI ROSSI NAZIONALI
-  ═══════════════════════════════════════════════ -->
-  <div class="cat-wrap">
-  <div class="cat-header" onclick="toggleCat(this)">
-    <span class="cat-title"><span class="cat-icon">🍷</span> Vini Rossi</span>
-    <span class="cat-arrow">▾</span>
-  </div>
-  <div class="cat-body">
-    <div class="subcat-header" onclick="toggleSubcat(this)">Selezione Vini Rossi Nazionali <span class="subcat-arrow">›</span></div>
-    <div class="subcat-body">
-
-      <div class="wine-item" data-name="Barbaresco Biologico Nada 2019 Piemonte Nebbiolo rosso" data-cat="Vini Rossi" data-price="59">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Barbaresco Biologico – Nada 2019</div></div>
-          <div class="wine-right"><span class="wine-price">€ 59,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/barbaresco-biologico-nada-2019.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Piemonte</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 14%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Nebbiolo</span>
-          </div>
-          <div class="wine-desc">Intensi sentori floreali, note di frutti rossi e spezie. Elegante, sapido, con tannini levigati e lunga persistenza.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> 24 mesi in botti di rovere, seguito da 6 mesi in bottiglia.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Barbera d'Alba Pio Cesare 2019 Piemonte rosso" data-cat="Vini Rossi" data-price="32">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Barbera d'Alba – Pio Cesare 2019</div></div>
-          <div class="wine-right"><span class="wine-price">€ 32,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/barbera-dalba-pio-cesare-2019.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Piemonte</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 14,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Barbera 100%</span>
-          </div>
-          <div class="wine-desc">Ciliegie, prugne, viola, pepe nero. Pieno e corposo, con piacevole freschezza e tannini morbidi.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Barbera d'Alba Clavesana 2019 Piemonte rosso" data-cat="Vini Rossi" data-price="24">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Barbera d'Alba – Clavesana 2019</div></div>
-          <div class="wine-right"><span class="wine-price">€ 24,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/barbera-dalba-clavesana-2019.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Piemonte</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 14,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Barbera</span>
-          </div>
-          <div class="wine-desc">Note di frutta rossa (ciliegia, prugna) e spezie. Morbido, elegante, con piacevole acidità e finale persistente.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Barolo Serralunga Palladino 2019 Piemonte Nebbiolo DOCG rosso" data-cat="Vini Rossi" data-price="64">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Barolo Serralunga – Palladino 2019</div></div>
-          <div class="wine-right"><span class="wine-price">€ 64,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/barolo-serralunga-palladino-2019.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Piemonte</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 14,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Nebbiolo 100%</span>
-          </div>
-          <div class="wine-desc">Frutti rossi maturi, spezie, liquirizia e leggera nota floreale. Morbido, strutturato, con tannini ben integrati e lunga persistenza.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> 24 mesi in grandi botti di rovere, 6 mesi in cemento.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Dolcetto d'Alba Palladino 2022 Piemonte rosso" data-cat="Vini Rossi" data-price="24">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Dolcetto d'Alba – Palladino 2022</div></div>
-          <div class="wine-right"><span class="wine-price">€ 24,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/dolcetto-dalba-palladino-2022.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Piemonte</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Dolcetto</span>
-          </div>
-          <div class="wine-desc">Lampone, prugna e violette. Asciutto, armonico, equilibrato, con tannini fini e finale fresco.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Nebbiolo d'Alba Nhe Clavesana 2021 Piemonte rosso" data-cat="Vini Rossi" data-price="24">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Nebbiolo d'Alba Nhe – Clavesana 2021</div></div>
-          <div class="wine-right"><span class="wine-price">€ 24,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/nebbiolo-dalba-nhe-clavesana-2021.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Piemonte</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 14%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Nebbiolo</span>
-          </div>
-          <div class="wine-desc">Sentori di frutti rossi sotto spirito, note speziate e toni eterei. Morbido, con tannini ben integrati e una persistenza piacevole.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Amarone della Valpolicella Campo León Latium 2017 Veneto DOCG rosso" data-cat="Vini Rossi" data-price="92">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Amarone della Valpolicella Campo Leòn – Latium 2017</div></div>
-          <div class="wine-right"><span class="wine-price">€ 92,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/amarone-della-valpolicella-campo-leon-latium-2017.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Sigla:</strong> DOCG</span>
-            <span class="wine-tag"><strong>Regione:</strong> Veneto</span>
-          </div>
-          <div class="wine-desc">Ciliegia sotto spirito, prugna matura, liquirizia, vaniglia, tabacco e spezie dolci. Gusto corposo e vellutato.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> Appassimento ~40% peso; affinamento ~30 mesi in grandi botti di rovere di Slavonia + 10 mesi in bottiglia.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Bell'Aja Bolgheri San Felice 2021 Toscana Merlot Cabernet DOC rosso" data-cat="Vini Rossi" data-price="44">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Bell'Aja Bolgheri – San Felice 2021</div></div>
-          <div class="wine-right"><span class="wine-price">€ 44,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/bellaja-bolgheri-san-felice-2021.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Sigla:</strong> DOC</span>
-            <span class="wine-tag"><strong>Regione:</strong> Toscana</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 14,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 90% Merlot, 10% Cabernet Sauvignon</span>
-          </div>
-          <div class="wine-desc">Ciliegia matura, prugna, liquirizia, cioccolato fondente e spezie dolci. Strutturato e armonioso, con tannini levigati.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Brunello di Montalcino Campogiovanni San Felice 2016 Toscana Sangiovese DOCG rosso" data-cat="Vini Rossi" data-price="70">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Brunello di Montalcino Campogiovanni – San Felice 2016</div></div>
-          <div class="wine-right"><span class="wine-price">€ 70,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/brunello-campogiovanni-san-felice-2016.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Toscana</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Brunello (Sangiovese)</span>
-          </div>
-          <div class="wine-desc">Ciliegia matura, cuoio, tabacco dolce, erbe mediterranee, liquirizia e spezie. Strutturato e avvolgente, con tannini morbidi.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> ~36 mesi in botti di rovere di Slavonia + almeno 12 mesi in bottiglia.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Chianti Classico Riserva il Grigio San Felice 2018 Toscana Sangiovese rosso" data-cat="Vini Rossi" data-price="33">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Chianti Classico Riserva il Grigio – San Felice 2018</div></div>
-          <div class="wine-right"><span class="wine-price">€ 33,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/hianti-classico-riserva-grigio-2018.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Toscana</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Sangiovese</span>
-          </div>
-          <div class="wine-desc">Viola mammola e frutti di bosco. Corposo e austero, con tannini succosi e fresca acidità.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Le Volte dell'Ornellaia Tenuta dell'Ornellaia 2021 Toscana IGT Merlot Sangiovese Cabernet rosso" data-cat="Vini Rossi" data-price="43">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Le Volte dell'Ornellaia – Tenuta dell'Ornellaia 2021</div></div>
-          <div class="wine-right"><span class="wine-price">€ 43,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/le-volte-dellornellaia-2021.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Sigla:</strong> IGT Toscana</span>
-            <span class="wine-tag"><strong>Regione:</strong> Toscana</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 70% Merlot, 15% Sangiovese, 15% Cabernet Sauvignon</span>
-          </div>
-          <div class="wine-desc">Ciliegia matura, mora, ribes nero. Equilibrato e rotondo, tannini morbidi ma presenti.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rosso di Montalcino Casanova di Neri 2021 Toscana Sangiovese rosso" data-cat="Vini Rossi" data-price="45">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rosso di Montalcino – Casanova di Neri 2021</div></div>
-          <div class="wine-right"><span class="wine-price">€ 45,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/rosso-montalcino-casanova-neri-2021.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Toscana</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 14,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Sangiovese</span>
-          </div>
-          <div class="wine-desc">Ciliegie, mirtilli, sfumature speziate e floreali. Rotondo e generoso, con tannini morbidi e vellutati.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Rosso di Montepulciano Sabazio La Braccesca 2021 Toscana Sangiovese Merlot rosso" data-cat="Vini Rossi" data-price="21">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Rosso di Montepulciano Sabazio – La Braccesca 2021</div></div>
-          <div class="wine-right"><span class="wine-price">€ 21,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/rosso-montepulciano-sabazio-2021.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Toscana</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 14%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Sangiovese e Merlot</span>
-          </div>
-          <div class="wine-desc">Amarena, lampone, fragola e ciliegia, con accenni floreali e balsamici. Morbido e fresco, con tannini vellutati.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Ruit Hora Bolgheri Caccia al Piano 2020 Toscana Merlot Cabernet Syrah rosso" data-cat="Vini Rossi" data-price="63">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Ruit Hora Bolgheri – Caccia al Piano 2020</div></div>
-          <div class="wine-right"><span class="wine-price">€ 63,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/ruit-hora-bolgheri-caccia-al-piano-2020.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Gradazione:</strong> 14%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 60% Merlot, 30% Cab. Sauvignon, 5% Petit Verdot, 5% Syrah</span>
-          </div>
-          <div class="wine-desc">Ciliegie mature, petali di rosa, accenno di spezie. Tannini setosi, struttura equilibrata e finale persistente.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Tignanello Marchesi Antinori 2016 Toscana Sangiovese Cabernet IGT rosso" data-cat="Vini Rossi" data-price="170">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Tignanello – Marchesi Antinori 2016</div></div>
-          <div class="wine-right"><span class="wine-price">€ 170,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/tignanello-antinori-2016.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Gradazione:</strong> 14%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 80% Sangiovese, 15% Cabernet Sauvignon, 5% Cabernet Franc</span>
-          </div>
-          <div class="wine-desc">Frutta rossa matura, mora, vaniglia, cioccolato amaro e leggere spezie. Vibrante, con tannini setosi e raffinati. Equilibrato e intenso, con finale lungo.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> Affinamento ~14–16 mesi in barrique.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Montepulciano d'Abruzzo Masciarelli 2020 Abruzzo rosso DOC" data-cat="Vini Rossi" data-price="19">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Montepulciano d'Abruzzo – Masciarelli 2020</div></div>
-          <div class="wine-right"><span class="wine-price">€ 19,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/montepulciano-abruzzo-masciarelli-2020.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Sigla:</strong> DOC Montepulciano</span>
-            <span class="wine-tag"><strong>Regione:</strong> Abruzzo</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Montepulciano</span>
-          </div>
-          <div class="wine-desc">Ciliegie nere mature, prugne, violette e tabacco. Corposo e succoso.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Aglianico Neromora Vinosia 2019 Campania rosso" data-cat="Vini Rossi" data-price="21">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Aglianico Neromora – Vinosia 2019</div></div>
-          <div class="wine-right"><span class="wine-price">€ 21,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/aglianico-neromora-vinosia-2019.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Campania</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Aglianico</span>
-          </div>
-          <div class="wine-desc">Elegante ma profondamente territoriale. Secco, avvolgente, con tannini ben integrati e finale persistente.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Primitivo Salento Orus Vinosia 2022 Puglia rosso IGT" data-cat="Vini Rossi" data-price="18">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Primitivo Salento Orus – Vinosia 2022</div></div>
-          <div class="wine-right"><span class="wine-price">€ 18,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/primitivo-salento-orus-vinosia-2022.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Sigla:</strong> Salento IGT</span>
-            <span class="wine-tag"><strong>Regione:</strong> Puglia</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> 100% Primitivo</span>
-          </div>
-          <div class="wine-desc">Amarene, more, mirtilli e accenno di liquirizia. Vellutato e concentrato, con tannini morbidi.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Nero d'Avola Musita 2022 Sicilia rosso" data-cat="Vini Rossi" data-price="22">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Nero d'Avola – Musita 2022</div></div>
-          <div class="wine-right"><span class="wine-price">€ 22,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/nero-davola-musita-2022.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Sicilia</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 14%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Nero d'Avola 100%</span>
-          </div>
-          <div class="wine-desc">Note di ciliegia e marasca. Eleganza e armonia dei tannini.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="Brunello di Montalcino Poggio all'Oro 2007 Toscana Sangiovese DOCG rosso" data-cat="Vini Rossi" data-price="180">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">Brunello di Montalcino "Poggio all'Oro" 2007</div></div>
-          <div class="wine-right"><span class="wine-price">€ 180,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/brunello-poggio-alloro-2007.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Regione:</strong> Toscana</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 15%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Sangiovese 100%</span>
-          </div>
-          <div class="wine-desc">Pieno, austero, vellutato e giustamente tannico.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> Macerazione a temp. controllata 12–14 giorni; maturazione in barriques 2,5 anni; affinamento in bottiglia 12–18 mesi.</div>
-        </div>
-      </div>
-
-      <div class="wine-item" data-name="50 50 del 2015 Capannelle Avignonesi Toscana IGT Merlot Sangiovese rosso" data-cat="Vini Rossi" data-price="170">
-        <div class="wine-row" onclick="toggleWine(this)">
-          <div class="wine-left"><div class="wine-name">50 &amp; 50 del 2015 – Capannelle Avignonesi</div></div>
-          <div class="wine-right"><span class="wine-price">€ 170,00</span><span class="wine-chevron">▾</span></div>
-        </div>
-        <div class="wine-detail">
-          <div class="wine-bottle-img"><img src="image/50-50-capannelle-avignonesi-2015.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="wine-tags">
-            <span class="wine-tag"><strong>Sigla:</strong> Toscana IGT</span>
-            <span class="wine-tag"><strong>Regione:</strong> Toscana</span>
-            <span class="wine-tag"><strong>Gradazione:</strong> 13,5%</span>
-            <span class="wine-tag"><strong>Uve:</strong> Merlot 50%, Sangiovese 50%</span>
-          </div>
-          <div class="wine-desc">L'anima di due tra le più antiche aree vitivinicole della Toscana: il galestro del Chianti e le argille di Montepulciano. Profilo ricco e armonioso.</div>
-          <div class="wine-vinif"><strong>Vinificazione:</strong> Affinamento in barrique.</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  </div>
-
-  </div><!-- end #catalog -->
-</div>
-
-<div class="footer">
-  ✦ LAGO BIN ✦
-  <p>Tutti i prezzi si intendono per bottiglia da 75 Cl</p>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">×</span>
+  <img id="lightboxImg" src="" alt="">
 </div>
 
 <script>
-// ── toggle functions ──────────────────────────────────
-function toggleCat(el) {
-  el.classList.toggle('open');
-  el.nextElementSibling.classList.toggle('open');
-}
-function toggleSubcat(el) {
-  el.classList.toggle('open');
-  el.nextElementSibling.classList.toggle('open');
-}
-function toggleWine(el) {
-  el.classList.toggle('active');
-  el.nextElementSibling.classList.toggle('open');
+// ── TRANSLATIONS ──────────────────────────────────────────────
+const T = {
+  it:{ paese:"Paese", regione:"Regione", gradazione:"Gradazione", uve:"Uve", colore:"Colore",
+       gusto:"Gusto", desc:"Descrizione", vinif:"Vinificazione", sigla:"Sigla", prezzo:"Prezzo",
+       search:"Cerca vino…", all:"Tutti", noRes:"Nessun vino trovato" },
+  en:{ paese:"Country", regione:"Region", gradazione:"Alcohol", uve:"Grapes", colore:"Colour",
+       gusto:"Taste", desc:"Description", vinif:"Winemaking", sigla:"Label", prezzo:"Price",
+       search:"Search wine…", all:"All", noRes:"No wines found" },
+  fr:{ paese:"Pays", regione:"Région", gradazione:"Alcool", uve:"Cépages", colore:"Couleur",
+       gusto:"Goût", desc:"Description", vinif:"Vinification", sigla:"Appellation", prezzo:"Prix",
+       search:"Chercher un vin…", all:"Tous", noRes:"Aucun vin trouvé" },
+  de:{ paese:"Land", regione:"Region", gradazione:"Alkohol", uve:"Trauben", colore:"Farbe",
+       gusto:"Geschmack", desc:"Beschreibung", vinif:"Weinbereitung", sigla:"Bezeichnung", prezzo:"Preis",
+       search:"Wein suchen…", all:"Alle", noRes:"Keine Weine gefunden" },
+  bn:{ paese:"দেশ", regione:"অঞ্চল", gradazione:"অ্যালকোহল", uve:"আঙুর", colore:"রঙ",
+       gusto:"স্বাদ", desc:"বিবরণ", vinif:"ওয়াইন তৈরি", sigla:"লেবেল", prezzo:"মূল্য",
+       search:"ওয়াইন খুঁজুন…", all:"সব", noRes:"কোনো ওয়াইন পাওয়া যায়নি" }
+};
+let lang = 'it';
+function t(k){ return T[lang][k]||T.it[k]||k }
+function setLang(l){
+  lang=l;
+  document.getElementById('searchInput').placeholder=t('search');
+  renderAll();
 }
 
-// ── search ────────────────────────────────────────────
-const searchInput = document.getElementById('searchInput');
-const searchCount = document.getElementById('searchCount');
-const catalog     = document.getElementById('catalog');
-const resultsBox  = document.getElementById('search-results');
+// ── WINE DATA ──────────────────────────────────────────────────
+const WINES = [
 
-function highlight(text, query) {
-  if (!query) return text;
-  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return text.replace(new RegExp(`(${escaped})`, 'gi'), '<mark>$1</mark>');
+  // ─── VINI DEL LAGO BIN ────────────────────────────────────
+  { id:'bollicine-lago', cat:'lago', subcat:'Selezioni Vini Lago Bin',
+    name:'Le Bollicine del Lago', price:16, img:'images/le-bollicine-del-lago.png',
+    paese:'Italia', regione:'Veneto', gradazione:'11,5%', uve:'Chardonnay Veneto', colore:'Giallo paglierino con riflessi verdolini',
+    desc:'Un vino bianco frizzante che esprime note floreali fresche e fruttate che ricordano sensazioni esotiche e mediterranee',
+    vinif:'Vino frizzante ottenuto con fermentazione naturale. Terminata la fermentazione sosta in vasca per due mesi prima di essere imbottigliato'
+  },
+  { id:'lago-bianco', cat:'lago', subcat:'Selezioni Vini Lago Bin',
+    name:'Lago Bianco', price:12, img:'images/lago-bianco.png',
+    paese:'Italia', regione:'Veneto', gradazione:'12,5%', uve:'Pinot Grigio', colore:'Giallo paglierino con leggeri riflessi ramati',
+    desc:'Un vino bianco, che esprime un profumo delicato, fruttato e dal gusto asciutto ed armonico. Da piacevoli sensazioni minerali e di frutta fresca',
+    vinif:'Il mosto ottenuto dalla pressatura, viene avviato alla fermentazione a temperatura controllata in vasche di acciaio. Terminata la fermentazione il vino traversato sosta in vasca circa due mesi'
+  },
+  { id:'lago-rose', cat:'lago', subcat:'Selezioni Vini Lago Bin',
+    name:'Lago Rosè', price:12, img:'images/lago-rose.png',
+    paese:'Italia', regione:'Veneto', gradazione:'11,5%', uve:'Uve Raboso', colore:'Cerasuolo acceso e brillante con riflessi rosei',
+    desc:'Al palato è molto gradevole, morbido e piacevolmente rotondo',
+    vinif:'Vino frizzante ottenuto per fermentazione naturale, con profumi che ricordano la rosa il glicine il biancospino e il sambuco'
+  },
+  { id:'lago-rosso', cat:'lago', subcat:'Selezioni Vini Lago Bin',
+    name:'Lago Rosso', price:12, img:'images/lago-rosso.png',
+    paese:'Italia', regione:'Veneto', gradazione:'-', colore:'Rosso',
+    vinif:'Al termine della fermentazione alcolica, viene immediatamente avviata quella malolattica al termine della quale il vino viene fatto riposare per circa 5 mesi in vasche d\'acciaio e successivamente confezionato'
+  },
+  { id:'bolle-lago', cat:'lago', subcat:'Selezioni Vini Lago Bin',
+    name:'Le Bolle del Lago', price:21, img:'images/le-bolle-del-lago.png',
+    paese:'Italia', regione:'Veneto', gradazione:'11%', uve:'Glera', colore:'Giallo paglierino',
+    gusto:'Profumo fine ed elegante, gusto intenso sapido e delicato',
+    desc:'Le sue note minerali e floreali molto delicate accompagnano una sensazione di piacevolezza al palato',
+    vinif:'Terminata la fermentazione il vino traversato viene posto un autoclave a rifermentare per circa 2 mesi. Trascorso questo periodo viene imbottigliato'
+  },
+
+  // ─── BOLLICINE ITALIANE ────────────────────────────────────
+  { id:'prosecco-valdobbiadene', cat:'bollicine', subcat:'Selezione Bollicine Italiane',
+    name:'Prosecco di Valdobbiadene Superiore Extra Brut – Maschio dei Cavalieri', price:23,
+    img:'images/Prosecco-di-Valdobbiadene.png',
+    paese:'Italia', regione:'Veneto', gradazione:'12%', uve:'Glera', colore:'Giallo paglierino brillante con riflessi verdolini',
+    gusto:'Fresco, asciutto, deciso; una bollicina di grande pulizia',
+    desc:'Fondo floreale fresco e vivace, con espressioni floreali fragranti di mela verde e pera abate, intervallate da note eleganti di lime e agrumi. Si abbina perfettamente a piatti di pescato al forno, gratinati di capesante e grigliate di prelibati crostacei'
+  },
+  { id:'prosecco-rose', cat:'bollicine', subcat:'Selezione Bollicine Italiane',
+    name:'Prosecco Rosé Extra Dry – Maschio dei Cavalieri', price:22,
+    img:'images/prosecco-rose-extra-dry-maschio-dei-cavalieri.png',
+    paese:'Italia', regione:'Veneto', gradazione:'11%', uve:'85–90% Glera; 10–15% Pinot Nero Vinificato In Rosso', colore:'Osato tenue con eleganti riflessi ramati; perlage fine e persistente',
+    gusto:'Al palato è fresco, armonico e di buona struttura',
+    desc:'Sentori floreali di acacia tipici del Glera, accompagnati da note di viola e lampone derivanti dal Pinot Nero. Si presta bene come aperitivo e accompagna egregiamente piatti di mare, antipasti leggeri, risotti delicati e carni bianche'
+  },
+  { id:'franciacorta-berlucchi', cat:'bollicine', subcat:'Selezione Bollicine Italiane',
+    name:'Franciacorta Brut \'61 – Berlucchi', price:39,
+    img:'images/berlucchi-franciacorta-brut-61.png',
+    gradazione:'12,5%', uve:'85% Chardonnay, 15% Pinot Nero', colore:'Giallo paglierino con riflessi dorati e perlage fine e persistente',
+    gusto:'Secco, fresco, sapido, con un finale lungo e persistente',
+    desc:'Aromi di frutta a polpa bianca, agrumi, crosta di pane e delicate note minerali. Aperitivo e piatti delicati come crudi di pesce, sushi, carpacci di carne, formaggi stagionati e primi piatti leggeri',
+    vinif:'Affinamento: 24 mesi sui lieviti'
+  },
+  // ─── CHAMPAGNE ────────────────────────────────────────────
+  { id:'cuvee-lago-bin', cat:'bollicine', subcat:'Selezione Champagne',
+    name:'Cuveè Lago Bin', price:55, img:'images/cuvee-lago-bin.png',
+    paese:'Italia', regione:'Liguria', desc:'Il nostro Cuveè Lago Bin'
+  },
+  { id:'gardet', cat:'bollicine', subcat:'Selezione Champagne',
+    name:'Gardet "Tradition"', price:65, img:'images/gardet-tradition.png',
+    paese:'Francia', regione:'Champagne', gradazione:'12%', uve:'45% Pinot Nero, 10% Chardonnay, 45% Pinot Meunier', colore:'Giallo miele',
+    desc:'In bocca si presenta con una bella acidità e un equilibrio tra flessibilità e durezza, tra la dolcezza vellutata'
+  },
+  { id:'veuve-clicquot', cat:'bollicine', subcat:'Selezione Champagne',
+    name:'Veuve Cliquot', price:80, img:'images/veuve-clicquot.png',
+    paese:'Francia', regione:'Champagne', gradazione:'12%', uve:'Pinot Noir 50-55%, Chardonnay 28-33%, Pinot Meunier 15-20%', colore:'Giallo intenso con riflessi dorati e con perlage ricco ed elegante',
+    gusto:'Equilibrato e cremoso, rotondo e fresco, con gradevoli scie tostate',
+    desc:'Armonioso e ricco, ha una fine sfaccettatura aromatica che si traduce in un sorso lungo e profondo, che anticipa un finale di vivace freschezza',
+    vinif:'Affinamento Dai 3 ai 4 anni sui lieviti'
+  },
+  { id:'michel-tixier', cat:'bollicine', subcat:'Selezione Champagne',
+    name:'Michel Tixier', price:60, img:'images/michel-tixier.png',
+    paese:'Francia', regione:'Champagne', gradazione:'12%', uve:'60% Pinot Meunier, 20% Pinot Noir, 20% Chardonnay', colore:'Bianco oro',
+    desc:'Michel Tixier è uno champagne ricco di gusto, dal perlage fine e delicato In bocca è pieno ed elegante con note di frutta matura, mela cotogna e albicocca; il finale è generoso con sentori tostati e di brioche'
+  },
+  { id:'deutz', cat:'bollicine', subcat:'Selezione Champagne',
+    name:'Deutz', price:90, img:'images/deutz.png',
+    paese:'Francia', regione:'Aÿ', gradazione:'12%', uve:'Chardonnay 34%, Pinot Noir 33%, Pinot Meunier 33%', colore:'Colore giallo paglierino brillante',
+    desc:'Al palato è fresco e ben strutturato, con un finale lungo e persistente',
+    vinif:'36 mesi sui lieviti'
+  },
+  { id:'gh-mumm', cat:'bollicine', subcat:'Selezione Champagne',
+    name:'G H Mumm', price:70, img:'images/gh-mumm.png',
+    paese:'Francia', regione:'Champagne', gradazione:'12,5%', uve:'Pinot Noir 45%, Chardonnay 30%, Pinot Meunier 25%', colore:'Dorato con un perlage fine e persistent',
+    desc:'In bocca ha una bella acidità e morbidezza, equilibrata fino alla lunga chiusura'
+  },
+  { id:'ruinart-magnum', cat:'bollicine', subcat:'Selezione Champagne',
+    name:'Ruinart "Magnum"', price:190, img:'images/Ruinart "Magnum" .png',
+    paese:'Francia', regione:'Champagne', gradazione:'12%', colore:'Giallo con brillanti riflessi dorati',
+    desc:'Al palato è ricco e intenso, con un sorso profondo e persistente, che chiude su note fresche e sapide'
+  },
+  { id:'laurent-perrier', cat:'bollicine', subcat:'Selezione Champagne',
+    name:'Laurent Perrier', price:75, img:'images/laurent-perrier.png',
+    paese:'Francia', regione:'Champagne', gradazione:'12%', uve:'Chardonnay 55%, Pinot Nero 35%, Pinot Meunier 10%', colore:'Giallo dorato',
+    desc:'L\'assaggio è fragrante, armonioso ed equilibrato, di ottima lunghezza'
+  },
+  { id:'don-perignon', cat:'bollicine', subcat:'Selezione Champagne',
+    name:'Don Perignon', price:280, img:'images/don-perignon.png',
+    sigla:'Champagne AOC', paese:'Francia', regione:'Champagne', gradazione:'12,5%', uve:'Pinot Noir, Chardonnay', colore:'Giallo paglierino brillante con riflessi dorati',
+    gusto:'Energico, potente, pieno e avvolgente, vellutato e cremoso, finale intenso e balsamico',
+    desc:'Al palato rivela un impeccabile equilibrato, giocato tra la cremosa finezza delle bollicine, la rotondità del corpo, la minerale freschezza del terroir e la ricchezza del gusto',
+    vinif:'Affinamento almeno 72 mesi sui lieviti'
+  },
+
+  // ─── VINI DEL TERRITORIO – BIANCHI ────────────────────────
+  { id:'vermentino-poggio-elmo', cat:'territorio', subcat:'Selezione vini bianchi del territorio',
+    name:'Vermentino RLP – Poggio dell\' Elmo', price:25, img:'images/vermentino-poggio-elmo.png',
+    sigla:'Vermentino DOC', paese:'Italia', regione:'Liguria', gradazione:'12,5%', uve:'100% Vermentino', colore:'Giallo paglierino con riflessi verdolini',
+    desc:'Al naso si apre con un bouquet elegante e delicato: fiori di campo che evocano la natura incontaminata, note erbacee fresche e un accenno vivace di mela verde croccante. Al palato si distingue per una fresca acidità, che dona slancio e vivacità al sorso',
+    vinif:'5 ore a contatto con le bucce con controllo della temperatura 5 mesi in acciaio'
+  },
+  { id:'vermentino-terre-bianche', cat:'territorio', subcat:'Selezione vini bianchi del territorio',
+    name:'Vermentino RLP – Terre Bianche', price:33, img:'images/vermentino-terre-bianche.png',
+    paese:'Italia', regione:'Liguria', uve:'Vermentino', colore:'Giallo scarico con riflessi verde ramarro',
+    gusto:'Sapore fresco e persistente, gradevolmente morbido e scorrevole, su una stoffa delicata e continua',
+    desc:'Fiori bianchi e mare, un connubio ligure d\'eccellenza in apertura, sapido ma gentile e piacevole al gusto. Ottimo per un aperitivo in riva al mare, magari con grigliata di pesce',
+    vinif:'Ottenuto dalla pressatura soffice delle uve Vermentino e vinificato a temperatura controllata con lieviti selezionati e permanenza sulle fecce fini'
+  },
+  { id:'vermentino-foresti', cat:'territorio', subcat:'Selezione vini bianchi del territorio',
+    name:'Vermentino RLP – Foresti – 100% Vermentino', price:26, img:'images/vermentino-foresti.png',
+    paese:'Italia', regione:'Liguria', gradazione:'12%', uve:'100% Vermentino', colore:'Colore giallo paglierino intenso con riflessi dorati',
+    gusto:'Profumo intenso e persistente, fine ed elegante, con sentori di erbe e fiori freschi di campo'
+  },
+  { id:'pigato-soli-foresti', cat:'territorio', subcat:'Selezione vini bianchi del territorio',
+    name:'Pigato RLP – I Soli – Foresti', price:26, img:'images/pigato-foresti.png',
+    paese:'Italia', regione:'Liguria', gradazione:'12%', uve:'100% Pigato', colore:'Giallo paglierino intenso con riflessi verdognoli',
+    gusto:'Di buon corpo e continuità, con un caratteristico fondo amarognolo',
+    desc:'Intenso e persistente, con sentori di pesca, miele, fiori e muschio',
+    vinif:'Macerazione pellicolare a temperatura ambiente per circa 12 ore. Chiarifica a freddo del mosto con enzimi selezionati. Affinamento in vasche di acciaio inox per 5 mesi, di cui 3 "sur lie"'
+  },
+  { id:'pigato-nemu', cat:'territorio', subcat:'Selezione vini bianchi del territorio',
+    name:'Pigato RLP – Nemu', price:24, img:'images/pigato-nemu.png',
+    paese:'Italia', regione:'Liguria', uve:'Pigato', colore:'Giallo paglierino, che può evolvere verso tonalità dorate con l\'invecchiamento',
+    gusto:'Moderata struttura e buona freschezza, di buona persistenza aromatica',
+    desc:'Intenso e caratteristico, con note di macchia mediterranea e frutti a polpa gialla'
+  },
+  { id:'pigato-cygnus', cat:'territorio', subcat:'Selezione vini bianchi del territorio',
+    name:'Pigato RLP Cygnus – Poggio dei Gorleri', price:38, img:'images/pigato-cygnus-gorleri.png',
+    gradazione:'13%', uve:'100% Pigato', colore:'Giallo paglierino luminoso',
+    gusto:'Morbido, sapido, equilibrato e fresco, con una viva acidità che ne esalta la freschezza',
+    desc:'Aromi intensi di frutta matura (nespola, mela), agrumi, camomilla, lavanda e una leggera nota minerale',
+    vinif:'8 mesi in acciaio'
+  },
+
+  // ─── VINI DEL TERRITORIO – ROSSI ──────────────────────────
+  { id:'rossese-poggi-elmo-2022', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Rossese di Dolceacqua – Poggi dell\' Elmo 2022', price:28, img:'images/poggi-dellelmo-rossese-di-dolceacqua-2022.png',
+    paese:'Italia', regione:'Liguria', gradazione:'13%', uve:'100% Rossese', colore:'Rosso rubino con riflessi violacei',
+    gusto:'Fresco in bocca con sentori di ciliegia sotto spirito',
+    desc:'Rosa canina, spezie che ricordano il pepe nero. Accompagna piatti tipici della cucina ligure, va servito ad un temperatura abbastanza fresca intorno ai 16°',
+    vinif:'In acciaio con controllo della temperatura'
+  },
+  { id:'rossese-pini-2022', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Rossese di Dolceacqua Superiore Pini – Poggi dell\'Elmo 2022', price:36,
+    img:'images/rossese-pini-2022.png',
+    paese:'Italia', regione:'Liguria', gradazione:'14,5%', uve:'100% Rossese', colore:'Rosso rubino con riflessi violacei',
+    gusto:'Pieno, carnoso, fruttato in bocca',
+    desc:'Note di ciliegia ben matura, mentuccia, speziato, balsamico e pepe nero. Accompagna formaggi piccanti, coniglio alla ligure, cinghiale e capra e fagioli',
+    vinif:'15 giorni sulle bucce in acciaio con controllo della temperatura. Periodo di affinamento: 12 mesi in acciaio'
+  },
+  { id:'rossese-cima-tramontina', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Rossese di Dolceacqua Cima Tramontina – Du Nemu 2022', price:24,
+    img:'images/rossese-cima-tramontina-2022.png',
+    paese:'Italia', regione:'Liguria', gradazione:'12,5%', uve:'100% Rossese Di Dolceacqua', colore:'Rosso rubino tenue',
+    gusto:'Asciutto, sapido, minerale, con tannini moderati e un finale amarognolo tipico del Rossese',
+    desc:'Note di fragole di bosco, lamponi, nespole e pepe nero. Si sposa perfettamente con piatti tipici della cucina ligure, come: Coniglio alla ligure Torte di verdure Affettati e formaggi freschi o di media stagionatura Tonno scottato',
+    vinif:'Fermentazione in acciaio inox a temperatura controllata (28°C), macerazione di 4–6 giorni con rimontaggi e delestage, fermentazione malolattica e affinamento in acciaio inox'
+  },
+  { id:'rossese-superiore-nemu-2021', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Rossese di Dolceacqua Superiore – Du Nemu 2021', price:34,
+    img:'images/rossese-superiore-du-nemu-2021.png',
+    paese:'Italia', regione:'Liguria', gradazione:'14%', uve:'100% Rossese Di Dolceacqua', colore:'Rosso rubino intenso',
+    gusto:'Asciutto, sapido, minerale, con tannini eleganti e un finale lungo e amarognolo',
+    desc:'Note di lamponi, ribes, fragoline di bosco e una piacevole sfumatura speziata. Si sposa perfettamente con piatti tipici della cucina ligure, come: Cacciagione Capra e fagioli Formaggi di media e lunga stagionatura. Ottimo anche da solo, dopo cena, per accompagnare una conversazione tra amici'
+  },
+  { id:'rossese-foresti-2022', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Rossese di Dolceacqua – Foresti 2022', price:26, img:'images/foresti-rossese-di-dolceacqua-2022.png',
+    paese:'Italia', regione:'Liguria', gradazione:'13%', uve:'100% Rossese Di Ventimiglia', colore:'Rosso rubino chiaro, che tende al granato con l\'invecchiamento',
+    gusto:'Asciutto, di medio corpo, con un piacevole retrogusto di mandorla e una buona persistenza',
+    desc:'Aromi floreali di rosa e viola, con sentori fruttati. Si abbina perfettamente a piatti tipici della cucina ligure, come: Antipasti all\'italiana Pasta con fagioli e cozze Minestre ripiene Arrosti e selvaggina Coniglio in umido Brasati e lepri in salmi',
+    vinif:'Affinamento: 5 mesi in vasche di acciaio inox'
+  },
+  { id:'rossese-luvaira-foresti', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Rossese di Dolceacqua Luvaira – Foresti 2021', price:32, img:'images/rossese-luvaira-foresti-2021.png',
+    paese:'Italia', regione:'Liguria', gradazione:'13%', uve:'100% Rossese Di Dolceacqua', colore:'Colore rosso rubino',
+    gusto:'Buona acidità e freschezza, con tannini morbidi e retrogusto fruttato, con buona nota minerale',
+    desc:'È prodotto con uve di un vigneto centenario coltivato su terreni scoscesi e ben esposti al sole',
+    vinif:'Prodotto da una singola vigna di un ttarp situata nel comune di San Biagio della Cima impiantata nel 1913. La fermentazione avviene in acciaio ad opera di lieviN indigeni, con una macerazione di 10-12 giorni. Successivamente il vino affina almeno 6 mesi in barriques usate'
+  },
+  { id:'rossese-beragna-ka-mancine', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Rossese di Dolceacqua Beragna – Ka Mancine 2021', price:32,
+    img:'images/rossese-beragna-ka-mancine-2021.png',
+    paese:'Italia', regione:'Liguria', gradazione:'13%', uve:'100% Rossese', colore:'Rubino brillante',
+    gusto:'Di medio corpo, fresco e fragrante, con tannini delicati e un finale sapido',
+    desc:'Eleganti note di pepe nero, frutta rossa matura e tabacco. Si abbina perfettamente a piatti a base di pesce, come risotto ai frutti di mare, zuppe e pesce in umido. È ottimo anche con carne rossa in umido',
+    vinif:'Fermentazione in acciaio a temperatura controllata con macerazione sulle bucce; maturazione in acciaio per alcuni mesi'
+  },
+  { id:'rossese-galeae-2022', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Rossese di Dolceacqua Galeae – Ka Mancine 2022', price:36,
+    img:'images/rossese-galeae-ka-mancine-2022.png',
+    sigla:'DOC Rossese', paese:'Italia', regione:'Liguria', gradazione:'13,5%', uve:'100% Rossese', colore:'Rosso rubino intenso',
+    gusto:'Secco, caldo, morbido, discretamente strutturato, con ottima persistenza e finale fresco e sapido',
+    desc:'Aromi di melograno, pepe bianco e note speziate. Si abbina perfettamente a piatti a base di carne rossa, selvaggina e formaggi stagionati ed erborinati',
+    vinif:'Vendemmia tardiva, diraspatura immediata, fermentazione con macerazione lunga sulle bucce, affinamento in acciaio'
+  },
+  { id:'rossese-ange-2024', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Rossese di Dolceacqua Ange – Ka Mancine 2024', price:44,
+    img:'images/ka-mancine-rossese-di-dolceacqua-ange-2024.png',
+    paese:'Italia', regione:'Liguria', gradazione:'13%', uve:'Rossese', colore:'Rosso rubino brillante, tipico dei Rossese, con riflessi violacei',
+    gusto:'In bocca il vino si presenta elegante e bilanciato, con una buona struttura e freschezza',
+    desc:'Il bouquet è complesso e ricco, con note di frutti rossi (come ciliegia e fragola), spezie (pepe nero e note di tabacco) e una leggera sfumatura di erbe mediterranee',
+    vinif:'Fermentazione in acciaio a temperatura controllata, con macerazione sulle bucce per estrarre colore e aromi. Affinamento in acciaio per alcuni mesi per preservare la freschezza e il frutto'
+  },
+  { id:'rossese-terre-bianche-2022', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Rossese di Dolceacqua – Terre Bianche 2022', price:32,
+    img:'images/terre-bianche-rossese-di-dolceacqua-2022.png',
+    paese:'Italia', regione:'Liguria', gradazione:'13,5%', uve:'100% Rossese', colore:'Rosso rubino con riflessi granati, che possono accentuarsi con l\'invecchiamento',
+    gusto:'Al palato si presenta sapido, elegante, caldo e di buona freschezza, con una nota amarognola',
+    desc:'Bouquet ampio e intenso con sentori di frutti rossi di bosco, ciliegia, rosa canina e spezie. Ideale con pesce azzurro, carni bianche, coniglio, stoccafisso e torte di verdura',
+    vinif:'La vinificazione avviene con macerazione di uve totalmente diraspate, utilizzando lieviti autoctoni e a temperature controllate sotto i 29°C'
+  },
+  { id:'rossese-bricco-arcagna', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Rossese di Dolceacqua Bricco Arcagna – Terre Bianche 2017', price:64,
+    img:'images/rossese-bricco-arcagna-terre-bianche-2017.png',
+    paese:'Italia', regione:'Liguria', gradazione:'13,5%', uve:'100% Rossese', colore:'Rosso rubino con riflessi granati',
+    gusto:'Tannini setosi, sapidità equilibrata e finale leggermente amarognolo',
+    desc:'Note di ciliegia sotto spirito, spezie dolci, incenso e un accenno balsamico. Ideale con carni rosse alla griglia, selvaggina da piuma, coniglio alla ligure e capra con fagioli',
+    vinif:'Fermentazione con lieviti indigeni, macerazione a temperatura controllata e affinamento in barrique da 225 litri'
+  },
+  { id:'rossese-testalonga', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Rossese di Dolceacqua Testalonga', price:56, img:'images/rossese-testalonga.png',
+    paese:'Italia', regione:'Liguria', uve:'100% Rossese', colore:'Rosso chiaro, quasi trasparente',
+    gusto:'Elegante e leggero, con tannini setosi e una vivace acidità. Il finale è lungo, con richiami salini',
+    desc:'Note floreali di violetta e rosa, frutti rossi come ciliegia e ribes, con sfumature mediterranee di erbe aromatiche e spezie',
+    vinif:'La vinificazione avviene in modo artigianale: fermentazione spontanea con grappoli interi, pigiatura con i piedi, macerazione di circa due settimane e affinamento in vecchie botti di rovere, senza filtrazioni né aggiunta di solfiti'
+  },
+  { id:'roccese-masala', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Roccese – Masala', price:49, img:'images/roccese-masala.png',
+    paese:'Italia', regione:'Liguria', gradazione:'13%', uve:'Uve Rossese E Altri Vitigni Autoctoni', colore:'Rosso rubino intenso',
+    gusto:'Equilibrato, persistente, con una struttura che riflette il terroir roccioso e le condizioni estreme',
+    desc:'Note di erbe aromatiche come rosmarino, salvia e finocchio selvatico, derivanti dalla flora spontanea che cresce tra i filari',
+    vinif:'Fermentazione in acciaio per 12 mesi'
+  },
+  { id:'roccese-barricato-masala', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Roccese Barricato – Masala', price:63, img:'images/roccese-barricato-masala.png',
+    paese:'Italia', regione:'Liguria', uve:'Rossese E Altri Vitigni Autoctoni', colore:'Rosso rubino intenso, tendente al granato',
+    gusto:'Ben equilibrato, ricco e strutturato, con tannini morbidi e una lunga persistenza',
+    desc:'Intenso e complesso, con note di erbe aromatiche e officinali tipiche del territorio, arricchite da sfumature legnose derivanti dall\'affinamento in botte. Si abbina perfettamente a piatti strutturati e saporiti, come: Carni rosse alla griglia o in umido. Formaggi stagionati. Piatti tipici della cucina ligure, come il coniglio alla ligure o lo stoccafisso',
+    vinif:'Il vino viene trasferito in botti di legno esauste per un ulteriore affinamento di 15 mesi'
+  },
+  { id:'rossese-dolceacqua-generic', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Rossese di Dolceacqua', price:45,
+    paese:'Italia', regione:'Liguria', gradazione:'14%', uve:'100% Rossese', colore:'Rosso rubino chiaro con riflessi violacei',
+    gusto:'Fresco, con tannini morbidi e una buona acidità che conferisce eleganza e longevità al vino',
+    desc:'Note di frutti rossi maturi, erbe aromatiche, sottobosco e una leggera mineralità',
+    vinif:'Affinamento: In acciaio per circa 10 mesi'
+  },
+  { id:'rossese-peverelli', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Rossese di Dolceacqua Superiore Peverelli – Luigi Mauro 2021', price:39,
+    img:'images/rossese-peverelli-luigi-mauro-2021.png',
+    paese:'Italia', regione:'Liguria', gradazione:'13,5%', uve:'100% Rossese', colore:'Rosso rubino intenso e brillante, tipico della varietà Rossese',
+    gusto:'Equilibrato, con una buona acidità che ne esalta la freschezza',
+    desc:'Il bouquet olfattivo è fresco e complesso, con note floreali di petali di rosa e sentori di macchia mediterranea (rosmarino, timo, pino ed elicriso)'
+  },
+  { id:'roccese-masala-2', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Roccese – Masala (2)', price:49,
+    paese:'Italia', regione:'Liguria', gradazione:'13%', uve:'Uve Rossese E Altri Vitigni Autoctoni', colore:'Rosso rubino intenso',
+    gusto:'Equilibrato, persistente',
+    desc:'Note di erbe aromatiche come rosmarino, salvia e finocchio selvatico',
+    vinif:'Fermentazione in acciaio per 12 mesi'
+  },
+  { id:'roccese-du-nemu', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Roccese dolceacqua et rossa du nemu', price:24, img:'images/roccese-rossa-du-nemu.png',
+    paese:'Italia', regione:'Liguria', gradazione:'12,5%', uve:'Rossese 100%', colore:'Rosso rubino leggero',
+    gusto:'Tannico, asciutto e preciso, sapido, minerale sul finale',
+    desc:'Al palato, si rivela vivace e armonioso, con tannini soffici e un finale lungo e memorabile',
+    vinif:'Fermentazione alcolica in acciaio Affinamento di alcuni mesi in acciaio'
+  },
+  { id:'roccese-bucciardino', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Roccese dolceacqua bucciardino ka mancine 2023', price:39, img:'images/roccese-bucciardino-ka-mancine-2023.png',
+    paese:'Italia', regione:'Liguria', gradazione:'13%', uve:'Rossese',
+    desc:'Persistente e di discreta struttura, risulta caldo, morbido, fine e con una buona sapidità'
+  },
+  { id:'rossese-maccario-ringenberg', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Rossese di dolceacqua 2021 Maccario Dringenberg', price:37,
+    img:'images/rossese-maccario-ringenberg-2021.png',
+    sigla:'Rossese Di Dolceacqua DOC', paese:'Italia', regione:'Liguria', gradazione:'13,5%', uve:'100% Rossese', colore:'Rosso Rubino con riflessi violacei',
+    gusto:'Fresco e piacevolmente fruttato',
+    desc:'Al palato è di medio corpo, elegante e con una bella freschezza'
+  },
+  { id:'rossese-fratelli-maccario', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Rossese di Dolceacqua Fratelli Macario', price:45, img:'images/rossese-fratelli-maccario.png',
+    paese:'Italia', regione:'Liguria', gradazione:'13,5%', uve:'Rossese 100%', colore:'Rosso rubino trasparente e luminoso',
+    gusto:'Un corredo fruttato denso e deciso',
+    desc:'Al palato, il Fratelli Maccario apre con note fruttate dolci e si sviluppa in un ricco ventaglio speziato. Esprime con nitidezza l\'austerità dell\'annata calda e siccitosa',
+    vinif:'Fermentazione spontanea in acciaio. Affinamento, sempre in acciaio, per circa 10 mesi'
+  },
+  { id:'rossese-curli', cat:'territorio', subcat:'Selezione vini rossi del territorio',
+    name:'Rossese Curli', price:54, img:'images/rossese-curli.png',
+    paese:'Italia', regione:'Liguria', gradazione:'14%', uve:'Rossese 100%', colore:'Rosso rubino',
+    desc:'Sottobosco, bacche, frutti di bosco. Intenso, sapido, corposo'
+  },
+
+  // ─── VINI DEL TERRITORIO – ROSATI ─────────────────────────
+  { id:'rossese-rosato-du-nemu', cat:'territorio', subcat:'Selezione vini rosati del territorio',
+    name:'Rossese di Dolceacqua Rosato – Du Nemu', price:21, img:'images/rossese-rosato-du-nemu.png',
+    paese:'Italia', regione:'Liguria', uve:'100% Rossese', colore:'Rosa scarico',
+    desc:'Il vino, fresco e fruttato ricorda le sensazioni varietali del vitigno da cui deriva, ciliegia, rosa, piccoli frutti rossi',
+    vinif:'Le uve rosse di Rossese di Dolceacqua vinificate in bianco per esaltare le note fruttate e la freschezza del vino con una macerazione di due ore in pressa per ottenere un colore rosa scarico'
+  },
+  { id:'rossese-rosato-ka-mancine', cat:'territorio', subcat:'Selezione vini rosati del territorio',
+    name:'Rossese di Dolceacqua Rosato – Ka Mancine', price:23, img:'images/rossese-rosato-ka-mancine.png',
+    paese:'Italia', regione:'Liguria', gusto:'Finale dolce con una punta di amarognolo',
+    desc:'Al palato risulta secco, caldo, morbido, discretamente strutturato con ottima la persistenza, equilibrato finale fresco, abbastanza sapido'
+  },
+  { id:'rossese-rosato-poggi-elmo', cat:'territorio', subcat:'Selezione vini rosati del territorio',
+    name:'Rossese di Dolceacqua Rosato – Poggi dell\' Elmo', price:21,
+    img:'images/rossese-rosato-poggi-del-elmo.png',
+    paese:'Italia', regione:'Liguria', colore:'Rosa tenue',
+    gusto:'Delicato con profumi di rosa',
+    desc:'Morbido e sapido',
+    vinif:'Uva rossa vinificata in bianco, 12 ore di macerazione a contatto con le bucce'
+  },
+
+  // ─── VINI BIANCHI NAZIONALI ───────────────────────────────
+  { id:'roero-arneis-2023', cat:'bianchi', subcat:'Selezione vini Bianchi Nazionali',
+    name:'Roero Arneis Ero – Clavesana 2023', price:23, img:'images/clavesana-roero-arneis-ero-2023.png',
+    sigla:'Roero DOCG', paese:'Italia', regione:'Piemonte', gradazione:'13%', uve:'Arneis 100%', colore:'Giallo paglierino, con riflessi verdognoli',
+    desc:'Al naso si esprime con sentori fruttati, note floreali e cenni vegetali. Al palato si rivela fresco, di piacevole sapidità ed equilibrato'
+  },
+  { id:'falanghina-2022', cat:'bianchi', subcat:'Selezione vini Bianchi Nazionali',
+    name:'Falanghina Beneventano – Vinosia 2022', price:18, img:'images/vinosia-falanghina-beneventano-2022.png',
+    sigla:'Falanghina IGT', gradazione:'12,5%', uve:'Falanghina', colore:'Giallo paglierino intenso',
+    gusto:'Buon corpo, rotondo, con un sorso perfettamente equilibrato. Una lunghezza finale. Interessante in',
+    desc:'Note fruttate, anche esotici, sentori di banana, ananas, kiwi',
+    vinif:'Pigiatura soffice, pressatura dei grappoli interi, fermentazione aiutata con lieviti autoctoni, manolattica non svolta completamente'
+  },
+  { id:'gewurztraminer-2022', cat:'bianchi', subcat:'Selezione vini Bianchi Nazionali',
+    name:'A.A. Gewürztraminer – Muri-Gries 2022', price:27, img:'images/aa-gewurztraminer-muri-gries-2022.png',
+    paese:'Italia', regione:'Alto Adige', gradazione:'14,5%', uve:'100% Gewürztraminer', colore:'Giallo paglierino chiaro',
+    gusto:'Struttura piena e accessibile, elegante, giovane e di piacevole beva, con un finale aromatico fine',
+    desc:'Aromi eleganti di petali di rosa, garofano e una leggera nota affumicata',
+    vinif:'Affinamento: Acciaio inox'
+  },
+  { id:'soave-latium-2021', cat:'bianchi', subcat:'Selezione vini Bianchi Nazionali',
+    name:'Soave (Garganega 100%) – Latium 2021', price:18, img:'images/soave-latium-2021.png',
+    paese:'Italia', regione:'Veneto', uve:'Garganega 100%', colore:'Giallo paglierino intenso e luminoso',
+    gusto:'Al palato morbido, intenso ed avvolgente con una piacevole acidità sul finale',
+    desc:'Profumi fruttati tendenti al maturo, pesca gialla, accenni di mela cotogna e bergamotto con ricordi tipici di frutta esotica',
+    vinif:'L\'uva appassita per 30/40 giorni, viene diraspata e macerata in pressa per 12 ore. Seguono pulizia statica e fermentazione controllata a max. 15 °C per 15/20 gg in acciaio inox'
+  },
+  { id:'sauvignon', cat:'bianchi', subcat:'Selezione vini Bianchi Nazionali',
+    name:'Sauvignon', price:21, img:'images/sauvignon.png',
+    paese:'Italia', regione:'Friuli Venezia Giulia', gradazione:'12%', uve:'Sauvignon', colore:'Colore giallo paglierino luminoso',
+    gusto:'In bocca, il vino è equilibrato, con una freschezza che lo rende incredibilmente bevibile e un corp',
+    desc:'Al gusto si presenta aromatico, delicato, asciutto',
+    vinif:'VINIFICAZIONE: pressatura soffice e fermentazione a temperatura controllata di 18°C in assenza di solfiti. MATURAZIONE: in vasche di acciaio inox'
+  },
+
+  // ─── VINI ROSATI NAZIONALI ─────────────────────────────────
+  { id:'bardolino-chiaretto', cat:'rosati', subcat:'Selezione vini rosati nazionali',
+    name:'Bardolino Chiaretto Classico – Negrar Domìni Veneti 2021', price:16,
+    img:'images/Bardolino Chiaretto Classico - Negrar Domìni Veneti 2021.png',
+    sigla:'DOC Bardolino', paese:'Italia', regione:'Veneto', gradazione:'12,5%', uve:'Corvina, Rondinella E Molinara', colore:'Rosato splendente',
+    gusto:'Pieno ed equilibrato, fresco, ricorda fragoline di bosco e lamponi',
+    desc:'Al naso il profumo è delicato di frutti rossi, rosa tea e violetta. Un vino che si abbina molto bene a pesce alla griglia, carni bianche, salumi freschi e formaggi molli'
+  },
+  { id:'pallido-capecci', cat:'rosati', subcat:'Selezione vini rosati nazionali',
+    name:'Pallido – Capecci', price:27, img:'images/pallido-capecci.png',
+    paese:'Italia', regione:'Marche', gradazione:'12%', uve:'Montepulciano'
+  },
+
+  // ─── VINI ROSSI NAZIONALI ──────────────────────────────────
+  { id:'barbaresco-biologico', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Barbaresco Biologico – Nada 2019', price:59, img:'images/barbaresco-biologico-nada-2019.png',
+    paese:'Italia', regione:'Piemonte', gradazione:'14%', uve:'100% Nebbiolo', colore:'Rosso granato brillante',
+    gusto:'Elegante, sapido, con tannini levigati e una lunga persistenza',
+    desc:'Intensi sentori floreali, con note di frutti rossi e spezie. Ideale con arrosti, formaggi stagionati e piatti a base di carne',
+    vinif:'Affinamento: 24 mesi in botti di rovere, seguito da 6 mesi in bottiglia'
+  },
+  { id:'barbera-pio-cesare', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Barbera d\'Alba – Pio Cesare 2019', price:32, img:'images/barbera-dalba-pio-cesare-2019.png',
+    paese:'Italia', regione:'Piemonte', gradazione:'14,5%', uve:'Barbera Al 100%', colore:'Rosso rubino intenso con riflessi violacei',
+    gusto:'Pieno e corposo, con una piacevole freschezza e tannini morbidi; finale persistente e armonioso',
+    desc:'Bouquet complesso con note di frutti rossi maturi (ciliegie, prugne), sentori floreali (viola) e speziati (pepe nero). Ideale con primi piatti con sugo di carne, salumi, arrosti, grigliate e formaggi'
+  },
+  { id:'barbera-clavesana', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Barbera d\'Alba – Clavesana 2019', price:24, img:'images/barbera-dalba-clavesana-2019.png',
+    paese:'Italia', regione:'Piemonte', gradazione:'14,5%', uve:'100% Barbera', colore:'Rosso rubino intenso',
+    gusto:'Morbido, elegante, con una piacevole acidità e un finale persistente',
+    desc:'Note di frutta rossa (ciliegia, prugna) e spezie. Abbinamenti consigliati: Primi piatti con sughi di carne, stufati, arrosti e formaggi stagionati'
+  },
+  { id:'barolo-palladino', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Barolo Serralunga – Palladino 2019', price:64, img:'images/barolo-serralunga-palladino-2019.png',
+    paese:'Italia', regione:'Piemonte', gradazione:'14,5%', uve:'Nebbiolo 100%', colore:'Rosso rubino con riflessi granata',
+    gusto:'Morbido, strutturato, con tannini ben integrati e una lunga persistenza',
+    desc:'Note di frutti rossi maturi, spezie, liquirizia e una leggera nota floreale. Abbinamenti consigliati: Arrosti, brasati, selvaggina e formaggi stagionati',
+    vinif:'Affinamento: 24 mesi in grandi botti di rovere, seguito da 6 mesi in cemento'
+  },
+  { id:'dolcetto-palladino', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Dolcetto d\'Alba – Palladino 2022', price:24, img:'images/dolcetto-dalba-palladino-2022.png',
+    paese:'Italia', regione:'Piemonte', gradazione:'13%', uve:'100% Dolcetto', colore:'Rosso rubino intenso',
+    gusto:'Asciutto, armonico, equilibrato, con tannini fini e finale fresco',
+    desc:'Fruttato, con note di lampone, prugna e violette. Abbinamenti consigliati: Carni bianche, antipasti, salumi, pasta al pomodoro, piatti della cucina piemontese',
+    vinif:'Vinificazione: Fermentazione e affinamento in acciaio inox, senza passaggi in legno'
+  },
+  { id:'nebbiolo-clavesana', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Nebbiolo d\'Alba Nhe – Clavesana 2021', price:24, img:'images/nebbiolo-dalba-nhe-clavesana-2021.png',
+    paese:'Italia', regione:'Piemonte', gradazione:'14%', uve:'100% Nebbiolo', colore:'Rosso rubino con riflessi granata',
+    gusto:'Morbido, con tannini ben integrati e una persistenza piacevole',
+    desc:'Sentori di frutti rossi sotto spirito, note speziate e toni eterei. Abbinamenti consigliati: Risotti di carne, secondi piatti a base di manzo e maiale'
+  },
+  { id:'amarone-latium', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Amarone della Valpolicella Campo Leòn – Latium 2017', price:92,
+    img:'images/amarone-della-valpolicella-campo-leon-latium-2017.png',
+    sigla:'DOCG', paese:'Italia', regione:'Veneto', uve:'Selezione Di Vitigni Tipici Della Valpolicella', colore:'Rosso granato intenso con riflessi rubino',
+    gusto:'Gusto corposo, vellutato, con tannini maturi e ben integrati',
+    desc:'Profumo ricco e complesso, con sentori di ciliegia sotto spirito, prugna matura, liquirizia, vaniglia, tabacco e spezie dolci. È un vino da bere con calma, perfetto per accompagnare piatti importanti o per essere gustato da solo nelle occasioni speciali',
+    vinif:'Le uve vengono sottoposte al tradizionale processo di appassimento, durante il quale perdono circa il 40% del loro peso, concentrando zuccheri e aromi'
+  },
+  { id:'bellaja-bolgheri', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Bell\'Aja Bolgheri – San Felice 2021', price:44, img:'images/bellaja-bolgheri-san-felice-2021.png',
+    sigla:'DOC', paese:'Italia', regione:'Toscana', gradazione:'4,5%', uve:'90% Merlot, 10% Cabernet Sauvignon', colore:'Rosso rubino intenso con riflessi granati',
+    gusto:'Strutturato e armonioso, con tannini levigati e una vivace acidità',
+    desc:'Profumi di ciliegia matura, prugna, liquirizia, cioccolato fondente e spezie dolci. Ideale con piatti ricchi come bistecca alla fiorentina, selvaggina, arrosti di maiale o agnello alla griglia',
+    vinif:'Affinamento: circa 18 mesi. Contenitori: barrique francese (in parte nuove e in parte di secondo passaggio). Successivo affinamento in bottiglia per almeno 6 mesi prima della commercializzazione'
+  },
+  { id:'brunello-campogiovanni', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Brunello di Montalcino Campogiovanni – San Felice 2016', price:70,
+    img:'images/brunello-campogiovanni-san-felice-2016.png',
+    paese:'Italia', regione:'TOscana', uve:'100% Brunello', colore:'Rosso rubino profondo',
+    gusto:'Strutturato e avvolgente, con tannini morbidi e una persistenza dolce e speziata',
+    desc:'Ciliegia matura, cuoio, tabacco dolce, erbe mediterranee (rosmarino, timo), liquirizia e spezie. Ideale con carni rosse, selvaggina, arrosti e formaggi stagionati come il pecorino toscano',
+    vinif:'Affinamento: Circa 36 mesi in botti di rovere di Slavonia da 60 e 80 hl Successivo affinamento in bottiglia di almeno 12 mesi prima della commercializzazione'
+  },
+  { id:'chianti-classico-grigio', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Chianti Classico Riserva il Grigio da San Felice – San Felice 2018', price:33,
+    img:'images/hianti-classico-riserva-grigio-2018.png',
+    paese:'Italia', regione:'Toscana', gradazione:'13,5%', uve:'100% Sangiovese', colore:'Rosso rubino profondo',
+    gusto:'Corposo e austero, con tannini succosi e una fresca acidità',
+    desc:'Aroma intenso e persistente, con note di viola mammola e frutti di bosco. Si abbina perfettamente a piatti di carne alla griglia, arrosti, selvaggina e formaggi stagionati'
+  },
+  { id:'le-volte-ornellaia', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Le Volte dell\'Ornellaia – Tenuta dell\'Ornellaia 2021', price:43,
+    img:'images/le-volte-dellornellaia-2021.png',
+    sigla:'IGT Toscana', paese:'Italia', regione:'Toscana', gradazione:'13,5%', uve:'70% Merlot, 15% Sangiovese, 15% Cabernet Sauvignon', colore:'Rosso rubino intenso, con riflessi violacei',
+    gusto:'Equilibrato e rotondo: tannini morbidi ma presenti',
+    desc:'Note fruttate di ciliegia matura, mora, ribes nero. Si abbina bene a pappardelle al ragù, risotti ai funghi, lasagne, carni come tagliata o coniglio alla cacciatora, pecorino stagionato, salumi toscani, bruschette rustiche e pizze saporite'
+  },
+  { id:'rosso-montalcino-casanova', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Rosso di Montalcino – Casanova di Neri 2021', price:45,
+    img:'images/rosso-montalcino-casanova-neri-2021.png',
+    paese:'Italia', regione:'Toscana', gradazione:'14,5%', uve:'100% Sangiovese', colore:'Rosso intenso e vivace',
+    gusto:'Rotondo e generoso, con tannini morbidi e vellutati',
+    desc:'Note intriganti di frutta rossa scura, in particolare ciliegie e mirtilli, con sfumature speziate e floreali'
+  },
+  { id:'rosso-montepulciano-sabazio', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Rosso di Montepulciano Sabazio – La Braccesca 2021', price:21,
+    img:'images/rosso-montepulciano-sabazio-2021.png',
+    paese:'Italia', regione:'Toscana', gradazione:'14%', uve:'Sangiovese E Merlot', colore:'Rosso rubino brillante',
+    gusto:'Morbido e fresco, con tannini vellutati e un finale sapido',
+    desc:'Note fruttate di amarena, lampone, fragola e ciliegia, con accenni floreali e balsamici',
+    vinif:'Affinamento: Acciaio inox per circa 4 mesi'
+  },
+  { id:'ruit-hora-bolgheri', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Ruit Hora Bolgheri – Caccia al Piano 2020', price:63, img:'images/ruit-hora-bolgheri-caccia-al-piano-2020.png',
+    gradazione:'14%', uve:'60% Merlot, 30% Cabernet Sauvignon, 5% Petit Verdot, 5% Syrah', colore:'Rosso rubino intenso e brillante',
+    gusto:'Tannini setosi, struttura equilibrata e un finale persistente con sentori fruttati',
+    desc:'Note di ciliegie mature, petali di rosa e un accenno di spezie. Ideale con arrosti, brasati di carne rossa, selvaggina, salumi stagionati e formaggi a media o lunga stagionatura',
+    vinif:'Affinamento: Circa 16 mesi in botti di rovere da 35–50 hl e anfore di ceramica, seguiti da 6 mesi in bottiglia'
+  },
+  { id:'tignanello-antinori', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Tignanello – Marchesi Antinori 2016', price:170, img:'images/tignanello-antinori-2016.png',
+    gradazione:'14%', uve:'80% Sangiovese, 15% Cabernet Sauvignon, 5% Cabernet Franc', colore:'Rosso rubino intenso con riflessi porpora',
+    gusto:'Vibrante, con tannini setosi e raffinati. Equilibrato e intenso, con un finale lungo',
+    desc:'Note di frutta rossa matura, mora fresca e frutti di bosco, con aromi di vaniglia, cioccolato amaro e leggere spezie',
+    vinif:'Affinato per circa 14–16 mesi in barrique'
+  },
+  { id:'montepulciano-abruzzo', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Montepulciano d\'Abruzzo – Masciarelli 2020', price:19,
+    img:'images/montepulciano-abruzzo-masciarelli-2020.png',
+    sigla:'DOC Montepulciano', paese:'Italia', regione:'Abruzzo', gradazione:'13,5%', uve:'100% Montepulciano', colore:'Rosso rubino intenso',
+    gusto:'Corposo e succoso, con sapori di frutti rossi maturi, ciliegie e prugne',
+    desc:'Note complesse di ciliegie nere mature, prugne, violette e un accenno di tabacco',
+    vinif:'Fermentazione e affinamento in acciaio inox per preservare la freschezza e la vivacità del frutto'
+  },
+  { id:'aglianico-neromora', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Aglianico Neromora – Vinosia 2019', price:21, img:'images/aglianico-neromora-vinosia-2019.png',
+    paese:'Italia', regione:'Campania', gradazione:'13,5%', uve:'100% Aglianico', colore:'Rosso rubino intenso, con riflessi violacei quando è giovane',
+    gusto:'In bocca è secco, avvolgente, con tannini ben integrati e un finale persistente',
+    desc:'Un vino elegante ma ancora profondamente territoriale. Ottimo con piatti ricchi o da meditazione',
+    vinif:'Affinamento: 6 mesi in barrique di rovere francese'
+  },
+  { id:'primitivo-salento', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Primitivo Salento Orus – Vinosia 2022', price:18, img:'images/primitivo-salento-orus-vinosia-2022.png',
+    sigla:'Salento IGT', paese:'Italia', regione:'Puglia', gradazione:'13,5%', uve:'100% Primitivo', colore:'Rosso rubino profondo con riflessi violacei',
+    gusto:'Vellutato e concentrato, con tannini morbidi e una buona acidità che conferisce equilibrio',
+    desc:'Intenso e fruttato, con note di amarene, more, mirtilli e un accenno di liquirizia',
+    vinif:'Affinamento: In acciaio per circa 6 mesi, senza passaggio in legno'
+  },
+  { id:'nero-davola', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Nero d\'Avola – Musita 2022', price:22, img:'images/nero-davola-musita-2022.png',
+    paese:'Italia', regione:'Sicilia', gradazione:'14%', uve:'Nero D\'Avola Al 100%', colore:'Colore rosso rubino carico',
+    gusto:'Al palato, si distingue per l\'eleganza e l\'armonia dei tannini',
+    desc:'Il Musita Nero d\'Avola 2022 presenta un colore rosso rubino carico e un bouquet olfattivo che richiama note di ciliegia e marasca',
+    vinif:'Affinamento: Per alcuni mesi in vasche di acciaio e cemento'
+  },
+  { id:'brunello-poggio-oro', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'Brunello di Montalcino "Poggio all\' Oro" 2007', price:180,
+    img:'images/brunello-poggio-alloro-2007.png',
+    paese:'Italia', regione:'Toscana', gradazione:'15%', uve:'Sangiovese 100%', colore:'Rosso rubino intenso',
+    desc:'Sapore: pieno, austero, vellutato e giustamente tannico',
+    vinif:'La macerazione si svolge a temperatura controllata in tini combinati in acciaio e legno per 12-14 giorni. Maturato in barriques 2 anni e mezzo, si affina in bottiglia per almeno 12-18 mesi'
+  },
+  { id:'5050-avignonesi', cat:'rossi', subcat:'Selezione vini Rossi Nazionali',
+    name:'50 & 50 del 2015 – Capannelle Avignonesi', price:170,
+    img:'images/50-50-capannelle-avignonesi-2015.png',
+    sigla:'Toscana IGT 50 & 50 2015 Avignones', paese:'Italia', regione:'Toscana', gradazione:'13,5%', uve:'Merlot 50%, Sangiovese 50%',
+    desc:'Questo vino racchiude l\'anima di due tra le più antiche e rinomate aree vitivinicole della Toscana',
+    vinif:'AFFINAMENTO: Barrique'
+  },
+];
+
+// ── CATEGORY CONFIG ────────────────────────────────────────────
+const CATS = [
+  { id:'all',       label:'Tutti' },
+  { id:'lago',      label:'Vini del Lago Bin' },
+  { id:'bollicine', label:'Bollicine' },
+  { id:'territorio',label:'Vini del Territorio' },
+  { id:'bianchi',   label:'Vini Bianchi' },
+  { id:'rosati',    label:'Vini Rosati' },
+  { id:'rossi',     label:'Vini Rossi' },
+];
+
+// ── STATE ──────────────────────────────────────────────────────
+let activeCat = 'all';
+let searchQ = '';
+
+// ── RENDER ─────────────────────────────────────────────────────
+function renderAll(){
+  renderCatBar();
+  renderWines();
 }
 
-searchInput.addEventListener('input', function() {
-  const q = this.value.trim().toLowerCase();
-  resultsBox.innerHTML = '';
+function renderCatBar(){
+  const bar = document.getElementById('catBar');
+  bar.innerHTML = CATS.map(c=>`
+    <button class="cat-btn${activeCat===c.id?' active':''}" onclick="setCat('${c.id}')">
+      ${c.id==='all'?t('all'):c.label}
+    </button>`).join('');
+}
 
-  if (!q) {
-    catalog.style.display = '';
-    resultsBox.style.display = 'none';
-    searchCount.textContent = '';
+function filterWines(){
+  searchQ = document.getElementById('searchInput').value.toLowerCase();
+  renderWines();
+}
+
+function setCat(id){
+  activeCat = id;
+  searchQ = '';
+  document.getElementById('searchInput').value = '';
+  renderAll();
+}
+
+function getFilteredWines(){
+  return WINES.filter(w=>{
+    const matchCat = activeCat==='all' || w.cat===activeCat;
+    const matchQ = !searchQ ||
+      w.name.toLowerCase().includes(searchQ) ||
+      (w.uve||'').toLowerCase().includes(searchQ) ||
+      (w.regione||'').toLowerCase().includes(searchQ) ||
+      (w.paese||'').toLowerCase().includes(searchQ) ||
+      (w.desc||'').toLowerCase().includes(searchQ);
+    return matchCat && matchQ;
+  });
+}
+
+function renderWines(){
+  const wines = getFilteredWines();
+  const main = document.getElementById('mainContent');
+
+  if(wines.length===0){
+    main.innerHTML=`<div class="no-results">
+      <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="#b8973a"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      <p>${t('noRes')}</p>
+    </div>`;
     return;
   }
 
-  catalog.style.display = 'none';
-  resultsBox.style.display = 'block';
+  // Group by subcat
+  const groups = {};
+  wines.forEach(w=>{
+    const g = w.subcat||'—';
+    if(!groups[g]) groups[g]=[];
+    groups[g].push(w);
+  });
 
-  const allItems = document.querySelectorAll('#catalog .wine-item');
-  const matches = [];
-
-  allItems.forEach(item => {
-    const name   = item.dataset.name  || '';
-    const cat    = item.dataset.cat   || '';
-    const price  = item.dataset.price || '';
-    const html   = item.innerHTML;
-    const fullText = (name + ' ' + cat + ' ' + html).toLowerCase();
-
-    if (fullText.includes(q)) {
-      matches.push({ item, name: item.querySelector('.wine-name').textContent, cat, price: item.querySelector('.wine-price').textContent });
+  let html = '';
+  // Also group by main cat if showing all
+  let lastCat = null;
+  Object.entries(groups).forEach(([sub,ws])=>{
+    const cat = ws[0].cat;
+    if(activeCat==='all' && cat!==lastCat){
+      const catLabel = CATS.find(c=>c.id===cat);
+      if(catLabel){
+        html += `<div class="section"><div class="section-title">${catLabel.label}</div>`;
+        lastCat = cat;
+      }
+    } else if(activeCat!=='all' && lastCat===null){
+      const catLabel = CATS.find(c=>c.id===activeCat);
+      html += `<div class="section"><div class="section-title">${catLabel?catLabel.label:''}</div>`;
+      lastCat = activeCat;
     }
+    html += `<div class="subsection-title">${sub}</div>`;
+    html += `<div class="wine-grid">`;
+    ws.forEach(w=>{ html += wineCard(w); });
+    html += `</div>`;
   });
+  if(lastCat) html += `</div>`;
 
-  if (matches.length === 0) {
-    resultsBox.innerHTML = '<div class="no-results">Nessun vino trovato per "' + q + '"</div>';
-    searchCount.textContent = '0 risultati';
-    return;
+  main.innerHTML = html;
+}
+
+function wineCard(w){
+  const imgTag = w.img
+    ? `<img class="card-img" src="${w.img}" alt="${w.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">`
+    : '';
+  const placeholder = `<div class="card-img-placeholder" ${w.img?'style="display:none"':''}></div>`;
+  return `
+  <div class="wine-card" onclick="openModal('${w.id}')">
+    <div class="card-img-wrap">
+      ${imgTag}${placeholder}
+      <button class="zoom-btn" onclick="event.stopPropagation();openZoom('${w.img||''}')">⤢</button>
+    </div>
+    <div class="card-body">
+      <div class="card-name">${w.name}</div>
+      <div class="card-sub">${[w.paese,w.regione].filter(Boolean).join(' · ')}</div>
+      ${w.uve?`<div class="card-sub" style="font-style:italic">${w.uve}</div>`:''}
+    </div>
+    <div class="card-footer">
+      <div class="card-price">€ ${w.price}</div>
+      ${w.gradazione?`<div class="card-region">${w.gradazione}</div>`:''}
+    </div>
+  </div>`;
+}
+
+// ── MODAL ──────────────────────────────────────────────────────
+function openModal(id){
+  const w = WINES.find(x=>x.id===id);
+  if(!w) return;
+
+  const img = document.getElementById('modalImg');
+  if(w.img){ img.src=w.img; img.style.display='block'; }
+  else { img.style.display='none'; }
+
+  document.getElementById('modalName').textContent = w.name;
+  document.getElementById('modalPrice').textContent = `€ ${w.price} · 75 Cl`;
+
+  const details = [
+    w.paese && [t('paese'), w.paese],
+    w.regione && [t('regione'), w.regione],
+    w.gradazione && [t('gradazione'), w.gradazione],
+    w.uve && [t('uve'), w.uve],
+    w.colore && [t('colore'), w.colore],
+    w.sigla && [t('sigla'), w.sigla],
+  ].filter(Boolean);
+
+  document.getElementById('modalDetails').innerHTML = details.map(([l,v])=>`
+    <div class="detail-item">
+      <div class="detail-label">${l}</div>
+      <div class="detail-value">${v}</div>
+    </div>`).join('');
+
+  let descHtml = '';
+  if(w.gusto) descHtml += `<p><strong>${t('gusto')}</strong>${w.gusto}</p>`;
+  if(w.desc)  descHtml += `<p><strong>${t('desc')}</strong>${w.desc}</p>`;
+  if(w.vinif) descHtml += `<p><strong>${t('vinif')}</strong>${w.vinif}</p>`;
+  document.getElementById('modalDesc').innerHTML = descHtml;
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(e){
+  if(e.target===document.getElementById('modalOverlay')) closeModalBtn();
+}
+function closeModalBtn(){
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+// ── ZOOM ───────────────────────────────────────────────────────
+function openZoom(src){
+  if(!src) return;
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function openLightbox(src){ openZoom(src); }
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+}
+
+// ── KEYBOARD ──────────────────────────────────────────────────
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    closeModalBtn();
+    closeLightbox();
   }
-
-  searchCount.textContent = matches.length + ' risultat' + (matches.length === 1 ? 'o' : 'i');
-
-  matches.forEach(({ item, name, cat, price }) => {
-    const clone = item.cloneNode(true);
-    // re-bind toggleWine on clone
-    const row = clone.querySelector('.wine-row');
-    row.onclick = function() { toggleWine(this); };
-
-    const wrap = document.createElement('div');
-    wrap.className = 'result-wine';
-
-    const badge = document.createElement('div');
-    badge.className = 'result-category-badge';
-    badge.textContent = cat;
-    wrap.appendChild(badge);
-    wrap.appendChild(clone);
-    resultsBox.appendChild(wrap);
-  });
 });
+
+// ── INIT ───────────────────────────────────────────────────────
+renderAll();
 </script>
 </body>
 </html>
