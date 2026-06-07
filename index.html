@@ -18,6 +18,12 @@ function googleTranslateElementInit() {
 }
 </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<style>
+/* Hide default Google bar */
+.goog-te-banner-frame,.skiptranslate{display:none!important}
+body{top:0!important}
+iframe.skiptranslate{display:none!important}
+</style>
 
 <style>
 :root{
@@ -45,6 +51,8 @@ body{
   background:var(--cream);
   color:var(--text-dark);
   min-height:100vh;
+  overflow-x:hidden;
+  width:100%;
 }
 img{display:block}
 
@@ -121,20 +129,26 @@ img{display:block}
 ═══════════════════════════════════════════ */
 .controls{
   background: radial-gradient(ellipse at 60% 0%, var(--burg-mid) 0%, var(--burg-dark) 55%, #1a0206 100%);
-  padding:0 16px 20px;
+  padding:0 12px 16px;
+  box-sizing:border-box;
+  width:100%;
+  overflow:hidden;
 }
 .controls-inner{
   max-width:760px;
   margin:0 auto;
   display:flex;
-  gap:10px;
+  gap:8px;
   align-items:stretch;
-  flex-wrap:wrap;
+  flex-wrap:nowrap;
+  width:100%;
+  box-sizing:border-box;
 }
 .search-wrap{
   flex:1;
-  min-width:200px;
+  min-width:0;
   position:relative;
+  width:100%;
 }
 .search-wrap svg{
   position:absolute;left:13px;top:50%;
@@ -155,6 +169,8 @@ img{display:block}
   letter-spacing:0.04em;
   outline:none;
   transition:border-color 0.2s,background 0.2s;
+  box-sizing:border-box;
+  min-width:0;
 }
 #searchInput::placeholder{color:rgba(201,168,76,0.4)}
 #searchInput:focus{border-color:var(--gold);background:rgba(255,255,255,0.13)}
@@ -405,7 +421,8 @@ body{top:0!important}
   max-width:560px;
   border-radius:14px 14px 0 0;
   overflow:hidden;
-  max-height:92dvh;
+  max-height:88dvh;
+  max-height:88vh;
   display:flex;flex-direction:column;
   animation:sheetUp 0.28s cubic-bezier(0.34,1.2,0.64,1);
 }
@@ -425,14 +442,16 @@ body{top:0!important}
 
 .modal-img-area{
   background:linear-gradient(135deg,#f5ece0,#e8d4b0);
-  height:200px;
+  height:160px;
+  min-height:120px;
   display:flex;align-items:center;justify-content:center;
   position:relative;flex-shrink:0;
+  overflow:hidden;
 }
 .modal-img{
-  max-height:185px;max-width:130px;
+  max-height:148px;max-width:100px;
   object-fit:contain;
-  filter:drop-shadow(0 8px 22px rgba(0,0,0,0.22));
+  filter:drop-shadow(0 6px 16px rgba(0,0,0,0.22));
   cursor:zoom-in;
   transition:transform 0.25s;
 }
@@ -451,20 +470,20 @@ body{top:0!important}
 .modal-close:hover{background:var(--burg-dark)}
 
 .modal-body{
-  padding:16px 20px 24px;
+  padding:12px 16px 20px;
   overflow-y:auto;flex:1;
   -webkit-overflow-scrolling:touch;
 }
 .modal-name{
   font-family:'Cormorant Garamond',serif;
-  font-size:20px;font-weight:600;
+  font-size:18px;font-weight:600;
   color:var(--text-dark);
-  line-height:1.3;margin-bottom:4px;
+  line-height:1.3;margin-bottom:3px;
 }
 .modal-price{
   font-family:'Cormorant Garamond',serif;
-  font-size:19px;color:var(--burg);
-  font-weight:600;margin-bottom:14px;
+  font-size:17px;color:var(--burg);
+  font-weight:600;margin-bottom:10px;
   display:flex;align-items:baseline;gap:6px;
 }
 .modal-price-cl{
@@ -475,9 +494,9 @@ body{top:0!important}
 .modal-details{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px 16px;
-  margin-bottom:14px;
-  padding-bottom:14px;
+  gap:7px 14px;
+  margin-bottom:10px;
+  padding-bottom:10px;
   border-bottom:1px solid var(--line-cream);
 }
 .detail-label{
@@ -540,13 +559,59 @@ body{top:0!important}
   .modal-overlay{align-items:center;padding:20px}
   .modal{border-radius:10px;max-height:90vh}
   .modal-handle{display:none}
-  .modal-img-area{height:230px}
+  .modal-img-area{height:200px}
+  .modal-img{max-height:185px;max-width:120px}
+  .modal-body{padding:16px 22px 24px}
+  .modal-name{font-size:20px}
+  .modal-price{font-size:19px;margin-bottom:14px}
 }
 @media(max-width:400px){
   .modal-details{grid-template-columns:1fr}
   .cat-label{font-size:10px;letter-spacing:0.12em}
   .hero-title{font-size:clamp(30px,9vw,48px)}
 }
+
+/* ═══════════════════════════════════════════
+   LANGUAGE DROPDOWN
+═══════════════════════════════════════════ */
+.lang-select-wrap{
+  position:relative;
+  flex-shrink:0;
+}
+.lang-select-wrap::before{
+  content:'🌐';
+  position:absolute;left:10px;top:50%;
+  transform:translateY(-50%);
+  font-size:13px;
+  pointer-events:none;
+  z-index:1;
+}
+.lang-select-wrap::after{
+  content:'▾';
+  position:absolute;right:10px;top:50%;
+  transform:translateY(-50%);
+  color:var(--gold);
+  font-size:11px;
+  pointer-events:none;
+}
+#langSelect{
+  appearance:none;
+  -webkit-appearance:none;
+  padding:11px 30px 11px 32px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(201,168,76,0.3);
+  border-radius:4px;
+  color:var(--cream);
+  font-family:'Montserrat',sans-serif;
+  font-size:12px;
+  letter-spacing:0.03em;
+  outline:none;
+  cursor:pointer;
+  min-width:130px;
+  transition:border-color 0.2s,background 0.2s;
+}
+#langSelect:focus{border-color:var(--gold);background:rgba(255,255,255,0.13)}
+#langSelect option{background:#3d0609;color:#f0d898}
 </style>
 </head>
 <body>
@@ -568,11 +633,37 @@ body{top:0!important}
   <div class="controls-inner">
     <div class="search-wrap">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-      <input type="text" id="searchInput" placeholder="Cerca vino, vitigno, regione, prezzo…" oninput="filterWines()">
+      <input type="text" id="searchInput" placeholder="Cerca vino, vitigno, regione…" oninput="filterWines()">
     </div>
-    <div id="google_translate_element"></div>
+    <div class="lang-select-wrap">
+      <select id="langSelect" onchange="setLang(this.value)">
+        <option value="it">🇮🇹 Italiano</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="pt">🇵🇹 Português</option>
+        <option value="ru">🇷🇺 Русский</option>
+        <option value="nl">🇳🇱 Nederlands</option>
+        <option value="pl">🇵🇱 Polski</option>
+        <option value="sv">🇸🇪 Svenska</option>
+        <option value="da">🇩🇰 Dansk</option>
+        <option value="no">🇳🇴 Norsk</option>
+        <option value="fi">🇫🇮 Suomi</option>
+        <option value="cs">🇨🇿 Čeština</option>
+        <option value="hu">🇭🇺 Magyar</option>
+        <option value="ro">🇷🇴 Română</option>
+        <option value="tr">🇹🇷 Türkçe</option>
+        <option value="ar">🇸🇦 العربية</option>
+        <option value="zh-CN">🇨🇳 中文</option>
+        <option value="ja">🇯🇵 日本語</option>
+      </select>
+    </div>
   </div>
 </div>
+
+<!-- hidden GT widget still needed -->
+<div id="google_translate_element" style="display:none"></div>
 
 <div class="hint-bar">Tocca la categoria per espandere · Tocca il vino per i dettagli</div>
 
@@ -1100,8 +1191,7 @@ const WINES = [
     desc:'Questo vino racchiude l\'anima di due tra le più antiche e rinomate aree vitivinicole della Toscana',
     vinif:'AFFINAMENTO: Barrique'
   },
-  // ─── VINI FRIZZANTI ───────────────────────────────────────
-  { id:'lambrusco-sierra', cat:'frizzanti', subcat:'Vini Frizzanti',
+  { id:'lambrusco-sierra', cat:'rossi', subcat:'Vini Frizzanti',
     name:"Lambrusco Rosso dell'Emilia Sierra – Semi Sweet", price:18,
     img:'images/lambrusco-sierra.png',
     sigla:'IGT Emilia', paese:'Italia', regione:'Emilia-Romagna',
@@ -1119,7 +1209,6 @@ const CATS = [
   { id:'bianchi',    label:'Vini Bianchi',          icon:'🍋' },
   { id:'rosati',     label:'Vini Rosati',           icon:'🌸' },
   { id:'rossi',      label:'Vini Rossi',            icon:'🍷' },
-  { id:'frizzanti',  label:'Vini Frizzanti',        icon:'🫧' },
 ];
 
 // ── STATE ─────────────────────────────────────────────────────
@@ -1288,6 +1377,41 @@ function closeLightbox() {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { closeModalBtn(); closeLightbox(); }
 });
+
+// ── LANGUAGE SWITCHER ─────────────────────────────────────────
+function setLang(langCode) {
+  if (langCode === 'it') {
+    const domain = location.hostname;
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain;
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + domain;
+    location.reload();
+    return;
+  }
+
+  const val = '/it/' + langCode;
+  const domain = location.hostname;
+  document.cookie = 'googtrans=' + val + '; path=/; domain=' + domain;
+  document.cookie = 'googtrans=' + val + '; path=/';
+  document.cookie = 'googtrans=' + val + '; path=/; domain=.' + domain;
+
+  const sel = document.querySelector('.goog-te-combo');
+  if (sel) {
+    sel.value = langCode;
+    sel.dispatchEvent(new Event('change'));
+  } else {
+    location.reload();
+  }
+}
+
+// Sync dropdown with current translation on page load
+(function syncDropdown() {
+  const m = document.cookie.match(/googtrans=\/it\/([^;]+)/);
+  const sel = document.getElementById('langSelect');
+  if (m && sel) {
+    sel.value = decodeURIComponent(m[1]);
+  }
+}());
 
 // ── INIT ──────────────────────────────────────────────────────
 renderAll();
