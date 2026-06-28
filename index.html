@@ -172,6 +172,22 @@ img{display:block}
 #searchInput::placeholder{color:rgba(201,168,76,0.4)}
 #searchInput:focus{border-color:var(--gold);background:rgba(255,255,255,0.13)}
 
+.sort-btn{
+  flex-shrink:0;
+  width:42px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(201,168,76,0.3);
+  border-radius:4px;
+  color:var(--gold2);
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  transition:border-color 0.2s,background 0.2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.sort-btn:hover,.sort-btn:active{border-color:var(--gold);background:rgba(255,255,255,0.13)}
+.sort-btn.active{color:var(--gold);border-color:var(--gold);background:rgba(201,168,76,0.15)}
+
 #google_translate_element{display:flex;align-items:center}
 #google_translate_element .goog-te-combo{
   padding:11px 12px;
@@ -225,6 +241,9 @@ body{top:0!important}
   user-select:none;
   transition:background 0.18s;
   -webkit-tap-highlight-color:transparent;
+  position:sticky;
+  top:0;
+  z-index:5;
 }
 .cat-header:hover,.cat-header:active{background:var(--burg-lite)}
 .cat-header-left{
@@ -528,18 +547,20 @@ body{top:0!important}
   color:var(--burg);margin-bottom:8px;font-weight:600;
 }
 .similar-list{
-  display:flex;gap:8px;overflow-x:auto;
-  padding-bottom:4px;
-  -webkit-overflow-scrolling:touch;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
 }
 .similar-card{
-  flex:0 0 auto;
-  min-width:128px;
-  max-width:150px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  width:100%;
   background:var(--cream3);
   border:1px solid var(--line-cream);
   border-radius:6px;
-  padding:8px 10px;
+  padding:9px 12px;
   cursor:pointer;
   transition:background 0.15s, border-color 0.15s;
   -webkit-tap-highlight-color:transparent;
@@ -550,17 +571,20 @@ body{top:0!important}
 }
 .similar-card-name{
   font-family:'Cormorant Garamond',serif;
-  font-size:12px;font-weight:600;
+  font-size:13px;font-weight:600;
   color:var(--text-dark);
   line-height:1.3;
-  margin-bottom:4px;
+  flex:1;
+  min-width:0;
   display:-webkit-box;
   -webkit-line-clamp:2;
   -webkit-box-orient:vertical;
   overflow:hidden;
 }
 .similar-card-price{
-  font-size:11px;color:var(--burg);font-weight:600;
+  font-size:12px;color:var(--burg);font-weight:600;
+  flex-shrink:0;
+  white-space:nowrap;
 }
 
 .lightbox{
@@ -648,6 +672,36 @@ body{top:0!important}
 }
 #langSelect:focus{border-color:var(--gold);background:rgba(255,255,255,0.13)}
 #langSelect option{background:#3d0609;color:#f0d898}
+
+/* ═══════════════════════════════════════════
+   AUTO DARK MODE (evening ambiance)
+═══════════════════════════════════════════ */
+body.dark-mode{
+  --cream:#1c1410;
+  --cream2:#241a15;
+  --cream3:#2b201a;
+  --white:#2b201a;
+  --text-dark:#f0e3d0;
+  --text-mid:#d9c4a8;
+  --text-lite:#b39b7c;
+  --line-cream:#3d2e22;
+}
+body.dark-mode .wine-row:hover,
+body.dark-mode .wine-row:active{ background:#3a2a1f; }
+body.dark-mode #searchInput{ background:rgba(255,255,255,0.05); }
+body.dark-mode .modal-img-area{
+  background:linear-gradient(135deg,#2b201a,#1c1410);
+}
+body.dark-mode .similar-card{
+  background:#241a15;
+}
+body.dark-mode .similar-card:hover,
+body.dark-mode .similar-card:active{
+  background:#3a2a1f;
+}
+body.dark-mode .subcat-header{
+  background:#241a15;
+}
 </style>
 </head>
 <body>
@@ -669,6 +723,7 @@ body{top:0!important}
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
       <input type="text" id="searchInput" placeholder="Cerca vino, vitigno, regione…" oninput="filterWines()">
     </div>
+    <button class="sort-btn" id="sortBtn" onclick="cycleSort()" title="Ordina per prezzo">⇅</button>
     <div class="lang-select-wrap">
       <select id="langSelect" onchange="setLang(this.value)">
         <option value="it">🇮🇹 Italiano</option>
@@ -846,6 +901,26 @@ const CATS = [
 // ── STATE ─────────────────────────────────────────────────────
 let openCats = new Set();
 let searchQ = '';
+let sortMode = 'default'; // 'default' | 'asc' | 'desc'
+
+function cycleSort() {
+  sortMode = sortMode === 'default' ? 'asc' : sortMode === 'asc' ? 'desc' : 'default';
+  const btn = document.getElementById('sortBtn');
+  if (sortMode === 'asc') {
+    btn.textContent = '€↑'; btn.classList.add('active'); btn.title = 'Prezzo: crescente';
+  } else if (sortMode === 'desc') {
+    btn.textContent = '€↓'; btn.classList.add('active'); btn.title = 'Prezzo: decrescente';
+  } else {
+    btn.textContent = '⇅'; btn.classList.remove('active'); btn.title = 'Ordina per prezzo';
+  }
+  renderAll();
+}
+
+function sortWines(arr) {
+  if (sortMode === 'asc') return [...arr].sort((a, b) => a.price - b.price);
+  if (sortMode === 'desc') return [...arr].sort((a, b) => b.price - a.price);
+  return arr;
+}
 
 // ── RENDER ────────────────────────────────────────────────────
 function renderAll() {
@@ -853,7 +928,7 @@ function renderAll() {
   const isSearch = searchQ.trim().length > 0;
 
   if (isSearch) {
-    const results = getFilteredWines();
+    const results = sortWines(getFilteredWines());
     if (results.length === 0) {
       main.innerHTML = `<div class="no-results"><p>Nessun vino trovato</p></div>`;
       return;
@@ -895,7 +970,7 @@ function renderAll() {
 
     Object.entries(groups).forEach(([sub, ws]) => {
       html += `<div class="subcat-header">${sub}</div>`;
-      ws.forEach(w => { html += wineRow(w); });
+      sortWines(ws).forEach(w => { html += wineRow(w); });
     });
 
     html += `</div></div>`;
@@ -1099,8 +1174,17 @@ function setLang(langCode) {
   }
 }());
 
+// ── AUTO DARK MODE ────────────────────────────────────────────
+function applyAutoDarkMode() {
+  const hour = new Date().getHours();
+  const isEvening = hour >= 19 || hour < 6; // 19:00–05:59
+  document.body.classList.toggle('dark-mode', isEvening);
+}
+
 // ── INIT ──────────────────────────────────────────────────────
 renderAll();
+applyAutoDarkMode();
+setInterval(applyAutoDarkMode, 5 * 60 * 1000); // re-check every 5 min
 </script>
 </body>
 </html>
