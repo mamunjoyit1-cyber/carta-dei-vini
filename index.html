@@ -1173,6 +1173,11 @@ function setLang(langCode) {
     sel.value = decodeURIComponent(m[1]);
   }
 }());
+
+// ── INIT ──────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  renderAll();
+});
 </script>
 </body>
 </html>
