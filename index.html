@@ -517,6 +517,52 @@ body{top:0!important}
   font-size:12px;color:var(--text-mid);line-height:1.75;
 }
 
+/* ── SIMILAR WINES ── */
+.similar-section{
+  margin-top:14px;
+  padding-top:14px;
+  border-top:1px solid var(--line-cream);
+}
+.similar-title{
+  font-size:8px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--burg);margin-bottom:8px;font-weight:600;
+}
+.similar-list{
+  display:flex;gap:8px;overflow-x:auto;
+  padding-bottom:4px;
+  -webkit-overflow-scrolling:touch;
+}
+.similar-card{
+  flex:0 0 auto;
+  min-width:128px;
+  max-width:150px;
+  background:var(--cream3);
+  border:1px solid var(--line-cream);
+  border-radius:6px;
+  padding:8px 10px;
+  cursor:pointer;
+  transition:background 0.15s, border-color 0.15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.similar-card:hover,.similar-card:active{
+  background:#fdf5e8;
+  border-color:var(--gold);
+}
+.similar-card-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:12px;font-weight:600;
+  color:var(--text-dark);
+  line-height:1.3;
+  margin-bottom:4px;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.similar-card-price{
+  font-size:11px;color:var(--burg);font-weight:600;
+}
+
 .lightbox{
   position:fixed;inset:0;
   background:rgba(0,0,0,0.96);
@@ -674,6 +720,7 @@ body{top:0!important}
       <div class="modal-price" id="modalPrice"></div>
       <div class="modal-details" id="modalDetails"></div>
       <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-similar" id="modalSimilar"></div>
     </div>
   </div>
 </div>
@@ -762,7 +809,6 @@ const WINES = [
   { id:"bellaja-bolgheri", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Bell'Aja Bolgheri – San Felice", price:44, img:"images/bellaja-bolgheri-san-felice-2021.png", sigla:"DOC", paese:"Italia", regione:"Toscana", uve:"90% Merlot, 10% Cabernet Sauvignon", colore:"Rosso rubino intenso con riflessi granati", gusto:"Strutturato e armonioso, con tannini levigati e una vivace acidità", desc:"Profumi di ciliegia matura, prugna, liquirizia, cioccolato fondente e spezie dolci." },
   { id:"brunello-campogiovanni", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Brunello di Montalcino Campogiovanni – San Felice", price:80, img:"images/brunello-campogiovanni-san-felice-2016.png", paese:"Italia", regione:"Toscana", uve:"100% Brunello", colore:"Rosso rubino profondo", gusto:"Strutturato e avvolgente, con tannini morbidi e una persistenza dolce e speziata", desc:"Ciliegia matura, cuoio, tabacco dolce, erbe mediterranee, liquirizia e spezie." },
   { id:"chianti-classico-grigio", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Chianti Classico Riserva il Grigio da San Felice – San Felice", price:33, img:"images/hianti-classico-riserva-grigio-2018.png", paese:"Italia", regione:"Toscana", gradazione:"13,5%", uve:"100% Sangiovese", colore:"Rosso rubino profondo", gusto:"Corposo e austero, con tannini succosi e una fresca acidità", desc:"Aroma intenso e persistente, con note di viola mammola e frutti di bosco." },
-  { id:"chianti-colli-senesi-panizzi", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Chianti Colli Senesi – Panizzi", price:20, img:"images/chianti-colli-senesi-panizzi.png", sigla:"DOCG", paese:"Italia", regione:"Toscana", uve:"Sangiovese", desc:"Chianti Colli Senesi della cantina Panizzi" },
   { id:"chianti-classico-berardenga", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Chianti Classico – Berardenga", price:33, img:"images/chianti-classico-berardenga.png", sigla:"DOCG", paese:"Italia", regione:"Toscana", uve:"Sangiovese", desc:"Chianti Classico della cantina Berardenga" },
   { id:"le-volte-ornellaia", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Le Volte dell'Ornellaia – Tenuta dell'Ornellaia", price:43, img:"images/le-volte-dellornellaia-2021.png", sigla:"IGT Toscana", paese:"Italia", regione:"Toscana", gradazione:"13,5%", uve:"70% Merlot, 15% Sangiovese, 15% Cabernet Sauvignon", colore:"Rosso rubino intenso, con riflessi violacei", gusto:"Equilibrato e rotondo: tannini morbidi ma presenti", desc:"Note fruttate di ciliegia matura, mora, ribes nero." },
   { id:"rosso-montalcino-casanova", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Rosso di Montalcino – Casanova di Neri", price:45, img:"images/rosso-montalcino-casanova-neri-2021.png", paese:"Italia", regione:"Toscana", gradazione:"14,5%", uve:"100% Sangiovese", colore:"Rosso intenso e vivace", gusto:"Rotondo e generoso, con tannini morbidi e vellutati", desc:"Note intriganti di frutta rossa scura, in particolare ciliegie e mirtilli, con sfumature speziate e floreali" },
@@ -903,6 +949,50 @@ function wineRow(w) {
   </div>`;
 }
 
+// ── SIMILAR WINES ─────────────────────────────────────────────
+const GRAPE_KEYWORDS = ['vermentino','rossese','pigato','sangiovese','nebbiolo','barbera',
+  'dolcetto','chardonnay','merlot','cabernet','glera','greco','falanghina','aglianico',
+  'primitivo','montepulciano','garganega','gewürztraminer','gewurztraminer','sauvignon',
+  'arneis','lambrusco','grenache','cinsault','syrah','pinot','corvina','rondinella','molinara'];
+
+function getGrapes(uve) {
+  if (!uve) return [];
+  const lower = uve.toLowerCase();
+  return GRAPE_KEYWORDS.filter(g => lower.includes(g));
+}
+
+function findSimilarWines(wine, limit = 4) {
+  const myGrapes = getGrapes(wine.uve);
+  return WINES.filter(w => w.id !== wine.id).map(w => {
+    let score = 0;
+    if (w.regione && wine.regione && w.regione === wine.regione) score += 3;
+    const overlap = getGrapes(w.uve).filter(g => myGrapes.includes(g)).length;
+    score += overlap * 3;
+    if (typeof w.price === 'number' && typeof wine.price === 'number' && Math.abs(w.price - wine.price) <= 10) score += 1;
+    if (w.cat === wine.cat) score += 1;
+    return { w, score };
+  }).filter(x => x.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map(x => x.w);
+}
+
+function renderSimilarWines(wine) {
+  const similar = findSimilarWines(wine);
+  if (similar.length === 0) return '';
+  let html = `<div class="similar-section">
+    <div class="similar-title">✦ Forse ti piacerà anche</div>
+    <div class="similar-list">`;
+  similar.forEach(w => {
+    html += `<div class="similar-card" onclick="openModal('${w.id}')">
+      <div class="similar-card-name">${w.name}</div>
+      <div class="similar-card-price">€ ${w.price}</div>
+    </div>`;
+  });
+  html += `</div></div>`;
+  return html;
+}
+
 // ── MODAL ─────────────────────────────────────────────────────
 function openModal(id) {
   const w = WINES.find(x => x.id === id);
@@ -944,6 +1034,11 @@ function openModal(id) {
   if (w.desc)  descHtml += `<p><strong>Descrizione</strong><span>${w.desc}</span></p>`;
   if (w.vinif) descHtml += `<p><strong>Vinificazione</strong><span>${w.vinif}</span></p>`;
   document.getElementById('modalDesc').innerHTML = descHtml;
+
+  document.getElementById('modalSimilar').innerHTML = renderSimilarWines(w);
+
+  const modalBody = document.querySelector('.modal-body');
+  if (modalBody) modalBody.scrollTop = 0;
 
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
