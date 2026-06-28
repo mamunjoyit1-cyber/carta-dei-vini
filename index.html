@@ -1173,18 +1173,6 @@ function setLang(langCode) {
     sel.value = decodeURIComponent(m[1]);
   }
 }());
-
-// ── AUTO DARK MODE ────────────────────────────────────────────
-function applyAutoDarkMode() {
-  const hour = new Date().getHours();
-  const isEvening = hour >= 19 || hour < 6; // 19:00–05:59
-  document.body.classList.toggle('dark-mode', isEvening);
-}
-
-// ── INIT ──────────────────────────────────────────────────────
-renderAll();
-applyAutoDarkMode();
-setInterval(applyAutoDarkMode, 5 * 60 * 1000); // re-check every 5 min
 </script>
 </body>
 </html>
