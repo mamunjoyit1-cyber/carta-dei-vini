@@ -672,36 +672,6 @@ body{top:0!important}
 }
 #langSelect:focus{border-color:var(--gold);background:rgba(255,255,255,0.13)}
 #langSelect option{background:#3d0609;color:#f0d898}
-
-/* ═══════════════════════════════════════════
-   AUTO DARK MODE (evening ambiance)
-═══════════════════════════════════════════ */
-body.dark-mode{
-  --cream:#1c1410;
-  --cream2:#241a15;
-  --cream3:#2b201a;
-  --white:#2b201a;
-  --text-dark:#f0e3d0;
-  --text-mid:#d9c4a8;
-  --text-lite:#b39b7c;
-  --line-cream:#3d2e22;
-}
-body.dark-mode .wine-row:hover,
-body.dark-mode .wine-row:active{ background:#3a2a1f; }
-body.dark-mode #searchInput{ background:rgba(255,255,255,0.05); }
-body.dark-mode .modal-img-area{
-  background:linear-gradient(135deg,#2b201a,#1c1410);
-}
-body.dark-mode .similar-card{
-  background:#241a15;
-}
-body.dark-mode .similar-card:hover,
-body.dark-mode .similar-card:active{
-  background:#3a2a1f;
-}
-body.dark-mode .subcat-header{
-  background:#241a15;
-}
 </style>
 </head>
 <body>
@@ -864,7 +834,6 @@ const WINES = [
   { id:"bellaja-bolgheri", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Bell'Aja Bolgheri – San Felice", price:44, img:"images/bellaja-bolgheri-san-felice-2021.png", sigla:"DOC", paese:"Italia", regione:"Toscana", uve:"90% Merlot, 10% Cabernet Sauvignon", colore:"Rosso rubino intenso con riflessi granati", gusto:"Strutturato e armonioso, con tannini levigati e una vivace acidità", desc:"Profumi di ciliegia matura, prugna, liquirizia, cioccolato fondente e spezie dolci." },
   { id:"brunello-campogiovanni", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Brunello di Montalcino Campogiovanni – San Felice", price:80, img:"images/brunello-campogiovanni-san-felice-2016.png", paese:"Italia", regione:"Toscana", uve:"100% Brunello", colore:"Rosso rubino profondo", gusto:"Strutturato e avvolgente, con tannini morbidi e una persistenza dolce e speziata", desc:"Ciliegia matura, cuoio, tabacco dolce, erbe mediterranee, liquirizia e spezie." },
   { id:"chianti-classico-grigio", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Chianti Classico Riserva il Grigio da San Felice – San Felice", price:33, img:"images/hianti-classico-riserva-grigio-2018.png", paese:"Italia", regione:"Toscana", gradazione:"13,5%", uve:"100% Sangiovese", colore:"Rosso rubino profondo", gusto:"Corposo e austero, con tannini succosi e una fresca acidità", desc:"Aroma intenso e persistente, con note di viola mammola e frutti di bosco." },
-  { id:"chianti-colli-senesi-panizzi", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Chianti Colli Senesi – Panizzi", price:20, img:"images/chianti-colli-senesi-panizzi.png", sigla:"DOCG", paese:"Italia", regione:"Toscana", uve:"Sangiovese", desc:"Chianti Colli Senesi della cantina Panizzi" },
   { id:"chianti-classico-berardenga", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Chianti Classico – Berardenga", price:33, img:"images/chianti-classico-berardenga.png", sigla:"DOCG", paese:"Italia", regione:"Toscana", uve:"Sangiovese", desc:"Chianti Classico della cantina Berardenga" },
   { id:"le-volte-ornellaia", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Le Volte dell'Ornellaia – Tenuta dell'Ornellaia", price:43, img:"images/le-volte-dellornellaia-2021.png", sigla:"IGT Toscana", paese:"Italia", regione:"Toscana", gradazione:"13,5%", uve:"70% Merlot, 15% Sangiovese, 15% Cabernet Sauvignon", colore:"Rosso rubino intenso, con riflessi violacei", gusto:"Equilibrato e rotondo: tannini morbidi ma presenti", desc:"Note fruttate di ciliegia matura, mora, ribes nero." },
   { id:"rosso-montalcino-casanova", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Rosso di Montalcino – Casanova di Neri", price:45, img:"images/rosso-montalcino-casanova-neri-2021.png", paese:"Italia", regione:"Toscana", gradazione:"14,5%", uve:"100% Sangiovese", colore:"Rosso intenso e vivace", gusto:"Rotondo e generoso, con tannini morbidi e vellutati", desc:"Note intriganti di frutta rossa scura, in particolare ciliegie e mirtilli, con sfumature speziate e floreali" },
@@ -1176,17 +1145,8 @@ function setLang(langCode) {
   }
 }());
 
-// ── AUTO DARK MODE ────────────────────────────────────────────
-function applyAutoDarkMode() {
-  const hour = new Date().getHours();
-  const isEvening = hour >= 19 || hour < 6; // 19:00–05:59
-  document.body.classList.toggle('dark-mode', isEvening);
-}
-
 // ── INIT ──────────────────────────────────────────────────────
 renderAll();
-applyAutoDarkMode();
-setInterval(applyAutoDarkMode, 5 * 60 * 1000); // re-check every 5 min
 </script>
 </body>
 </html>
