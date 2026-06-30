@@ -851,7 +851,7 @@ const WINES = [
   { id:"chardonnay-kreuth-terlan", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Chardonnay \"Kreuth\" – Cantina Terlan", price:37, img:"images/chardonnay-kreuth-terlan.png", paese:"Italia", regione:"Alto Adige", gradazione:"14%", uve:"100% Chardonnay", colore:"Giallo paglierino scintillante e accattivante", gusto:"Accattivante, con una struttura flessibile e compatta; sentori speziati, minerali e succosi che conferiscono un forte carattere del terroir", desc:"Profumo di frutta esotica come maracuja e carambola, agrumi, con una nota di pietra focaia dai tratti aromatici e minerali", vinif:"Vendemmia e selezione manuale delle uve. Fermentazione lenta a temperatura controllata in botti di rovere grandi, affinamento di 10 mesi sui lieviti, metà in acciaio e metà in legno" },
   { id:"bardolino-chiaretto", cat:"rosati", subcat:"Selezione vini rosati nazionali", name:"Bardolino Chiaretto Classico – Negrar Domìni Veneti", price:16, img:"images/bardolino-chiaretto-classico-domini-veneti-2021.png", sigla:"DOC Bardolino", paese:"Italia", regione:"Veneto", gradazione:"12,5%", uve:"Corvina, Rondinella E Molinara", colore:"Rosato splendente", gusto:"Pieno ed equilibrato, fresco, ricorda fragoline di bosco e lamponi", desc:"Al naso il profumo è delicato di frutti rossi, rosa tea e violetta. Un vino che si abbina molto bene a pesce alla griglia, carni bianche, salumi freschi e formaggi molli" },
   { id:"pallido-capecci", cat:"rosati", subcat:"Selezione vini rosati nazionali", name:"Pallido – Capecci", price:27, img:"images/pallido-capecci.png", paese:"Italia", regione:"Marche", gradazione:"12%", uve:"Montepulciano" },
-  { id:"roccese-rose-masala", cat:"rosati", subcat:"Selezione vini rosati nazionali", name:"Roccese Rosè – Masala", price:39, img:"images/roccese-rose-masala.png", paese:"Italia", regione:"Liguria", uve:"Rossese E Altri Vitigni Autoctoni", desc:"Rosato ligure della cantina Masala, dal territorio roccioso di Dolceacqua" },
+  { id:"roccese-rose-masala", cat:"rosati", subcat:"Selezione vini rosati nazionali", name:"Roccese Rosè – Masala", price:39, img:"images/roccese-rose-masala.png", paese:"Italia", regione:"Liguria", uve:"Rossese E Altri Vitigni Autoctoni", desc:"Rosato ligure della cantina Masala, dal territorio roccioso di Dolceacqua", available:false },
   { id:"maixei_rose_rosse", cat:"rosati", subcat:"Selezione vini rosati nazionali", name:"Maixei \"Rosé Rosse\" Vino Rosato", price:24, img:"images/maixei-rose.png", paese:"Italia", regione:"Liguria", gradazione:"12.5%", uve:"Uve locali a bacca rossa", colore:"Rosa cerasuolo brillante", gusto:"Fresco, fruttato, con note di fragolina e melograno", desc:"Rosato ligure dal profilo aromatico elegante, con sentori di frutta rossa e fiori.", vinif:"Vinificazione in acciaio a temperatura controllata per preservare freschezza e aromi." },
   { id:"castel_des_maures", cat:"rosati", subcat:"Selezione vini rosati nazionali", name:"Château Castel des Maures Rosé – Côtes de Provence (Bio)", price:18, img:"images/castel-maures.png", paese:"Francia", regione:"Provence", gradazione:"13%", uve:"Grenache, Cinsault, Syrah", colore:"Rosa pallido provenzale", gusto:"Elegante, secco, con note di pesca bianca, agrumi e fiori", desc:"Rosé biologico della Provenza, fine e aromatico, perfetto per piatti di pesce e aperitivi.", vinif:"Vinificazione biologica con fermentazione a bassa temperatura per esaltare freschezza e profumi." },
   { id:"barbaresco-biologico", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Barbaresco Biologico – Nada", price:59, img:"images/barbaresco-biologico-nada-2019.png", paese:"Italia", regione:"Piemonte", gradazione:"14%", uve:"100% Nebbiolo", colore:"Rosso granato brillante", gusto:"Elegante, sapido, con tannini levigati e una lunga persistenza", desc:"Intensi sentori floreali, con note di frutti rossi e spezie.", vinif:"Affinamento: 24 mesi in botti di rovere, seguito da 6 mesi in bottiglia" },
@@ -864,6 +864,7 @@ const WINES = [
   { id:"bellaja-bolgheri", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Bell'Aja Bolgheri – San Felice", price:44, img:"images/bellaja-bolgheri-san-felice-2021.png", sigla:"DOC", paese:"Italia", regione:"Toscana", uve:"90% Merlot, 10% Cabernet Sauvignon", colore:"Rosso rubino intenso con riflessi granati", gusto:"Strutturato e armonioso, con tannini levigati e una vivace acidità", desc:"Profumi di ciliegia matura, prugna, liquirizia, cioccolato fondente e spezie dolci." },
   { id:"brunello-campogiovanni", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Brunello di Montalcino Campogiovanni – San Felice", price:80, img:"images/brunello-campogiovanni-san-felice-2016.png", paese:"Italia", regione:"Toscana", uve:"100% Brunello", colore:"Rosso rubino profondo", gusto:"Strutturato e avvolgente, con tannini morbidi e una persistenza dolce e speziata", desc:"Ciliegia matura, cuoio, tabacco dolce, erbe mediterranee, liquirizia e spezie." },
   { id:"chianti-classico-grigio", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Chianti Classico Riserva il Grigio da San Felice – San Felice", price:33, img:"images/hianti-classico-riserva-grigio-2018.png", paese:"Italia", regione:"Toscana", gradazione:"13,5%", uve:"100% Sangiovese", colore:"Rosso rubino profondo", gusto:"Corposo e austero, con tannini succosi e una fresca acidità", desc:"Aroma intenso e persistente, con note di viola mammola e frutti di bosco." },
+  { id:"chianti-colli-senesi-panizzi", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Chianti Colli Senesi – Panizzi", price:20, img:"images/chianti-colli-senesi-panizzi.png", sigla:"DOCG", paese:"Italia", regione:"Toscana", uve:"Sangiovese", desc:"Chianti Colli Senesi della cantina Panizzi" },
   { id:"chianti-classico-berardenga", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Chianti Classico – Berardenga", price:33, img:"images/chianti-classico-berardenga.png", sigla:"DOCG", paese:"Italia", regione:"Toscana", uve:"Sangiovese", desc:"Chianti Classico della cantina Berardenga" },
   { id:"le-volte-ornellaia", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Le Volte dell'Ornellaia – Tenuta dell'Ornellaia", price:43, img:"images/le-volte-dellornellaia-2021.png", sigla:"IGT Toscana", paese:"Italia", regione:"Toscana", gradazione:"13,5%", uve:"70% Merlot, 15% Sangiovese, 15% Cabernet Sauvignon", colore:"Rosso rubino intenso, con riflessi violacei", gusto:"Equilibrato e rotondo: tannini morbidi ma presenti", desc:"Note fruttate di ciliegia matura, mora, ribes nero." },
   { id:"rosso-montalcino-casanova", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Rosso di Montalcino – Casanova di Neri", price:45, img:"images/rosso-montalcino-casanova-neri-2021.png", paese:"Italia", regione:"Toscana", gradazione:"14,5%", uve:"100% Sangiovese", colore:"Rosso intenso e vivace", gusto:"Rotondo e generoso, con tannini morbidi e vellutati", desc:"Note intriganti di frutta rossa scura, in particolare ciliegie e mirtilli, con sfumature speziate e floreali" },
@@ -885,7 +886,7 @@ const WINES = [
   { id:"lambrusco-ambasciatori", cat:"rossi", subcat:"Vini Frizzanti", name:"Ambasciatori Lambrusco Emilia IGT Amabile", price:18, img:"images/lambrusco-sierra.png", sigla:"IGT Emilia", paese:"Italia", regione:"Emilia-Romagna", gradazione:"8%", uve:"Lambrusco", colore:"Rosso rubino brillante con spuma rosata", gusto:"Amabile, morbido, fruttato con piacevole freschezza", desc:"Un Lambrusco frizzante vivace con note di ciliegia, mora e piccoli frutti rossi. La leggera dolcezza lo rende ideale come aperitivo o abbinato a salumi, formaggi emiliani, pizza e dessert leggeri" },
   { id:"barbera-asti-la-villa", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Barbera d'Asti \"La Villa\" - Tenuta Olim Bauda", price:27, img:"images/barbera-asti-la-villa.png", paese:"Italia", regione:"Piemonte", gradazione:"14,5%", uve:"100% Barbera", colore:"Rosso rubino intenso con riflessi violacei", gusto:"Pieno e corposo, con tannini morbidi e una piacevole freschezza", desc:"Note di frutta rossa matura, una leggera speziatura e un finale persistente, tipico della Barbera d'Asti.", vinif:"Fermentazione in acciaio inox, seguita da un affinamento in acciaio per alcuni mesi." },
   { id:"dogliani-terra", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Dogliani \"Terra\" - Produttori in Clavesana", price:24, img:"images/dogliani-terra.png", paese:"Italia", regione:"Piemonte", gradazione:"13,5%", uve:"100% Dolcetto", colore:"Rosso rubino intenso con riflessi violacei", gusto:"Asciutto, armonico, con tannini morbidi e una buona freschezza", desc:"Aromi di frutti rossi maturi e una leggera nota floreale, tipici del Dolcetto di Dogliani.", vinif:"Fermentazione e affinamento in acciaio inox, senza passaggi in legno." },
-  { id:"vermentino-masala", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Vermentino – Masala", price:48, img:"images/vermentino-masala.png", paese:"Italia", regione:"Liguria", uve:"Vermentino", desc:"Vermentino della cantina Masala" },
+  { id:"vermentino-masala", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Vermentino – Masala", price:48, img:"images/vermentino-masala.png", paese:"Italia", regione:"Liguria", uve:"Vermentino", desc:"Vermentino della cantina Masala", available:false },
 ];
 
 // ── CATEGORIES CONFIG ─────────────────────────────────────────
@@ -946,7 +947,7 @@ function renderAll() {
 
   let html = '';
   CATS.forEach(cat => {
-    const wines = WINES.filter(w => w.cat === cat.id);
+    const wines = WINES.filter(w => w.cat === cat.id && w.available !== false);
     if (wines.length === 0) return;
     const isOpen = openCats.has(cat.id);
 
@@ -995,6 +996,7 @@ function filterWines() {
 
 function getFilteredWines() {
   return WINES.filter(w => {
+    if (w.available === false) return false;
     return !searchQ ||
       w.name.toLowerCase().includes(searchQ) ||
       (w.uve || '').toLowerCase().includes(searchQ) ||
@@ -1038,7 +1040,7 @@ function getGrapes(uve) {
 
 function findSimilarWines(wine, limit = 4) {
   const myGrapes = getGrapes(wine.uve);
-  return WINES.filter(w => w.id !== wine.id).map(w => {
+  return WINES.filter(w => w.id !== wine.id && w.available !== false).map(w => {
     let score = 0;
     if (w.regione && wine.regione && w.regione === wine.regione) score += 3;
     const overlap = getGrapes(w.uve).filter(g => myGrapes.includes(g)).length;
@@ -1174,10 +1176,17 @@ function setLang(langCode) {
   }
 }());
 
+// ── AUTO DARK MODE ────────────────────────────────────────────
+function applyAutoDarkMode() {
+  const hour = new Date().getHours();
+  const isEvening = hour >= 19 || hour < 6; // 19:00–05:59
+  document.body.classList.toggle('dark-mode', isEvening);
+}
+
 // ── INIT ──────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  renderAll();
-});
+renderAll();
+applyAutoDarkMode();
+setInterval(applyAutoDarkMode, 5 * 60 * 1000); // re-check every 5 min
 </script>
 </body>
 </html>
