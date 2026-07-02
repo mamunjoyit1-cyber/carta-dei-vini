@@ -217,6 +217,204 @@ body{top:0!important}
   text-transform:uppercase;
 }
 
+.pairing-bar{
+  background:var(--cream2);
+  border-bottom:1px solid var(--line-cream);
+  padding:10px 14px;
+}
+.pairing-bar-inner{
+  display:flex;flex-direction:column;gap:8px;
+}
+.pairing-hint{
+  font-family:'Montserrat',sans-serif;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.08em;
+  color:var(--burg);
+  text-transform:uppercase;
+  opacity:0.7;
+}
+.pairing-chips-row{
+  display:flex;gap:6px;overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.pairing-chips-row::-webkit-scrollbar{display:none}
+.pairing-chip{
+  flex:0 0 auto;
+  padding:7px 14px;
+  border-radius:20px;
+  border:1px solid var(--line-cream);
+  background:var(--white);
+  color:var(--text-mid);
+  font-family:'Montserrat',sans-serif;
+  font-size:11px;font-weight:500;
+  white-space:nowrap;
+  cursor:pointer;
+  transition:all 0.15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.pairing-chip:hover{border-color:var(--gold)}
+.pairing-chip.active{
+  background:var(--burg);
+  border-color:var(--burg);
+  color:var(--gold2);
+}
+.pairing-dish-row{
+  display:flex;align-items:center;gap:8px;
+}
+.dish-open-btn{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:9px 16px;
+  border-radius:20px;
+  border:1px solid var(--gold);
+  background:var(--white);
+  color:var(--burg);
+  font-family:'Montserrat',sans-serif;
+  font-size:12px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.dish-open-btn.active{
+  background:var(--burg);
+  color:var(--gold2);
+  border-color:var(--burg);
+}
+.dish-clear-btn{
+  width:32px;height:32px;
+  border-radius:50%;
+  border:1px solid var(--line-cream);
+  background:var(--white);
+  color:var(--text-lite);
+  font-size:16px;
+  cursor:pointer;
+  display:none;
+  align-items:center;justify-content:center;
+  flex-shrink:0;
+  -webkit-tap-highlight-color:transparent;
+}
+.dish-clear-btn.visible{display:flex}
+
+/* ── DISH MODAL ── */
+.dish-overlay{
+  position:fixed;inset:0;
+  background:rgba(30,5,8,0.88);
+  z-index:1000;
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+  backdrop-filter:blur(5px);
+}
+.dish-overlay.open{display:flex}
+.dish-sheet{
+  background:var(--white);
+  width:100%;
+  max-width:560px;
+  border-radius:14px 14px 0 0;
+  overflow:hidden;
+  max-height:82vh;
+  display:flex;flex-direction:column;
+  animation:sheetUp 0.28s cubic-bezier(0.34,1.2,0.64,1);
+}
+.dish-sheet-handle{
+  width:36px;height:4px;
+  background:rgba(0,0,0,0.12);
+  border-radius:2px;
+  margin:10px auto 0;
+  flex-shrink:0;
+}
+.dish-sheet-header{
+  padding:12px 16px 0;
+  flex-shrink:0;
+}
+.dish-sheet-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;font-weight:600;
+  color:var(--text-dark);
+  margin-bottom:10px;
+  text-align:center;
+}
+.dish-close{
+  position:absolute;top:14px;right:14px;
+  width:30px;height:30px;
+  background:rgba(58,6,9,0.72);
+  border:1px solid rgba(201,168,76,0.4);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold2);font-size:17px;
+  cursor:pointer;z-index:2;
+}
+.dish-cat-tabs{
+  display:flex;gap:6px;
+  padding:0 16px 10px;
+  flex-shrink:0;
+  overflow-x:auto;
+}
+.dish-cat-tab{
+  flex:1;
+  padding:7px 10px;
+  border-radius:20px;
+  border:1px solid var(--line-cream);
+  background:var(--cream3);
+  color:var(--text-mid);
+  font-family:'Montserrat',sans-serif;
+  font-size:11px;font-weight:600;
+  cursor:pointer;
+  white-space:nowrap;
+  text-align:center;
+  transition:all 0.15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.dish-cat-tab.active{
+  background:var(--burg);
+  color:var(--gold2);
+  border-color:var(--burg);
+}
+.dish-list{
+  padding:8px 14px 20px;
+  overflow-y:auto;flex:1;
+  -webkit-overflow-scrolling:touch;
+  display:flex;flex-direction:column;gap:6px;
+}
+.dish-btn{
+  display:flex;align-items:center;
+  gap:10px;
+  padding:11px 14px;
+  border-radius:8px;
+  border:1px solid var(--line-cream);
+  background:var(--cream3);
+  color:var(--text-dark);
+  font-family:'Cormorant Garamond',serif;
+  font-size:15px;font-weight:600;
+  cursor:pointer;
+  text-align:left;
+  transition:all 0.15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.dish-btn:hover,.dish-btn:active{
+  background:#fdf5e8;
+  border-color:var(--gold);
+}
+.dish-btn.active{
+  background:var(--burg);
+  color:var(--gold2);
+  border-color:var(--burg);
+}
+.dish-btn-wines{
+  font-family:'Montserrat',sans-serif;
+  font-size:9px;
+  color:var(--text-lite);
+  font-weight:400;
+  margin-left:auto;
+  flex-shrink:0;
+}
+.dish-btn.active .dish-btn-wines{color:var(--gold3)}
+
 .main{
   max-width:780px;
   margin:0 auto;
@@ -721,6 +919,25 @@ body{top:0!important}
   </div>
 </div>
 
+<div class="pairing-bar" id="pairingBar">
+  <div class="pairing-bar-inner">
+    <div class="pairing-hint">🍷 Con cosa lo abbini? Scegli e ti suggerisco il vino</div>
+    <div class="pairing-chips-row">
+      <button class="pairing-chip" data-pair="antipasto" onclick="togglePairing('antipasto')">🥗 Antipasto</button>
+      <button class="pairing-chip" data-pair="pasta" onclick="togglePairing('pasta')">🍝 Pasta</button>
+      <button class="pairing-chip" data-pair="carne" onclick="togglePairing('carne')">🥩 Carne</button>
+      <button class="pairing-chip" data-pair="pesce" onclick="togglePairing('pesce')">🐟 Pesce</button>
+      <button class="pairing-chip" data-pair="aperitivo" onclick="togglePairing('aperitivo')">🍸 Aperitivo</button>
+    </div>
+    <div class="pairing-dish-row">
+      <button class="dish-open-btn" id="dishOpenBtn" onclick="openDishModal()">
+        🍽️ <span id="dishBtnLabel">Abbina al tuo piatto</span>
+      </button>
+      <button class="dish-clear-btn" id="dishClearBtn" onclick="clearDish()" title="Rimuovi filtro">✕</button>
+    </div>
+  </div>
+</div>
+
 <div id="google_translate_element" style="display:none"></div>
 
 <div class="hint-bar">Tocca la categoria per espandere · Tocca il vino per i dettagli</div>
@@ -750,6 +967,25 @@ body{top:0!important}
   </div>
 </div>
 
+<!-- DISH SELECTOR MODAL -->
+<div class="dish-overlay" id="dishOverlay" onclick="closeDishModalOutside(event)">
+  <div class="dish-sheet">
+    <div class="dish-sheet-handle"></div>
+    <div style="position:relative;flex-shrink:0;">
+      <button class="dish-close" onclick="closeDishModal()">×</button>
+    </div>
+    <div class="dish-sheet-header">
+      <div class="dish-sheet-title">🍽️ Con quale piatto?</div>
+      <div class="dish-cat-tabs">
+        <button class="dish-cat-tab active" onclick="setDishCat('antipasti',this)">🥗 Antipasti</button>
+        <button class="dish-cat-tab" onclick="setDishCat('primi',this)">🍝 Primi</button>
+        <button class="dish-cat-tab" onclick="setDishCat('secondi',this)">🥩 Secondi</button>
+      </div>
+    </div>
+    <div class="dish-list" id="dishList"></div>
+  </div>
+</div>
+
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <span class="lightbox-close">×</span>
   <img id="lightboxImg" src="" alt="">
@@ -758,104 +994,104 @@ body{top:0!important}
 <script>
 // ── WINE DATA ──────────────────────────────────────────────────
 const WINES = [
-  { id:"bollicine-lago", cat:"lago", subcat:"Selezioni Vini Lago Bin", name:"Le Bollicine del Lago", price:16, img:"images/le-bollicine-del-lago.png", paese:"Italia", regione:"Veneto", gradazione:"11,5%", uve:"Chardonnay Veneto", colore:"Giallo paglierino con riflessi verdolini", desc:"Un vino bianco frizzante che esprime note floreali fresche e fruttate che ricordano sensazioni esotiche e mediterranee", vinif:"Vino frizzante ottenuto con fermentazione naturale. Terminata la fermentazione sosta in vasca per due mesi prima di essere imbottigliato" },
-  { id:"lago-bianco", cat:"lago", subcat:"Selezioni Vini Lago Bin", name:"Lago Bianco", price:12, img:"images/lago-bianco.png", paese:"Italia", regione:"Veneto", gradazione:"12,5%", uve:"Pinot Grigio", colore:"Giallo paglierino con leggeri riflessi ramati", desc:"Un vino bianco, che esprime un profumo delicato, fruttato e dal gusto asciutto ed armonico. Da piacevoli sensazioni minerali e di frutta fresca", vinif:"Il mosto ottenuto dalla pressatura, viene avviato alla fermentazione a temperatura controllata in vasche di acciaio. Terminata la fermentazione il vino traversato sosta in vasca circa due mesi" },
-  { id:"lago-rose", cat:"lago", subcat:"Selezioni Vini Lago Bin", name:"Lago Rosè", price:12, img:"images/lago-rose.png", paese:"Italia", regione:"Veneto", gradazione:"11,5%", uve:"Uve Raboso", colore:"Cerasuolo acceso e brillante con riflessi rosei", desc:"Al palato è molto gradevole, morbido e piacevolmente rotondo", vinif:"Vino frizzante ottenuto per fermentazione naturale, con profumi che ricordano la rosa il glicine il biancospino e il sambuco" },
-  { id:"lago-rosso", cat:"lago", subcat:"Selezioni Vini Lago Bin", name:"Lago Rosso", price:12, img:"images/lago-rosso.png", paese:"Italia", regione:"Veneto", gradazione:"-", colore:"Rosso", vinif:"Al termine della fermentazione alcolica, viene immediatamente avviata quella malolattica al termine della quale il vino viene fatto riposare per circa 5 mesi in vasche d'acciaio e successivamente confezionato" },
-  { id:"bolle-lago", cat:"lago", subcat:"Selezioni Vini Lago Bin", name:"Le Bolle del Lago", price:21, img:"images/le-bolle-del-lago.png", paese:"Italia", regione:"Veneto", gradazione:"11%", uve:"Glera", colore:"Giallo paglierino", gusto:"Profumo fine ed elegante, gusto intenso sapido e delicato", desc:"Le sue note minerali e floreali molto delicate accompagnano una sensazione di piacevolezza al palato", vinif:"Terminata la fermentazione il vino traversato viene posto un autoclave a rifermentare per circa 2 mesi. Trascorso questo periodo viene imbottigliato" },
-  { id:"prosecco-valdobbiadene", cat:"bollicine", subcat:"Selezione Bollicine Italiane", name:"Prosecco di Valdobbiadene Superiore Extra Brut – Maschio dei Cavalieri", price:23, img:"images/Prosecco-di-Valdobbiadene.png", paese:"Italia", regione:"Veneto", gradazione:"12%", uve:"Glera", colore:"Giallo paglierino brillante con riflessi verdolini", gusto:"Fresco, asciutto, deciso; una bollicina di grande pulizia", desc:"Fondo floreale fresco e vivace, con espressioni floreali fragranti di mela verde e pera abate, intervallate da note eleganti di lime e agrumi. Si abbina perfettamente a piatti di pescato al forno, gratinati di capesante e grigliate di prelibati crostacei" },
-  { id:"prosecco-rose", cat:"bollicine", subcat:"Selezione Bollicine Italiane", name:"Prosecco Rosé Extra Dry – Maschio dei Cavalieri", price:22, img:"images/prosecco-rose-extra-dry-maschio-dei-cavalieri.png", paese:"Italia", regione:"Veneto", gradazione:"11%", uve:"85–90% Glera; 10–15% Pinot Nero Vinificato In Rosso", colore:"Osato tenue con eleganti riflessi ramati; perlage fine e persistente", gusto:"Al palato è fresco, armonico e di buona struttura", desc:"Sentori floreali di acacia tipici del Glera, accompagnati da note di viola e lampone derivanti dal Pinot Nero. Si presta bene come aperitivo e accompagna egregiamente piatti di mare, antipasti leggeri, risotti delicati e carni bianche" },
-  { id:"franciacorta-berlucchi", cat:"bollicine", subcat:"Selezione Bollicine Italiane", name:"Franciacorta Brut '61 – Berlucchi", price:39, img:"images/berlucchi-franciacorta-brut-61.png", gradazione:"12,5%", uve:"85% Chardonnay, 15% Pinot Nero", colore:"Giallo paglierino con riflessi dorati e perlage fine e persistente", gusto:"Secco, fresco, sapido, con un finale lungo e persistente", desc:"Aromi di frutta a polpa bianca, agrumi, crosta di pane e delicate note minerali. Aperitivo e piatti delicati come crudi di pesce, sushi, carpacci di carne, formaggi stagionati e primi piatti leggeri", vinif:"Affinamento: 24 mesi sui lieviti" },
-  { id:"franciacorta-manti", cat:"bollicine", subcat:"Selezione Bollicine Italiane", name:"Franciacorta Brut – Manti", price:45, img:"images/franciacorta-manti.png", paese:"Italia", regione:"Lombardia", desc:"Franciacorta Brut della cantina Manti" },
-  { id:"cuvee-lago-bin", cat:"bollicine", subcat:"Selezione Champagne", name:"Cuveè Lago Bin", price:55, img:"images/cuvee-lago-bin.png", paese:"Italia", regione:"Liguria", desc:"Il nostro Cuveè Lago Bin" },
-  { id:"gardet", cat:"bollicine", subcat:"Selezione Champagne", name:"Gardet \"Tradition\"", price:65, img:"images/gardet-tradition.png", paese:"Francia", regione:"Champagne", gradazione:"12%", uve:"45% Pinot Nero, 10% Chardonnay, 45% Pinot Meunier", colore:"Giallo miele", desc:"In bocca si presenta con una bella acidità e un equilibrio tra flessibilità e durezza, tra la dolcezza vellutata" },
-  { id:"veuve-clicquot", cat:"bollicine", subcat:"Selezione Champagne", name:"Veuve Cliquot", price:80, img:"images/veuve-clicquot.png", paese:"Francia", regione:"Champagne", gradazione:"12%", uve:"Pinot Noir 50-55%, Chardonnay 28-33%, Pinot Meunier 15-20%", colore:"Giallo intenso con riflessi dorati e con perlage ricco ed elegante", gusto:"Equilibrato e cremoso, rotondo e fresco, con gradevoli scie tostate", desc:"Armonioso e ricco, ha una fine sfaccettatura aromatica che si traduce in un sorso lungo e profondo, che anticipa un finale di vivace freschezza", vinif:"Affinamento Dai 3 ai 4 anni sui lieviti" },
-  { id:"michel-tixier", cat:"bollicine", subcat:"Selezione Champagne", name:"Michel Tixier", price:60, img:"images/michel-tixier.png", paese:"Francia", regione:"Champagne", gradazione:"12%", uve:"60% Pinot Meunier, 20% Pinot Noir, 20% Chardonnay", colore:"Bianco oro", desc:"Michel Tixier è uno champagne ricco di gusto, dal perlage fine e delicato In bocca è pieno ed elegante con note di frutta matura, mela cotogna e albicocca; il finale è generoso con sentori tostati e di brioche" },
-  { id:"deutz", cat:"bollicine", subcat:"Selezione Champagne", name:"Deutz", price:90, img:"images/deutz.png", paese:"Francia", regione:"Aÿ", gradazione:"12%", uve:"Chardonnay 34%, Pinot Noir 33%, Pinot Meunier 33%", colore:"Colore giallo paglierino brillante", desc:"Al palato è fresco e ben strutturato, con un finale lungo e persistente", vinif:"36 mesi sui lieviti" },
-  { id:"gh-mumm", cat:"bollicine", subcat:"Selezione Champagne", name:"G H Mumm", price:70, img:"images/gh-mumm.png", paese:"Francia", regione:"Champagne", gradazione:"12,5%", uve:"Pinot Noir 45%, Chardonnay 30%, Pinot Meunier 25%", colore:"Dorato con un perlage fine e persistent", desc:"In bocca ha una bella acidità e morbidezza, equilibrata fino alla lunga chiusura" },
-  { id:"ruinart-magnum", cat:"bollicine", subcat:"Selezione Champagne", name:"Ruinart \"Magnum\"", price:190, img:"images/ruinart-magnum.png", paese:"Francia", regione:"Champagne", gradazione:"12%", colore:"Giallo con brillanti riflessi dorati", desc:"Al palato è ricco e intenso, con un sorso profondo e persistente, che chiude su note fresche e sapide" },
-  { id:"laurent-perrier", cat:"bollicine", subcat:"Selezione Champagne", name:"Laurent Perrier", price:75, img:"images/laurent-perrier.png", paese:"Francia", regione:"Champagne", gradazione:"12%", uve:"Chardonnay 55%, Pinot Nero 35%, Pinot Meunier 10%", colore:"Giallo dorato", desc:"L'assaggio è fragrante, armonioso ed equilibrato, di ottima lunghezza" },
-  { id:"don-perignon", cat:"bollicine", subcat:"Selezione Champagne", name:"Don Perignon", price:280, img:"images/don-perignon.png", sigla:"Champagne AOC", paese:"Francia", regione:"Champagne", gradazione:"12,5%", uve:"Pinot Noir, Chardonnay", colore:"Giallo paglierino brillante con riflessi dorati", gusto:"Energico, potente, pieno e avvolgente, vellutato e cremoso, finale intenso e balsamico", desc:"Al palato rivela un impeccabile equilibrato, giocato tra la cremosa finezza delle bollicine, la rotondità del corpo, la minerale freschezza del terroir e la ricchezza del gusto", vinif:"Affinamento almeno 72 mesi sui lieviti" },
-  { id:"vermentino-poggio-elmo", cat:"territorio", subcat:"Vini Bianchi del Territorio", name:"Vermentino RLP – Poggio dell' Elmo", price:28, img:"images/vermentino-poggio-elmo.png", sigla:"Vermentino DOC", paese:"Italia", regione:"Liguria", gradazione:"12,5%", uve:"100% Vermentino", colore:"Giallo paglierino con riflessi verdolini", desc:"Al naso si apre con un bouquet elegante e delicato: fiori di campo che evocano la natura incontaminata, note erbacee fresche e un accenno vivace di mela verde croccante. Al palato si distingue per una fresca acidità, che dona slancio e vivacità al sorso", vinif:"5 ore a contatto con le bucce con controllo della temperatura 5 mesi in acciaio" },
-  { id:"vermentino-terre-bianche", cat:"territorio", subcat:"Vini Bianchi del Territorio", name:"Vermentino RLP – Terre Bianche", price:33, img:"images/vermentino-terre-bianche.png", paese:"Italia", regione:"Liguria", uve:"Vermentino", colore:"Giallo scarico con riflessi verde ramarro", gusto:"Sapore fresco e persistente, gradevolmente morbido e scorrevole, su una stoffa delicata e continua", desc:"Fiori bianchi e mare, un connubio ligure d'eccellenza in apertura, sapido ma gentile e piacevole al gusto. Ottimo per un aperitivo in riva al mare, magari con grigliata di pesce", vinif:"Ottenuto dalla pressatura soffice delle uve Vermentino e vinificato a temperatura controllata con lieviti selezionati e permanenza sulle fecce fini" },
-  { id:"vermentino-foresti", cat:"territorio", subcat:"Vini Bianchi del Territorio", name:"Vermentino RLP – Foresti – 100% Vermentino", price:26, img:"images/vermentino-foresti.png", paese:"Italia", regione:"Liguria", gradazione:"12%", uve:"100% Vermentino", colore:"Colore giallo paglierino intenso con riflessi dorati", gusto:"Profumo intenso e persistente, fine ed elegante, con sentori di erbe e fiori freschi di campo" },
-  { id:"pigato-soli-foresti", cat:"territorio", subcat:"Vini Bianchi del Territorio", name:"Pigato RLP – I Soli – Foresti", price:26, img:"images/pigato-foresti.png", paese:"Italia", regione:"Liguria", gradazione:"12%", uve:"100% Pigato", colore:"Giallo paglierino intenso con riflessi verdognoli", gusto:"Di buon corpo e continuità, con un caratteristico fondo amarognolo", desc:"Intenso e persistente, con sentori di pesca, miele, fiori e muschio", vinif:"Macerazione pellicolare a temperatura ambiente per circa 12 ore. Chiarifica a freddo del mosto con enzimi selezionati. Affinamento in vasche di acciaio inox per 5 mesi, di cui 3 \"sur lie\"" },
-  { id:"pigato-nemu", cat:"territorio", subcat:"Vini Bianchi del Territorio", name:"Pigato RLP – Nemu", price:24, img:"images/pigato-nemu.png", paese:"Italia", regione:"Liguria", uve:"Pigato", colore:"Giallo paglierino, che può evolvere verso tonalità dorate con l'invecchiamento", gusto:"Moderata struttura e buona freschezza, di buona persistenza aromatica", desc:"Intenso e caratteristico, con note di macchia mediterranea e frutti a polpa gialla" },
-  { id:"pigato-cygnus", cat:"territorio", subcat:"Vini Bianchi del Territorio", name:"Pigato RLP Cygnus – Poggio dei Gorleri", price:38, img:"images/pigato-cygnus-gorleri.png", gradazione:"13%", uve:"100% Pigato", colore:"Giallo paglierino luminoso", gusto:"Morbido, sapido, equilibrato e fresco, con una viva acidità che ne esalta la freschezza", desc:"Aromi intensi di frutta matura (nespola, mela), agrumi, camomilla, lavanda e una leggera nota minerale", vinif:"8 mesi in acciaio" },
-  { id:"tabaka-ka-mancine", cat:"territorio", subcat:"Vini Bianchi del Territorio", name:"Tabaka (Tabaka e Vermentino) – Ka Mancine", price:30, img:"images/tabaka-ka-mancine.png", paese:"Italia", regione:"Liguria", uve:"Tabaka E Vermentino", desc:"Bianco ligure del territorio di Dolceacqua, blend di Tabaka e Vermentino" },
-  { id:"flavia-foresti", cat:"territorio", subcat:"Vini Bianchi del Territorio", name:"Flavia (Vermentino e Pigato) – Foresti", price:34, img:"images/flavia-foresti.png", paese:"Italia", regione:"Liguria", uve:"Vermentino E Pigato", desc:"Blend di Vermentino e Pigato della cantina Foresti" },
-  { id:"vermentino-trecoli-lombardi", cat:"territorio", subcat:"Vini Bianchi del Territorio", name:"Vermentino \"Treçoli\" – Lombardi", price:29, img:"images/vermentino-trecoli-lombardi.png", paese:"Italia", regione:"Liguria", uve:"Vermentino", colore:"Giallo paglierino con riflessi verdolini", gusto:"Secco, fresco e armonico, con piacevole sapidità", desc:"Profumo delicato e fruttato tipico del Vermentino ligure. Ottimo come aperitivo, con trofie al pesto, brandacujun e la cucina ligure in generale", vinif:"Dopo la fermentazione, batonnage sui lieviti nobili e affinamento in vasche d'acciaio per circa sei mesi" },
-  { id:"rossese-poggi-elmo-2022", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua – Poggi dell' Elmo", price:32, img:"images/poggi-dellelmo-rossese-di-dolceacqua-2022.png", paese:"Italia", regione:"Liguria", gradazione:"13%", uve:"100% Rossese", colore:"Rosso rubino con riflessi violacei", gusto:"Fresco in bocca con sentori di ciliegia sotto spirito", desc:"Rosa canina, spezie che ricordano il pepe nero. Accompagna piatti tipici della cucina ligure, va servito ad un temperatura abbastanza fresca intorno ai 16°", vinif:"In acciaio con controllo della temperatura" },
-  { id:"rossese-pini-2022", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Superiore Pini – Poggi dell'Elmo", price:41, img:"images/rossese-pini-2022.png", paese:"Italia", regione:"Liguria", gradazione:"14,5%", uve:"100% Rossese", colore:"Rosso rubino con riflessi violacei", gusto:"Pieno, carnoso, fruttato in bocca", desc:"Note di ciliegia ben matura, mentuccia, speziato, balsamico e pepe nero. Accompagna formaggi piccanti, coniglio alla ligure, cinghiale e capra e fagioli", vinif:"15 giorni sulle bucce in acciaio con controllo della temperatura. Periodo di affinamento: 12 mesi in acciaio" },
-  { id:"rossese-cima-tramontina", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Cima Tramontina – Du Nemu", price:24, img:"images/rossese-cima-tramontina-2022.png", paese:"Italia", regione:"Liguria", gradazione:"12,5%", uve:"100% Rossese Di Dolceacqua", colore:"Rosso rubino tenue", gusto:"Asciutto, sapido, minerale, con tannini moderati e un finale amarognolo tipico del Rossese", desc:"Note di fragole di bosco, lamponi, nespole e pepe nero. Si sposa perfettamente con piatti tipici della cucina ligure", vinif:"Fermentazione in acciaio inox a temperatura controllata (28°C), macerazione di 4–6 giorni con rimontaggi e delestage, fermentazione malolattica e affinamento in acciaio inox" },
-  { id:"rossese-superiore-nemu-2021", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Superiore – Du Nemu", price:34, img:"images/rossese-superiore-du-nemu-2021.png", paese:"Italia", regione:"Liguria", gradazione:"14%", uve:"100% Rossese Di Dolceacqua", colore:"Rosso rubino intenso", gusto:"Asciutto, sapido, minerale, con tannini eleganti e un finale lungo e amarognolo", desc:"Note di lamponi, ribes, fragoline di bosco e una piacevole sfumatura speziata." },
-  { id:"rossese-foresti-2022", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua – Foresti", price:26, img:"images/foresti-rossese-di-dolceacqua-2022.png", paese:"Italia", regione:"Liguria", gradazione:"13%", uve:"100% Rossese Di Ventimiglia", colore:"Rosso rubino chiaro, che tende al granato con l'invecchiamento", gusto:"Asciutto, di medio corpo, con un piacevole retrogusto di mandorla e una buona persistenza", desc:"Aromi floreali di rosa e viola, con sentori fruttati.", vinif:"Affinamento: 5 mesi in vasche di acciaio inox" },
-  { id:"rossese-luvaira-foresti", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Luvaira – Foresti", price:32, img:"images/rossese-luvaira-foresti-2021.png", paese:"Italia", regione:"Liguria", gradazione:"13%", uve:"100% Rossese Di Dolceacqua", colore:"Colore rosso rubino", gusto:"Buona acidità e freschezza, con tannini morbidi e retrogusto fruttato, con buona nota minerale", desc:"È prodotto con uve di un vigneto centenario coltivato su terreni scoscesi e ben esposti al sole" },
-  { id:"rossese-beragna-ka-mancine", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Beragna – Ka Mancine", price:32, img:"images/rossese-beragna-ka-mancine-2021.png", paese:"Italia", regione:"Liguria", gradazione:"13%", uve:"100% Rossese", colore:"Rubino brillante", gusto:"Di medio corpo, fresco e fragrante, con tannini delicati e un finale sapido", desc:"Eleganti note di pepe nero, frutta rossa matura e tabacco." },
-  { id:"rossese-galeae-2022", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Galeae – Ka Mancine", price:36, img:"images/rossese-galeae-ka-mancine-2022.png", sigla:"DOC Rossese", paese:"Italia", regione:"Liguria", gradazione:"13,5%", uve:"100% Rossese", colore:"Rosso rubino intenso", gusto:"Secco, caldo, morbido, discretamente strutturato, con ottima persistenza e finale fresco e sapido", desc:"Aromi di melograno, pepe bianco e note speziate." },
-  { id:"rossese-ange-2024", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Ange – Ka Mancine", price:44, img:"images/ka-mancine-rossese-di-dolceacqua-ange-2024.png", paese:"Italia", regione:"Liguria", gradazione:"13%", uve:"Rossese", colore:"Rosso rubino brillante, tipico dei Rossese, con riflessi violacei", gusto:"In bocca il vino si presenta elegante e bilanciato, con una buona struttura e freschezza", desc:"Il bouquet è complesso e ricco, con note di frutti rossi, spezie e una leggera sfumatura di erbe mediterranee" },
-  { id:"rossese-terre-bianche-2022", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua – Terre Bianche", price:35, img:"images/terre-bianche-rossese-di-dolceacqua-2022.png", paese:"Italia", regione:"Liguria", gradazione:"13,5%", uve:"100% Rossese", colore:"Rosso rubino con riflessi granati", gusto:"Al palato si presenta sapido, elegante, caldo e di buona freschezza, con una nota amarognola", desc:"Bouquet ampio e intenso con sentori di frutti rossi di bosco, ciliegia, rosa canina e spezie." },
-  { id:"rossese-bricco-arcagna", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Bricco Arcagna – Terre Bianche", price:64, img:"images/rossese-bricco-arcagna-terre-bianche-2017.png", paese:"Italia", regione:"Liguria", gradazione:"13,5%", uve:"100% Rossese", colore:"Rosso rubino con riflessi granati", gusto:"Tannini setosi, sapidità equilibrata e finale leggermente amarognolo", desc:"Note di ciliegia sotto spirito, spezie dolci, incenso e un accenno balsamico." },
-  { id:"rossese-testalonga", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Testalonga", price:56, img:"images/rossese-testalonga.png", paese:"Italia", regione:"Liguria", uve:"100% Rossese", colore:"Rosso chiaro, quasi trasparente", gusto:"Elegante e leggero, con tannini setosi e una vivace acidità. Il finale è lungo, con richiami salini", desc:"Note floreali di violetta e rosa, frutti rossi come ciliegia e ribes, con sfumature mediterranee di erbe aromatiche e spezie" },
-  { id:"roccese-masala", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Roccese – Masala", price:49, img:"images/roccese-masala.png", paese:"Italia", regione:"Liguria", gradazione:"13%", uve:"Uve Rossese E Altri Vitigni Autoctoni", colore:"Rosso rubino intenso", gusto:"Equilibrato, persistente, con una struttura che riflette il terroir roccioso", desc:"Note di erbe aromatiche come rosmarino, salvia e finocchio selvatico" },
-  { id:"roccese-barricato-masala", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Roccese Barricato – Masala", price:63, img:"images/roccese-barricato-masala.png", paese:"Italia", regione:"Liguria", uve:"Rossese E Altri Vitigni Autoctoni", colore:"Rosso rubino intenso, tendente al granato", gusto:"Ben equilibrato, ricco e strutturato, con tannini morbidi e una lunga persistenza", desc:"Intenso e complesso, con note di erbe aromatiche e officinali tipiche del territorio" },
-  { id:"rossese-dolceacqua-generic", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Doc Posaù", price:45, img:"images/rossese-di-dolceacqua.png", paese:"Italia", regione:"Liguria", gradazione:"14%", uve:"100% Rossese", colore:"Rosso rubino chiaro con riflessi violacei", gusto:"Fresco, con tannini morbidi e una buona acidità", desc:"Note di frutti rossi maturi, erbe aromatiche, sottobosco e una leggera mineralità" },
-  { id:"rossese-peverelli", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Superiore Peverelli – Luigi Mauro", price:39, img:"images/rossese-peverelli-luigi-mauro-2021.png", paese:"Italia", regione:"Liguria", gradazione:"13,5%", uve:"100% Rossese", colore:"Rosso rubino intenso e brillante", gusto:"Equilibrato, con una buona acidità che ne esalta la freschezza", desc:"Il bouquet olfattivo è fresco e complesso, con note floreali di petali di rosa e sentori di macchia mediterranea" },
-  { id:"roccese-du-nemu", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Roccese dolceacqua et rossa du nemu", price:24, img:"images/roccese-rossa-du-nemu.png", paese:"Italia", regione:"Liguria", gradazione:"12,5%", uve:"Rossese 100%", colore:"Rosso rubino leggero", gusto:"Tannico, asciutto e preciso, sapido, minerale sul finale", desc:"Al palato, si rivela vivace e armonioso, con tannini soffici e un finale lungo e memorabile" },
-  { id:"roccese-bucciardino", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Roccese dolceacqua bucciardino ka mancine", price:39, img:"images/roccese-bucciardino-ka-mancine-2023.png", paese:"Italia", regione:"Liguria", gradazione:"13%", uve:"Rossese", desc:"Persistente e di discreta struttura, risulta caldo, morbido, fine e con una buona sapidità" },
-  { id:"rossese-maccario-ringenberg", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di dolceacqua Maccario Dringenberg", price:37, img:"images/rossese-maccario-ringenberg-2021.png", sigla:"Rossese Di Dolceacqua DOC", paese:"Italia", regione:"Liguria", gradazione:"13,5%", uve:"100% Rossese", colore:"Rosso Rubino con riflessi violacei", gusto:"Fresco e piacevolmente fruttato", desc:"Al palato è di medio corpo, elegante e con una bella freschezza" },
-  { id:"rossese-fratelli-maccario", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Fratelli Macario", price:45, img:"images/rossese-fratelli-maccario.png", paese:"Italia", regione:"Liguria", gradazione:"13,5%", uve:"Rossese 100%", colore:"Rosso rubino trasparente e luminoso", gusto:"Un corredo fruttato denso e deciso", desc:"Al palato, il Fratelli Maccario apre con note fruttate dolci e si sviluppa in un ricco ventaglio speziato." },
-  { id:"rossese-curli", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese Curli", price:54, img:"images/rossese-curli.png", paese:"Italia", regione:"Liguria", gradazione:"14%", uve:"Rossese 100%", colore:"Rosso rubino", desc:"Sottobosco, bacche, frutti di bosco. Intenso, sapido, corposo" },
-  { id:"rossese-rosato-du-nemu", cat:"territorio", subcat:"Vini Rosati del Territorio", name:"Rossese di Dolceacqua Rosato – Du Nemu", price:21, img:"images/rossese-rosato-du-nemu.png", paese:"Italia", regione:"Liguria", uve:"100% Rossese", colore:"Rosa scarico", desc:"Il vino, fresco e fruttato ricorda le sensazioni varietali del vitigno da cui deriva, ciliegia, rosa, piccoli frutti rossi", vinif:"Le uve rosse di Rossese di Dolceacqua vinificate in bianco per esaltare le note fruttate e la freschezza del vino" },
-  { id:"rossese-rosato-ka-mancine", cat:"territorio", subcat:"Vini Rosati del Territorio", name:"Rossese di Dolceacqua Rosato – Ka Mancine", price:23, img:"images/rossese-rosato-ka-mancine.png", paese:"Italia", regione:"Liguria", gusto:"Finale dolce con una punta di amarognolo", desc:"Al palato risulta secco, caldo, morbido, discretamente strutturato con ottima la persistenza" },
-  { id:"rossese-rosato-poggi-elmo", cat:"territorio", subcat:"Vini Rosati del Territorio", name:"Rossese di Dolceacqua Rosato – Poggi dell' Elmo", price:21, img:"images/rossese-rosato-poggi-del-elmo.png", paese:"Italia", regione:"Liguria", colore:"Rosa tenue", gusto:"Delicato con profumi di rosa", desc:"Morbido e sapido", vinif:"Uva rossa vinificata in bianco, 12 ore di macerazione a contatto con le bucce" },
-  { id:"rosato-postu-da-ve-lombardi", cat:"territorio", subcat:"Vini Rosati del Territorio", name:"Rosato \"Postu da Vé\" – Lombardi", price:28, img:"images/rosato-postu-da-ve-lombardi.png", paese:"Italia", regione:"Liguria", uve:"80% Rossese, 20% Granaccia", colore:"Rosa cipria pallido", gusto:"Fresco, asciutto, sapido e mediamente strutturato", desc:"Di media intensità olfattiva, con sentori di piccoli frutti di bosco e accenni d'agrumi", vinif:"Vinificazione in bianco con batonnage, affinamento in vasche d'acciaio per quattro mesi con ripetuti batonnage" },
-  { id:"rossese-crespi", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua – Crespi", price:21, img:"images/crespi.png", paese:"Italia", regione:"Liguria", gradazione:"13%", colore:"Rosso rubino con riflessi violacei", gusto:"Asciutto, sapido, con tannini eleganti e una buona persistenza", desc:"Note di frutti rossi maturi, erbe mediterranee e una leggera sfumatura speziata. Un Rossese elegante e tipico del territorio di Dolceacqua.", vinif:"Fermentazione in acciaio con macerazione sulle bucce, affinamento in acciaio per alcuni mesi." },
-  { id:"roero-arneis-2023", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Roero Arneis Ero – Clavesana", price:23, img:"images/clavesana-roero-arneis-ero-2023.png", sigla:"Roero DOCG", paese:"Italia", regione:"Piemonte", gradazione:"13%", uve:"Arneis 100%", colore:"Giallo paglierino, con riflessi verdognoli", desc:"Al naso si esprime con sentori fruttati, note floreali e cenni vegetali. Al palato si rivela fresco, di piacevole sapidità ed equilibrato" },
-  { id:"falanghina-2022", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Falanghina Beneventano – Vinosia", price:18, img:"images/vinosia-falanghina-beneventano-2022.png", sigla:"Falanghina IGT", gradazione:"12,5%", uve:"Falanghina", colore:"Giallo paglierino intenso", gusto:"Buon corpo, rotondo, con un sorso perfettamente equilibrato.", desc:"Note fruttate, anche esotici, sentori di banana, ananas, kiwi" },
-  { id:"greco-di-tufo-vinosia", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Greco di Tufo – Vinosia", price:21, img:"images/greco-di-tufo-vinosia.png", paese:"Italia", regione:"Campania", uve:"100% Greco", desc:"Bianco campano fresco e minerale, tipico della zona di Tufo" },
-  { id:"gewurztraminer-2022", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"A.A. Gewürztraminer – Muri-Gries", price:27, img:"images/aa-gewurztraminer-muri-gries-2022.png", paese:"Italia", regione:"Alto Adige", gradazione:"14,5%", uve:"100% Gewürztraminer", colore:"Giallo paglierino chiaro", gusto:"Struttura piena e accessibile, elegante, giovane e di piacevole beva, con un finale aromatico fine", desc:"Aromi eleganti di petali di rosa, garofano e una leggera nota affumicata", vinif:"Affinamento: Acciaio inox" },
-  { id:"soave-latium-2021", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Soave (Garganega 100%) – Latium", price:18, img:"images/soave-latium-2021.png", paese:"Italia", regione:"Veneto", uve:"Garganega 100%", colore:"Giallo paglierino intenso e luminoso", gusto:"Al palato morbido, intenso ed avvolgente con una piacevole acidità sul finale", desc:"Profumi fruttati tendenti al maturo, pesca gialla, accenni di mela cotogna e bergamotto" },
-  { id:"sauvignon", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Sauvignon", price:21, img:"images/sauvignon.png", paese:"Italia", regione:"Friuli Venezia Giulia", gradazione:"12%", uve:"Sauvignon", colore:"Colore giallo paglierino luminoso", desc:"Al gusto si presenta aromatico, delicato, asciutto" },
-  { id:"andaras", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Vermentino di Sardegna \"Andaras\"", price:27, img:"images/andaras.png", paese:"Italia", regione:"Sardegna", gradazione:"13%", uve:"100% Vermentino", colore:"Giallo paglierino con riflessi dorati", gusto:"Fresco e sapido, con una piacevole mineralità e un finale persistente", desc:"Aromi di macchia mediterranea, agrumi e fiori bianchi, tipici del Vermentino sardo.", vinif:"Fermentazione a temperatura controllata in acciaio inox, breve permanenza sui lieviti." },
-  { id:"chardonnay-kreuth-terlan", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Chardonnay \"Kreuth\" – Cantina Terlan", price:37, img:"images/chardonnay-kreuth-terlan.png", paese:"Italia", regione:"Alto Adige", gradazione:"14%", uve:"100% Chardonnay", colore:"Giallo paglierino scintillante e accattivante", gusto:"Accattivante, con una struttura flessibile e compatta; sentori speziati, minerali e succosi che conferiscono un forte carattere del terroir", desc:"Profumo di frutta esotica come maracuja e carambola, agrumi, con una nota di pietra focaia dai tratti aromatici e minerali", vinif:"Vendemmia e selezione manuale delle uve. Fermentazione lenta a temperatura controllata in botti di rovere grandi, affinamento di 10 mesi sui lieviti, metà in acciaio e metà in legno" },
-  { id:"bardolino-chiaretto", cat:"rosati", subcat:"Selezione vini rosati nazionali", name:"Bardolino Chiaretto Classico – Negrar Domìni Veneti", price:16, img:"images/bardolino-chiaretto-classico-domini-veneti-2021.png", sigla:"DOC Bardolino", paese:"Italia", regione:"Veneto", gradazione:"12,5%", uve:"Corvina, Rondinella E Molinara", colore:"Rosato splendente", gusto:"Pieno ed equilibrato, fresco, ricorda fragoline di bosco e lamponi", desc:"Al naso il profumo è delicato di frutti rossi, rosa tea e violetta. Un vino che si abbina molto bene a pesce alla griglia, carni bianche, salumi freschi e formaggi molli" },
-  { id:"pallido-capecci", cat:"rosati", subcat:"Selezione vini rosati nazionali", name:"Pallido – Capecci", price:27, img:"images/pallido-capecci.png", paese:"Italia", regione:"Marche", gradazione:"12%", uve:"Montepulciano" },
-  { id:"roccese-rose-masala", cat:"rosati", subcat:"Selezione vini rosati nazionali", name:"Roccese Rosè – Masala", price:39, img:"images/roccese-rose-masala.png", paese:"Italia", regione:"Liguria", uve:"Rossese E Altri Vitigni Autoctoni", desc:"Rosato ligure della cantina Masala, dal territorio roccioso di Dolceacqua", available:false },
-  { id:"maixei_rose_rosse", cat:"rosati", subcat:"Selezione vini rosati nazionali", name:"Maixei \"Rosé Rosse\" Vino Rosato", price:24, img:"images/maixei-rose.png", paese:"Italia", regione:"Liguria", gradazione:"12.5%", uve:"Uve locali a bacca rossa", colore:"Rosa cerasuolo brillante", gusto:"Fresco, fruttato, con note di fragolina e melograno", desc:"Rosato ligure dal profilo aromatico elegante, con sentori di frutta rossa e fiori.", vinif:"Vinificazione in acciaio a temperatura controllata per preservare freschezza e aromi." },
-  { id:"castel_des_maures", cat:"rosati", subcat:"Selezione vini rosati nazionali", name:"Château Castel des Maures Rosé – Côtes de Provence (Bio)", price:18, img:"images/castel-maures.png", paese:"Francia", regione:"Provence", gradazione:"13%", uve:"Grenache, Cinsault, Syrah", colore:"Rosa pallido provenzale", gusto:"Elegante, secco, con note di pesca bianca, agrumi e fiori", desc:"Rosé biologico della Provenza, fine e aromatico, perfetto per piatti di pesce e aperitivi.", vinif:"Vinificazione biologica con fermentazione a bassa temperatura per esaltare freschezza e profumi." },
-  { id:"barbaresco-biologico", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Barbaresco Biologico – Nada", price:59, img:"images/barbaresco-biologico-nada-2019.png", paese:"Italia", regione:"Piemonte", gradazione:"14%", uve:"100% Nebbiolo", colore:"Rosso granato brillante", gusto:"Elegante, sapido, con tannini levigati e una lunga persistenza", desc:"Intensi sentori floreali, con note di frutti rossi e spezie.", vinif:"Affinamento: 24 mesi in botti di rovere, seguito da 6 mesi in bottiglia" },
-  { id:"barbera-pio-cesare", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Barbera d'Alba – Pio Cesare", price:32, img:"images/barbera-dalba-pio-cesare-2019.png", paese:"Italia", regione:"Piemonte", gradazione:"14,5%", uve:"Barbera Al 100%", colore:"Rosso rubino intenso con riflessi violacei", gusto:"Pieno e corposo, con una piacevole freschezza e tannini morbidi; finale persistente e armonioso", desc:"Bouquet complesso con note di frutti rossi maturi (ciliegie, prugne), sentori floreali (viola) e speziati (pepe nero)." },
-  { id:"barbera-clavesana", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Barbera d'Alba – Clavesana", price:24, img:"images/barbera-dalba-clavesana-2019.png", paese:"Italia", regione:"Piemonte", gradazione:"14,5%", uve:"100% Barbera", colore:"Rosso rubino intenso", gusto:"Morbido, elegante, con una piacevole acidità e un finale persistente", desc:"Note di frutta rossa (ciliegia, prugna) e spezie." },
-  { id:"barolo-palladino", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Barolo Serralunga – Palladino", price:64, img:"images/barolo-serralunga-palladino-2019.png", paese:"Italia", regione:"Piemonte", gradazione:"14,5%", uve:"Nebbiolo 100%", colore:"Rosso rubino con riflessi granata", gusto:"Morbido, strutturato, con tannini ben integrati e una lunga persistenza", desc:"Note di frutti rossi maturi, spezie, liquirizia e una leggera nota floreale.", vinif:"Affinamento: 24 mesi in grandi botti di rovere, seguito da 6 mesi in cemento" },
-  { id:"dolcetto-palladino", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Dolcetto d'Alba – Palladino", price:24, img:"images/dolcetto-dalba-palladino-2022.png", paese:"Italia", regione:"Piemonte", gradazione:"13%", uve:"100% Dolcetto", colore:"Rosso rubino intenso", gusto:"Asciutto, armonico, equilibrato, con tannini fini e finale fresco", desc:"Fruttato, con note di lampone, prugna e violette." },
-  { id:"nebbiolo-clavesana", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Nebbiolo d'Alba Nhe – Clavesana", price:24, img:"images/nebbiolo-dalba-nhe-clavesana-2021.png", paese:"Italia", regione:"Piemonte", gradazione:"14%", uve:"100% Nebbiolo", colore:"Rosso rubino con riflessi granata", gusto:"Morbido, con tannini ben integrati e una persistenza piacevole", desc:"Sentori di frutti rossi sotto spirito, note speziate e toni eterei." },
-  { id:"amarone-latium", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Amarone della Valpolicella Campo Leòn – Latium", price:92, img:"images/amarone-della-valpolicella-campo-leon-latium-2017.png", sigla:"DOCG", paese:"Italia", regione:"Veneto", uve:"Selezione Di Vitigni Tipici Della Valpolicella", colore:"Rosso granato intenso con riflessi rubino", gusto:"Gusto corposo, vellutato, con tannini maturi e ben integrati", desc:"Profumo ricco e complesso, con sentori di ciliegia sotto spirito, prugna matura, liquirizia, vaniglia, tabacco e spezie dolci.", vinif:"Le uve vengono sottoposte al tradizionale processo di appassimento, durante il quale perdono circa il 40% del loro peso" },
-  { id:"bellaja-bolgheri", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Bell'Aja Bolgheri – San Felice", price:44, img:"images/bellaja-bolgheri-san-felice-2021.png", sigla:"DOC", paese:"Italia", regione:"Toscana", uve:"90% Merlot, 10% Cabernet Sauvignon", colore:"Rosso rubino intenso con riflessi granati", gusto:"Strutturato e armonioso, con tannini levigati e una vivace acidità", desc:"Profumi di ciliegia matura, prugna, liquirizia, cioccolato fondente e spezie dolci." },
-  { id:"brunello-campogiovanni", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Brunello di Montalcino Campogiovanni – San Felice", price:80, img:"images/brunello-campogiovanni-san-felice-2016.png", paese:"Italia", regione:"Toscana", uve:"100% Brunello", colore:"Rosso rubino profondo", gusto:"Strutturato e avvolgente, con tannini morbidi e una persistenza dolce e speziata", desc:"Ciliegia matura, cuoio, tabacco dolce, erbe mediterranee, liquirizia e spezie." },
-  { id:"chianti-classico-grigio", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Chianti Classico Riserva il Grigio da San Felice – San Felice", price:33, img:"images/hianti-classico-riserva-grigio-2018.png", paese:"Italia", regione:"Toscana", gradazione:"13,5%", uve:"100% Sangiovese", colore:"Rosso rubino profondo", gusto:"Corposo e austero, con tannini succosi e una fresca acidità", desc:"Aroma intenso e persistente, con note di viola mammola e frutti di bosco." },
-  { id:"chianti-classico-berardenga", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Chianti Classico – Berardenga", price:33, img:"images/chianti-classico-berardenga.png", sigla:"DOCG", paese:"Italia", regione:"Toscana", uve:"Sangiovese", desc:"Chianti Classico della cantina Berardenga" },
-  { id:"le-volte-ornellaia", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Le Volte dell'Ornellaia – Tenuta dell'Ornellaia", price:43, img:"images/le-volte-dellornellaia-2021.png", sigla:"IGT Toscana", paese:"Italia", regione:"Toscana", gradazione:"13,5%", uve:"70% Merlot, 15% Sangiovese, 15% Cabernet Sauvignon", colore:"Rosso rubino intenso, con riflessi violacei", gusto:"Equilibrato e rotondo: tannini morbidi ma presenti", desc:"Note fruttate di ciliegia matura, mora, ribes nero." },
-  { id:"rosso-montalcino-casanova", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Rosso di Montalcino – Casanova di Neri", price:45, img:"images/rosso-montalcino-casanova-neri-2021.png", paese:"Italia", regione:"Toscana", gradazione:"14,5%", uve:"100% Sangiovese", colore:"Rosso intenso e vivace", gusto:"Rotondo e generoso, con tannini morbidi e vellutati", desc:"Note intriganti di frutta rossa scura, in particolare ciliegie e mirtilli, con sfumature speziate e floreali" },
-  { id:"rosso-montalcino-scopone", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Rosso di Montalcino – Scopone", price:33, img:"images/rosso-montalcino-scopone.png", paese:"Italia", regione:"Toscana", uve:"100% Sangiovese", desc:"Rosso di Montalcino della cantina Scopone" },
-  { id:"nobile-montepulciano-barbicaia", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Nobile di Montepulciano – Barbicaia", price:40, img:"images/nobile-montepulciano-barbicaia.png", sigla:"DOCG", paese:"Italia", regione:"Toscana", uve:"Sangiovese (Prugnolo Gentile)", desc:"Vino Nobile di Montepulciano della cantina Barbicaia" },
-  { id:"i-tirreni-bolgheri-hydra", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"I Tirreni Bolgheri – Hydra", price:43, img:"images/i-tirreni-bolgheri-hydra.png", sigla:"DOC Bolgheri", paese:"Italia", regione:"Toscana", desc:"Bolgheri \"Hydra\" della cantina I Tirreni" },
-  { id:"rosso-montepulciano-sabazio", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Rosso di Montepulciano Sabazio – La Braccesca", price:21, img:"images/rosso-montepulciano-sabazio-2021.png", paese:"Italia", regione:"Toscana", gradazione:"14%", uve:"Sangiovese E Merlot", colore:"Rosso rubino brillante", gusto:"Morbido e fresco, con tannini vellutati e un finale sapido", desc:"Note fruttate di amarena, lampone, fragola e ciliegia, con accenni floreali e balsamici" },
-  { id:"ruit-hora-bolgheri", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Ruit Hora Bolgheri – Caccia al Piano", price:63, img:"images/ruit-hora-bolgheri-caccia-al-piano-2020.png", gradazione:"14%", uve:"60% Merlot, 30% Cabernet Sauvignon, 5% Petit Verdot, 5% Syrah", colore:"Rosso rubino intenso e brillante", gusto:"Tannini setosi, struttura equilibrata e un finale persistente con sentori fruttati", desc:"Note di ciliegie mature, petali di rosa e un accenno di spezie." },
-  { id:"promis-ca-marcanda-gaja-2023", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Promis – Ca' Marcanda Gaja", price:45, img:"images/promis-ca-marcanda-gaja-2023.png", sigla:"Toscana IGT", paese:"Italia", regione:"Toscana", uve:"55% Merlot, 35% Syrah, 10% Sangiovese", colore:"Rosso rubino brillante e intenso", gusto:"Caldo e corposo, avvolgente, con freschezza e tannino ben presenti; finale lungo e persistente", desc:"Frutta rossa matura e drupe a polpa scura, con sentori tostati, speziati, liquirizia e goudron. Firmato dalla famiglia Gaja nella tenuta di Bolgheri", vinif:"Affinamento in barrique per circa 12 mesi" },
-  { id:"grottaia-caccia-al-piano-2023", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Grottaia – Caccia al Piano 1868", price:34, img:"images/grottaia-caccia-al-piano-2023.png", sigla:"Toscana IGT", paese:"Italia", regione:"Toscana", gradazione:"13,5%", uve:"50% Cabernet Sauvignon, 50% Merlot", colore:"Rosso rubino brillante", gusto:"Fresco e accattivante, di pronta beva, con un leggero tannino giovane", desc:"Profumi freschi di frutti rossi e violetta. Vinificato dai vigneti più giovani della tenuta nella Costa Toscana, vicino a Bolgheri", vinif:"Macerazione e fermentazione a temperatura controllata in vasche d'acciaio; affinamento esclusivamente in acciaio" },
-  { id:"tignanello-antinori", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Tignanello – Marchesi Antinori", price:170, img:"images/tignanello-antinori-2016.png", gradazione:"14%", uve:"80% Sangiovese, 15% Cabernet Sauvignon, 5% Cabernet Franc", colore:"Rosso rubino intenso con riflessi porpora", gusto:"Vibrante, con tannini setosi e raffinati. Equilibrato e intenso, con un finale lungo", desc:"Note di frutta rossa matura, mora fresca e frutti di bosco, con aromi di vaniglia, cioccolato amaro e leggere spezie", vinif:"Affinato per circa 14–16 mesi in barrique" },
-  { id:"montepulciano-abruzzo", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Montepulciano d'Abruzzo – Masciarelli", price:19, img:"images/montepulciano-abruzzo-masciarelli-2020.png", sigla:"DOC Montepulciano", paese:"Italia", regione:"Abruzzo", gradazione:"13,5%", uve:"100% Montepulciano", colore:"Rosso rubino intenso", gusto:"Corposo e succoso, con sapori di frutti rossi maturi, ciliegie e prugne", desc:"Note complesse di ciliegie nere mature, prugne, violette e un accenno di tabacco" },
-  { id:"aglianico-neromora", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Aglianico Neromora – Vinosia", price:21, img:"images/aglianico-neromora-vinosia-2019.png", paese:"Italia", regione:"Campania", gradazione:"13,5%", uve:"100% Aglianico", colore:"Rosso rubino intenso, con riflessi violacei quando è giovane", gusto:"In bocca è secco, avvolgente, con tannini ben integrati e un finale persistente", desc:"Un vino elegante ma ancora profondamente territoriale." },
-  { id:"mora-aglianico-campania", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"\"Mora\" – Aglianico Campania IGP", price:21, img:"images/mora-aglianico-campania.png", paese:"Italia", regione:"Campania", uve:"100% Aglianico", colore:"Rosso rubino intenso", gusto:"Asciutto, caldo, armonico e ben tannico, di buon corpo", desc:"Profumo fragrante con sentori di mora, amarena e frutti di bosco, accompagnati da note speziate e minerali", vinif:"Fermentazione e affinamento in vasche di acciaio inox" },
-  { id:"primitivo-salento", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Primitivo Salento Orus – Vinosia", price:18, img:"images/primitivo-salento-orus-vinosia-2022.png", sigla:"Salento IGT", paese:"Italia", regione:"Puglia", gradazione:"13,5%", uve:"100% Primitivo", colore:"Rosso rubino profondo con riflessi violacei", gusto:"Vellutato e concentrato, con tannini morbidi e una buona acidità che conferisce equilibrio", desc:"Intenso e fruttato, con note di amarene, more, mirtilli e un accenno di liquirizia" },
-  { id:"nero-davola", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Nero d'Avola – Musita", price:22, img:"images/nero-davola-musita-2022.png", paese:"Italia", regione:"Sicilia", gradazione:"14%", uve:"Nero D'Avola Al 100%", colore:"Colore rosso rubino carico", gusto:"Al palato, si distingue per l'eleganza e l'armonia dei tannini", desc:"Il Musita Nero d'Avola 2022 presenta un colore rosso rubino carico e un bouquet olfattivo che richiama note di ciliegia e marasca" },
-  { id:"brunello-poggio-oro", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Brunello di Montalcino \"Poggio all' Oro\"", price:180, img:"images/brunello-poggio-alloro-2007.png", paese:"Italia", regione:"Toscana", gradazione:"15%", uve:"Sangiovese 100%", colore:"Rosso rubino intenso", desc:"Sapore: pieno, austero, vellutato e giustamente tannico", vinif:"La macerazione si svolge a temperatura controllata per 12-14 giorni. Maturato in barriques 2 anni e mezzo, si affina in bottiglia per almeno 12-18 mesi" },
-  { id:"5050-avignonesi", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"50 & 50 – Capannelle Avignonesi", price:170, img:"images/50-50-capannelle-avignonesi-2015.png", sigla:"Toscana IGT 50 & 50 Avignones", paese:"Italia", regione:"Toscana", gradazione:"13,5%", uve:"Merlot 50%, Sangiovese 50%", desc:"Questo vino racchiude l'anima di due tra le più antiche e rinomate aree vitivinicole della Toscana", vinif:"AFFINAMENTO: Barrique" },
-  { id:"lambrusco-ambasciatori", cat:"rossi", subcat:"Vini Frizzanti", name:"Ambasciatori Lambrusco Emilia IGT Amabile", price:18, img:"images/lambrusco-sierra.png", sigla:"IGT Emilia", paese:"Italia", regione:"Emilia-Romagna", gradazione:"8%", uve:"Lambrusco", colore:"Rosso rubino brillante con spuma rosata", gusto:"Amabile, morbido, fruttato con piacevole freschezza", desc:"Un Lambrusco frizzante vivace con note di ciliegia, mora e piccoli frutti rossi. La leggera dolcezza lo rende ideale come aperitivo o abbinato a salumi, formaggi emiliani, pizza e dessert leggeri" },
-  { id:"barbera-asti-la-villa", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Barbera d'Asti \"La Villa\" - Tenuta Olim Bauda", price:27, img:"images/barbera-asti-la-villa.png", paese:"Italia", regione:"Piemonte", gradazione:"14,5%", uve:"100% Barbera", colore:"Rosso rubino intenso con riflessi violacei", gusto:"Pieno e corposo, con tannini morbidi e una piacevole freschezza", desc:"Note di frutta rossa matura, una leggera speziatura e un finale persistente, tipico della Barbera d'Asti.", vinif:"Fermentazione in acciaio inox, seguita da un affinamento in acciaio per alcuni mesi." },
-  { id:"dogliani-terra", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Dogliani \"Terra\" - Produttori in Clavesana", price:24, img:"images/dogliani-terra.png", paese:"Italia", regione:"Piemonte", gradazione:"13,5%", uve:"100% Dolcetto", colore:"Rosso rubino intenso con riflessi violacei", gusto:"Asciutto, armonico, con tannini morbidi e una buona freschezza", desc:"Aromi di frutti rossi maturi e una leggera nota floreale, tipici del Dolcetto di Dogliani.", vinif:"Fermentazione e affinamento in acciaio inox, senza passaggi in legno." },
-  { id:"vermentino-masala", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Vermentino – Masala", price:48, img:"images/vermentino-masala.png", paese:"Italia", regione:"Liguria", uve:"Vermentino", desc:"Vermentino della cantina Masala", available:false },
+  { id:"bollicine-lago", cat:"lago", subcat:"Selezioni Vini Lago Bin", name:"Le Bollicine del Lago", price:16, img:"images/le-bollicine-del-lago.png", paese:"Italia", regione:"Veneto", gradazione:"11,5%", uve:"Chardonnay Veneto", colore:"Giallo paglierino con riflessi verdolini", desc:"Un vino bianco frizzante che esprime note floreali fresche e fruttate che ricordano sensazioni esotiche e mediterranee", vinif:"Vino frizzante ottenuto con fermentazione naturale. Terminata la fermentazione sosta in vasca per due mesi prima di essere imbottigliato", pairing:["aperitivo","pesce","antipasto"] },
+  { id:"lago-bianco", cat:"lago", subcat:"Selezioni Vini Lago Bin", name:"Lago Bianco", price:12, img:"images/lago-bianco.png", paese:"Italia", regione:"Veneto", gradazione:"12,5%", uve:"Pinot Grigio", colore:"Giallo paglierino con leggeri riflessi ramati", desc:"Un vino bianco, che esprime un profumo delicato, fruttato e dal gusto asciutto ed armonico. Da piacevoli sensazioni minerali e di frutta fresca", vinif:"Il mosto ottenuto dalla pressatura, viene avviato alla fermentazione a temperatura controllata in vasche di acciaio. Terminata la fermentazione il vino traversato sosta in vasca circa due mesi", pairing:["pesce","aperitivo","pasta","antipasto"] },
+  { id:"lago-rose", cat:"lago", subcat:"Selezioni Vini Lago Bin", name:"Lago Rosè", price:12, img:"images/lago-rose.png", paese:"Italia", regione:"Veneto", gradazione:"11,5%", uve:"Uve Raboso", colore:"Cerasuolo acceso e brillante con riflessi rosei", desc:"Al palato è molto gradevole, morbido e piacevolmente rotondo", vinif:"Vino frizzante ottenuto per fermentazione naturale, con profumi che ricordano la rosa il glicine il biancospino e il sambuco", pairing:["aperitivo","pesce","antipasto"] },
+  { id:"lago-rosso", cat:"lago", subcat:"Selezioni Vini Lago Bin", name:"Lago Rosso", price:12, img:"images/lago-rosso.png", paese:"Italia", regione:"Veneto", gradazione:"-", colore:"Rosso", vinif:"Al termine della fermentazione alcolica, viene immediatamente avviata quella malolattica al termine della quale il vino viene fatto riposare per circa 5 mesi in vasche d'acciaio e successivamente confezionato", pairing:["carne","formaggi"] },
+  { id:"bolle-lago", cat:"lago", subcat:"Selezioni Vini Lago Bin", name:"Le Bolle del Lago", price:21, img:"images/le-bolle-del-lago.png", paese:"Italia", regione:"Veneto", gradazione:"11%", uve:"Glera", colore:"Giallo paglierino", gusto:"Profumo fine ed elegante, gusto intenso sapido e delicato", desc:"Le sue note minerali e floreali molto delicate accompagnano una sensazione di piacevolezza al palato", vinif:"Terminata la fermentazione il vino traversato viene posto un autoclave a rifermentare per circa 2 mesi. Trascorso questo periodo viene imbottigliato", pairing:["aperitivo","pesce","antipasto"] },
+  { id:"prosecco-valdobbiadene", cat:"bollicine", subcat:"Selezione Bollicine Italiane", name:"Prosecco di Valdobbiadene Superiore Extra Brut – Maschio dei Cavalieri", price:23, img:"images/Prosecco-di-Valdobbiadene.png", paese:"Italia", regione:"Veneto", gradazione:"12%", uve:"Glera", colore:"Giallo paglierino brillante con riflessi verdolini", gusto:"Fresco, asciutto, deciso; una bollicina di grande pulizia", desc:"Fondo floreale fresco e vivace, con espressioni floreali fragranti di mela verde e pera abate, intervallate da note eleganti di lime e agrumi. Si abbina perfettamente a piatti di pescato al forno, gratinati di capesante e grigliate di prelibati crostacei", pairing:["aperitivo","pesce","antipasto"] },
+  { id:"prosecco-rose", cat:"bollicine", subcat:"Selezione Bollicine Italiane", name:"Prosecco Rosé Extra Dry – Maschio dei Cavalieri", price:22, img:"images/prosecco-rose-extra-dry-maschio-dei-cavalieri.png", paese:"Italia", regione:"Veneto", gradazione:"11%", uve:"85–90% Glera; 10–15% Pinot Nero Vinificato In Rosso", colore:"Osato tenue con eleganti riflessi ramati; perlage fine e persistente", gusto:"Al palato è fresco, armonico e di buona struttura", desc:"Sentori floreali di acacia tipici del Glera, accompagnati da note di viola e lampone derivanti dal Pinot Nero. Si presta bene come aperitivo e accompagna egregiamente piatti di mare, antipasti leggeri, risotti delicati e carni bianche", pairing:["aperitivo","pesce","antipasto"] },
+  { id:"franciacorta-berlucchi", cat:"bollicine", subcat:"Selezione Bollicine Italiane", name:"Franciacorta Brut '61 – Berlucchi", price:39, img:"images/berlucchi-franciacorta-brut-61.png", gradazione:"12,5%", uve:"85% Chardonnay, 15% Pinot Nero", colore:"Giallo paglierino con riflessi dorati e perlage fine e persistente", gusto:"Secco, fresco, sapido, con un finale lungo e persistente", desc:"Aromi di frutta a polpa bianca, agrumi, crosta di pane e delicate note minerali. Aperitivo e piatti delicati come crudi di pesce, sushi, carpacci di carne, formaggi stagionati e primi piatti leggeri", vinif:"Affinamento: 24 mesi sui lieviti", pairing:["aperitivo","pesce","antipasto"] },
+  { id:"franciacorta-manti", cat:"bollicine", subcat:"Selezione Bollicine Italiane", name:"Franciacorta Brut – Manti", price:45, img:"images/franciacorta-manti.png", paese:"Italia", regione:"Lombardia", desc:"Franciacorta Brut della cantina Manti", pairing:["aperitivo","pesce","antipasto"] },
+  { id:"cuvee-lago-bin", cat:"bollicine", subcat:"Selezione Champagne", name:"Cuveè Lago Bin", price:55, img:"images/cuvee-lago-bin.png", paese:"Italia", regione:"Liguria", desc:"Il nostro Cuveè Lago Bin", pairing:["aperitivo","pesce","antipasto"] },
+  { id:"gardet", cat:"bollicine", subcat:"Selezione Champagne", name:"Gardet \"Tradition\"", price:65, img:"images/gardet-tradition.png", paese:"Francia", regione:"Champagne", gradazione:"12%", uve:"45% Pinot Nero, 10% Chardonnay, 45% Pinot Meunier", colore:"Giallo miele", desc:"In bocca si presenta con una bella acidità e un equilibrio tra flessibilità e durezza, tra la dolcezza vellutata", pairing:["aperitivo","pesce","antipasto"] },
+  { id:"veuve-clicquot", cat:"bollicine", subcat:"Selezione Champagne", name:"Veuve Cliquot", price:80, img:"images/veuve-clicquot.png", paese:"Francia", regione:"Champagne", gradazione:"12%", uve:"Pinot Noir 50-55%, Chardonnay 28-33%, Pinot Meunier 15-20%", colore:"Giallo intenso con riflessi dorati e con perlage ricco ed elegante", gusto:"Equilibrato e cremoso, rotondo e fresco, con gradevoli scie tostate", desc:"Armonioso e ricco, ha una fine sfaccettatura aromatica che si traduce in un sorso lungo e profondo, che anticipa un finale di vivace freschezza", vinif:"Affinamento Dai 3 ai 4 anni sui lieviti", pairing:["aperitivo","pesce","antipasto"] },
+  { id:"michel-tixier", cat:"bollicine", subcat:"Selezione Champagne", name:"Michel Tixier", price:60, img:"images/michel-tixier.png", paese:"Francia", regione:"Champagne", gradazione:"12%", uve:"60% Pinot Meunier, 20% Pinot Noir, 20% Chardonnay", colore:"Bianco oro", desc:"Michel Tixier è uno champagne ricco di gusto, dal perlage fine e delicato In bocca è pieno ed elegante con note di frutta matura, mela cotogna e albicocca; il finale è generoso con sentori tostati e di brioche", pairing:["aperitivo","pesce","antipasto"] },
+  { id:"deutz", cat:"bollicine", subcat:"Selezione Champagne", name:"Deutz", price:90, img:"images/deutz.png", paese:"Francia", regione:"Aÿ", gradazione:"12%", uve:"Chardonnay 34%, Pinot Noir 33%, Pinot Meunier 33%", colore:"Colore giallo paglierino brillante", desc:"Al palato è fresco e ben strutturato, con un finale lungo e persistente", vinif:"36 mesi sui lieviti", pairing:["aperitivo","pesce","antipasto"] },
+  { id:"gh-mumm", cat:"bollicine", subcat:"Selezione Champagne", name:"G H Mumm", price:70, img:"images/gh-mumm.png", paese:"Francia", regione:"Champagne", gradazione:"12,5%", uve:"Pinot Noir 45%, Chardonnay 30%, Pinot Meunier 25%", colore:"Dorato con un perlage fine e persistent", desc:"In bocca ha una bella acidità e morbidezza, equilibrata fino alla lunga chiusura", pairing:["aperitivo","pesce","antipasto"] },
+  { id:"ruinart-magnum", cat:"bollicine", subcat:"Selezione Champagne", name:"Ruinart \"Magnum\"", price:190, img:"images/ruinart-magnum.png", paese:"Francia", regione:"Champagne", gradazione:"12%", colore:"Giallo con brillanti riflessi dorati", desc:"Al palato è ricco e intenso, con un sorso profondo e persistente, che chiude su note fresche e sapide", pairing:["aperitivo","pesce","antipasto"] },
+  { id:"laurent-perrier", cat:"bollicine", subcat:"Selezione Champagne", name:"Laurent Perrier", price:75, img:"images/laurent-perrier.png", paese:"Francia", regione:"Champagne", gradazione:"12%", uve:"Chardonnay 55%, Pinot Nero 35%, Pinot Meunier 10%", colore:"Giallo dorato", desc:"L'assaggio è fragrante, armonioso ed equilibrato, di ottima lunghezza", pairing:["aperitivo","pesce","antipasto"] },
+  { id:"don-perignon", cat:"bollicine", subcat:"Selezione Champagne", name:"Don Perignon", price:280, img:"images/don-perignon.png", sigla:"Champagne AOC", paese:"Francia", regione:"Champagne", gradazione:"12,5%", uve:"Pinot Noir, Chardonnay", colore:"Giallo paglierino brillante con riflessi dorati", gusto:"Energico, potente, pieno e avvolgente, vellutato e cremoso, finale intenso e balsamico", desc:"Al palato rivela un impeccabile equilibrato, giocato tra la cremosa finezza delle bollicine, la rotondità del corpo, la minerale freschezza del terroir e la ricchezza del gusto", vinif:"Affinamento almeno 72 mesi sui lieviti", pairing:["aperitivo","pesce","antipasto"] },
+  { id:"vermentino-poggio-elmo", cat:"territorio", subcat:"Vini Bianchi del Territorio", name:"Vermentino RLP – Poggio dell' Elmo", price:28, img:"images/vermentino-poggio-elmo.png", sigla:"Vermentino DOC", paese:"Italia", regione:"Liguria", gradazione:"12,5%", uve:"100% Vermentino", colore:"Giallo paglierino con riflessi verdolini", desc:"Al naso si apre con un bouquet elegante e delicato: fiori di campo che evocano la natura incontaminata, note erbacee fresche e un accenno vivace di mela verde croccante. Al palato si distingue per una fresca acidità, che dona slancio e vivacità al sorso", vinif:"5 ore a contatto con le bucce con controllo della temperatura 5 mesi in acciaio", pairing:["pesce","aperitivo","pasta","antipasto"] },
+  { id:"vermentino-terre-bianche", cat:"territorio", subcat:"Vini Bianchi del Territorio", name:"Vermentino RLP – Terre Bianche", price:33, img:"images/vermentino-terre-bianche.png", paese:"Italia", regione:"Liguria", uve:"Vermentino", colore:"Giallo scarico con riflessi verde ramarro", gusto:"Sapore fresco e persistente, gradevolmente morbido e scorrevole, su una stoffa delicata e continua", desc:"Fiori bianchi e mare, un connubio ligure d'eccellenza in apertura, sapido ma gentile e piacevole al gusto. Ottimo per un aperitivo in riva al mare, magari con grigliata di pesce", vinif:"Ottenuto dalla pressatura soffice delle uve Vermentino e vinificato a temperatura controllata con lieviti selezionati e permanenza sulle fecce fini", pairing:["pesce","aperitivo","pasta","antipasto"] },
+  { id:"vermentino-foresti", cat:"territorio", subcat:"Vini Bianchi del Territorio", name:"Vermentino RLP – Foresti – 100% Vermentino", price:26, img:"images/vermentino-foresti.png", paese:"Italia", regione:"Liguria", gradazione:"12%", uve:"100% Vermentino", colore:"Colore giallo paglierino intenso con riflessi dorati", gusto:"Profumo intenso e persistente, fine ed elegante, con sentori di erbe e fiori freschi di campo", pairing:["pesce","aperitivo","pasta","antipasto"] },
+  { id:"pigato-soli-foresti", cat:"territorio", subcat:"Vini Bianchi del Territorio", name:"Pigato RLP – I Soli – Foresti", price:26, img:"images/pigato-foresti.png", paese:"Italia", regione:"Liguria", gradazione:"12%", uve:"100% Pigato", colore:"Giallo paglierino intenso con riflessi verdognoli", gusto:"Di buon corpo e continuità, con un caratteristico fondo amarognolo", desc:"Intenso e persistente, con sentori di pesca, miele, fiori e muschio", vinif:"Macerazione pellicolare a temperatura ambiente per circa 12 ore. Chiarifica a freddo del mosto con enzimi selezionati. Affinamento in vasche di acciaio inox per 5 mesi, di cui 3 \"sur lie\"", pairing:["pesce","aperitivo","pasta","antipasto"] },
+  { id:"pigato-nemu", cat:"territorio", subcat:"Vini Bianchi del Territorio", name:"Pigato RLP – Nemu", price:24, img:"images/pigato-nemu.png", paese:"Italia", regione:"Liguria", uve:"Pigato", colore:"Giallo paglierino, che può evolvere verso tonalità dorate con l'invecchiamento", gusto:"Moderata struttura e buona freschezza, di buona persistenza aromatica", desc:"Intenso e caratteristico, con note di macchia mediterranea e frutti a polpa gialla", pairing:["pesce","aperitivo","pasta","antipasto"] },
+  { id:"pigato-cygnus", cat:"territorio", subcat:"Vini Bianchi del Territorio", name:"Pigato RLP Cygnus – Poggio dei Gorleri", price:38, img:"images/pigato-cygnus-gorleri.png", gradazione:"13%", uve:"100% Pigato", colore:"Giallo paglierino luminoso", gusto:"Morbido, sapido, equilibrato e fresco, con una viva acidità che ne esalta la freschezza", desc:"Aromi intensi di frutta matura (nespola, mela), agrumi, camomilla, lavanda e una leggera nota minerale", vinif:"8 mesi in acciaio", pairing:["pesce","aperitivo","pasta","antipasto"] },
+  { id:"tabaka-ka-mancine", cat:"territorio", subcat:"Vini Bianchi del Territorio", name:"Tabaka (Tabaka e Vermentino) – Ka Mancine", price:30, img:"images/tabaka-ka-mancine.png", paese:"Italia", regione:"Liguria", uve:"Tabaka E Vermentino", desc:"Bianco ligure del territorio di Dolceacqua, blend di Tabaka e Vermentino", pairing:["pesce","aperitivo","pasta","antipasto"] },
+  { id:"flavia-foresti", cat:"territorio", subcat:"Vini Bianchi del Territorio", name:"Flavia (Vermentino e Pigato) – Foresti", price:34, img:"images/flavia-foresti.png", paese:"Italia", regione:"Liguria", uve:"Vermentino E Pigato", desc:"Blend di Vermentino e Pigato della cantina Foresti", pairing:["pesce","aperitivo","pasta","antipasto"] },
+  { id:"vermentino-trecoli-lombardi", cat:"territorio", subcat:"Vini Bianchi del Territorio", name:"Vermentino \"Treçoli\" – Lombardi", price:29, img:"images/vermentino-trecoli-lombardi.png", paese:"Italia", regione:"Liguria", uve:"Vermentino", colore:"Giallo paglierino con riflessi verdolini", gusto:"Secco, fresco e armonico, con piacevole sapidità", desc:"Profumo delicato e fruttato tipico del Vermentino ligure. Ottimo come aperitivo, con trofie al pesto, brandacujun e la cucina ligure in generale", vinif:"Dopo la fermentazione, batonnage sui lieviti nobili e affinamento in vasche d'acciaio per circa sei mesi", pairing:["pesce","aperitivo","pasta","antipasto"] },
+  { id:"rossese-poggi-elmo-2022", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua – Poggi dell' Elmo", price:32, img:"images/poggi-dellelmo-rossese-di-dolceacqua-2022.png", paese:"Italia", regione:"Liguria", gradazione:"13%", uve:"100% Rossese", colore:"Rosso rubino con riflessi violacei", gusto:"Fresco in bocca con sentori di ciliegia sotto spirito", desc:"Rosa canina, spezie che ricordano il pepe nero. Accompagna piatti tipici della cucina ligure, va servito ad un temperatura abbastanza fresca intorno ai 16°", vinif:"In acciaio con controllo della temperatura", pairing:["carne","formaggi","pasta"] },
+  { id:"rossese-pini-2022", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Superiore Pini – Poggi dell'Elmo", price:41, img:"images/rossese-pini-2022.png", paese:"Italia", regione:"Liguria", gradazione:"14,5%", uve:"100% Rossese", colore:"Rosso rubino con riflessi violacei", gusto:"Pieno, carnoso, fruttato in bocca", desc:"Note di ciliegia ben matura, mentuccia, speziato, balsamico e pepe nero. Accompagna formaggi piccanti, coniglio alla ligure, cinghiale e capra e fagioli", vinif:"15 giorni sulle bucce in acciaio con controllo della temperatura. Periodo di affinamento: 12 mesi in acciaio", pairing:["carne","formaggi"] },
+  { id:"rossese-cima-tramontina", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Cima Tramontina – Du Nemu", price:24, img:"images/rossese-cima-tramontina-2022.png", paese:"Italia", regione:"Liguria", gradazione:"12,5%", uve:"100% Rossese Di Dolceacqua", colore:"Rosso rubino tenue", gusto:"Asciutto, sapido, minerale, con tannini moderati e un finale amarognolo tipico del Rossese", desc:"Note di fragole di bosco, lamponi, nespole e pepe nero. Si sposa perfettamente con piatti tipici della cucina ligure", vinif:"Fermentazione in acciaio inox a temperatura controllata (28°C), macerazione di 4–6 giorni con rimontaggi e delestage, fermentazione malolattica e affinamento in acciaio inox", pairing:["carne","formaggi","pasta","antipasto"] },
+  { id:"rossese-superiore-nemu-2021", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Superiore – Du Nemu", price:34, img:"images/rossese-superiore-du-nemu-2021.png", paese:"Italia", regione:"Liguria", gradazione:"14%", uve:"100% Rossese Di Dolceacqua", colore:"Rosso rubino intenso", gusto:"Asciutto, sapido, minerale, con tannini eleganti e un finale lungo e amarognolo", desc:"Note di lamponi, ribes, fragoline di bosco e una piacevole sfumatura speziata.", pairing:["carne","formaggi"] },
+  { id:"rossese-foresti-2022", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua – Foresti", price:26, img:"images/foresti-rossese-di-dolceacqua-2022.png", paese:"Italia", regione:"Liguria", gradazione:"13%", uve:"100% Rossese Di Ventimiglia", colore:"Rosso rubino chiaro, che tende al granato con l'invecchiamento", gusto:"Asciutto, di medio corpo, con un piacevole retrogusto di mandorla e una buona persistenza", desc:"Aromi floreali di rosa e viola, con sentori fruttati.", vinif:"Affinamento: 5 mesi in vasche di acciaio inox", pairing:["carne","formaggi","pasta","antipasto"] },
+  { id:"rossese-luvaira-foresti", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Luvaira – Foresti", price:32, img:"images/rossese-luvaira-foresti-2021.png", paese:"Italia", regione:"Liguria", gradazione:"13%", uve:"100% Rossese Di Dolceacqua", colore:"Colore rosso rubino", gusto:"Buona acidità e freschezza, con tannini morbidi e retrogusto fruttato, con buona nota minerale", desc:"È prodotto con uve di un vigneto centenario coltivato su terreni scoscesi e ben esposti al sole", pairing:["carne","formaggi"] },
+  { id:"rossese-beragna-ka-mancine", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Beragna – Ka Mancine", price:32, img:"images/rossese-beragna-ka-mancine-2021.png", paese:"Italia", regione:"Liguria", gradazione:"13%", uve:"100% Rossese", colore:"Rubino brillante", gusto:"Di medio corpo, fresco e fragrante, con tannini delicati e un finale sapido", desc:"Eleganti note di pepe nero, frutta rossa matura e tabacco.", pairing:["carne","formaggi","pasta"] },
+  { id:"rossese-galeae-2022", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Galeae – Ka Mancine", price:36, img:"images/rossese-galeae-ka-mancine-2022.png", sigla:"DOC Rossese", paese:"Italia", regione:"Liguria", gradazione:"13,5%", uve:"100% Rossese", colore:"Rosso rubino intenso", gusto:"Secco, caldo, morbido, discretamente strutturato, con ottima persistenza e finale fresco e sapido", desc:"Aromi di melograno, pepe bianco e note speziate.", pairing:["carne","formaggi"] },
+  { id:"rossese-ange-2024", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Ange – Ka Mancine", price:44, img:"images/ka-mancine-rossese-di-dolceacqua-ange-2024.png", paese:"Italia", regione:"Liguria", gradazione:"13%", uve:"Rossese", colore:"Rosso rubino brillante, tipico dei Rossese, con riflessi violacei", gusto:"In bocca il vino si presenta elegante e bilanciato, con una buona struttura e freschezza", desc:"Il bouquet è complesso e ricco, con note di frutti rossi, spezie e una leggera sfumatura di erbe mediterranee", pairing:["carne","formaggi"] },
+  { id:"rossese-terre-bianche-2022", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua – Terre Bianche", price:35, img:"images/terre-bianche-rossese-di-dolceacqua-2022.png", paese:"Italia", regione:"Liguria", gradazione:"13,5%", uve:"100% Rossese", colore:"Rosso rubino con riflessi granati", gusto:"Al palato si presenta sapido, elegante, caldo e di buona freschezza, con una nota amarognola", desc:"Bouquet ampio e intenso con sentori di frutti rossi di bosco, ciliegia, rosa canina e spezie.", pairing:["carne","formaggi"] },
+  { id:"rossese-bricco-arcagna", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Bricco Arcagna – Terre Bianche", price:64, img:"images/rossese-bricco-arcagna-terre-bianche-2017.png", paese:"Italia", regione:"Liguria", gradazione:"13,5%", uve:"100% Rossese", colore:"Rosso rubino con riflessi granati", gusto:"Tannini setosi, sapidità equilibrata e finale leggermente amarognolo", desc:"Note di ciliegia sotto spirito, spezie dolci, incenso e un accenno balsamico.", pairing:["carne","formaggi"] },
+  { id:"rossese-testalonga", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Testalonga", price:56, img:"images/rossese-testalonga.png", paese:"Italia", regione:"Liguria", uve:"100% Rossese", colore:"Rosso chiaro, quasi trasparente", gusto:"Elegante e leggero, con tannini setosi e una vivace acidità. Il finale è lungo, con richiami salini", desc:"Note floreali di violetta e rosa, frutti rossi come ciliegia e ribes, con sfumature mediterranee di erbe aromatiche e spezie", pairing:["carne","formaggi"] },
+  { id:"roccese-masala", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Roccese – Masala", price:49, img:"images/roccese-masala.png", paese:"Italia", regione:"Liguria", gradazione:"13%", uve:"Uve Rossese E Altri Vitigni Autoctoni", colore:"Rosso rubino intenso", gusto:"Equilibrato, persistente, con una struttura che riflette il terroir roccioso", desc:"Note di erbe aromatiche come rosmarino, salvia e finocchio selvatico", pairing:["carne","formaggi"] },
+  { id:"roccese-barricato-masala", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Roccese Barricato – Masala", price:63, img:"images/roccese-barricato-masala.png", paese:"Italia", regione:"Liguria", uve:"Rossese E Altri Vitigni Autoctoni", colore:"Rosso rubino intenso, tendente al granato", gusto:"Ben equilibrato, ricco e strutturato, con tannini morbidi e una lunga persistenza", desc:"Intenso e complesso, con note di erbe aromatiche e officinali tipiche del territorio", pairing:["carne","formaggi"] },
+  { id:"rossese-dolceacqua-generic", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Doc Posaù", price:45, img:"images/rossese-di-dolceacqua.png", paese:"Italia", regione:"Liguria", gradazione:"14%", uve:"100% Rossese", colore:"Rosso rubino chiaro con riflessi violacei", gusto:"Fresco, con tannini morbidi e una buona acidità", desc:"Note di frutti rossi maturi, erbe aromatiche, sottobosco e una leggera mineralità", pairing:["carne","formaggi"] },
+  { id:"rossese-peverelli", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Superiore Peverelli – Luigi Mauro", price:39, img:"images/rossese-peverelli-luigi-mauro-2021.png", paese:"Italia", regione:"Liguria", gradazione:"13,5%", uve:"100% Rossese", colore:"Rosso rubino intenso e brillante", gusto:"Equilibrato, con una buona acidità che ne esalta la freschezza", desc:"Il bouquet olfattivo è fresco e complesso, con note floreali di petali di rosa e sentori di macchia mediterranea", pairing:["carne","formaggi"] },
+  { id:"roccese-du-nemu", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Roccese dolceacqua et rossa du nemu", price:24, img:"images/roccese-rossa-du-nemu.png", paese:"Italia", regione:"Liguria", gradazione:"12,5%", uve:"Rossese 100%", colore:"Rosso rubino leggero", gusto:"Tannico, asciutto e preciso, sapido, minerale sul finale", desc:"Al palato, si rivela vivace e armonioso, con tannini soffici e un finale lungo e memorabile", pairing:["carne","formaggi"] },
+  { id:"roccese-bucciardino", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Roccese dolceacqua bucciardino ka mancine", price:39, img:"images/roccese-bucciardino-ka-mancine-2023.png", paese:"Italia", regione:"Liguria", gradazione:"13%", uve:"Rossese", desc:"Persistente e di discreta struttura, risulta caldo, morbido, fine e con una buona sapidità", pairing:["carne","formaggi"] },
+  { id:"rossese-maccario-ringenberg", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di dolceacqua Maccario Dringenberg", price:37, img:"images/rossese-maccario-ringenberg-2021.png", sigla:"Rossese Di Dolceacqua DOC", paese:"Italia", regione:"Liguria", gradazione:"13,5%", uve:"100% Rossese", colore:"Rosso Rubino con riflessi violacei", gusto:"Fresco e piacevolmente fruttato", desc:"Al palato è di medio corpo, elegante e con una bella freschezza", pairing:["carne","formaggi","pasta"] },
+  { id:"rossese-fratelli-maccario", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua Fratelli Macario", price:45, img:"images/rossese-fratelli-maccario.png", paese:"Italia", regione:"Liguria", gradazione:"13,5%", uve:"Rossese 100%", colore:"Rosso rubino trasparente e luminoso", gusto:"Un corredo fruttato denso e deciso", desc:"Al palato, il Fratelli Maccario apre con note fruttate dolci e si sviluppa in un ricco ventaglio speziato.", pairing:["carne","formaggi"] },
+  { id:"rossese-curli", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese Curli", price:54, img:"images/rossese-curli.png", paese:"Italia", regione:"Liguria", gradazione:"14%", uve:"Rossese 100%", colore:"Rosso rubino", desc:"Sottobosco, bacche, frutti di bosco. Intenso, sapido, corposo", pairing:["carne","formaggi"] },
+  { id:"rossese-rosato-du-nemu", cat:"territorio", subcat:"Vini Rosati del Territorio", name:"Rossese di Dolceacqua Rosato – Du Nemu", price:21, img:"images/rossese-rosato-du-nemu.png", paese:"Italia", regione:"Liguria", uve:"100% Rossese", colore:"Rosa scarico", desc:"Il vino, fresco e fruttato ricorda le sensazioni varietali del vitigno da cui deriva, ciliegia, rosa, piccoli frutti rossi", vinif:"Le uve rosse di Rossese di Dolceacqua vinificate in bianco per esaltare le note fruttate e la freschezza del vino", pairing:["pesce","aperitivo","carne","antipasto"] },
+  { id:"rossese-rosato-ka-mancine", cat:"territorio", subcat:"Vini Rosati del Territorio", name:"Rossese di Dolceacqua Rosato – Ka Mancine", price:23, img:"images/rossese-rosato-ka-mancine.png", paese:"Italia", regione:"Liguria", gusto:"Finale dolce con una punta di amarognolo", desc:"Al palato risulta secco, caldo, morbido, discretamente strutturato con ottima la persistenza", pairing:["pesce","aperitivo","carne","antipasto"] },
+  { id:"rossese-rosato-poggi-elmo", cat:"territorio", subcat:"Vini Rosati del Territorio", name:"Rossese di Dolceacqua Rosato – Poggi dell' Elmo", price:21, img:"images/rossese-rosato-poggi-del-elmo.png", paese:"Italia", regione:"Liguria", colore:"Rosa tenue", gusto:"Delicato con profumi di rosa", desc:"Morbido e sapido", vinif:"Uva rossa vinificata in bianco, 12 ore di macerazione a contatto con le bucce", pairing:["pesce","aperitivo","carne","antipasto"] },
+  { id:"rosato-postu-da-ve-lombardi", cat:"territorio", subcat:"Vini Rosati del Territorio", name:"Rosato \"Postu da Vé\" – Lombardi", price:28, img:"images/rosato-postu-da-ve-lombardi.png", paese:"Italia", regione:"Liguria", uve:"80% Rossese, 20% Granaccia", colore:"Rosa cipria pallido", gusto:"Fresco, asciutto, sapido e mediamente strutturato", desc:"Di media intensità olfattiva, con sentori di piccoli frutti di bosco e accenni d'agrumi", vinif:"Vinificazione in bianco con batonnage, affinamento in vasche d'acciaio per quattro mesi con ripetuti batonnage", pairing:["pesce","aperitivo","carne","antipasto"] },
+  { id:"rossese-crespi", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua – Crespi", price:21, img:"images/crespi.png", paese:"Italia", regione:"Liguria", gradazione:"13%", colore:"Rosso rubino con riflessi violacei", gusto:"Asciutto, sapido, con tannini eleganti e una buona persistenza", desc:"Note di frutti rossi maturi, erbe mediterranee e una leggera sfumatura speziata. Un Rossese elegante e tipico del territorio di Dolceacqua.", vinif:"Fermentazione in acciaio con macerazione sulle bucce, affinamento in acciaio per alcuni mesi.", pairing:["carne","formaggi","pasta","antipasto"] },
+  { id:"roero-arneis-2023", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Roero Arneis Ero – Clavesana", price:23, img:"images/clavesana-roero-arneis-ero-2023.png", sigla:"Roero DOCG", paese:"Italia", regione:"Piemonte", gradazione:"13%", uve:"Arneis 100%", colore:"Giallo paglierino, con riflessi verdognoli", desc:"Al naso si esprime con sentori fruttati, note floreali e cenni vegetali. Al palato si rivela fresco, di piacevole sapidità ed equilibrato", pairing:["pesce","aperitivo","pasta","antipasto"] },
+  { id:"falanghina-2022", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Falanghina Beneventano – Vinosia", price:18, img:"images/vinosia-falanghina-beneventano-2022.png", sigla:"Falanghina IGT", gradazione:"12,5%", uve:"Falanghina", colore:"Giallo paglierino intenso", gusto:"Buon corpo, rotondo, con un sorso perfettamente equilibrato.", desc:"Note fruttate, anche esotici, sentori di banana, ananas, kiwi", pairing:["pesce","aperitivo","pasta","antipasto"] },
+  { id:"greco-di-tufo-vinosia", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Greco di Tufo – Vinosia", price:21, img:"images/greco-di-tufo-vinosia.png", paese:"Italia", regione:"Campania", uve:"100% Greco", desc:"Bianco campano fresco e minerale, tipico della zona di Tufo", pairing:["pesce","aperitivo","antipasto"] },
+  { id:"gewurztraminer-2022", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"A.A. Gewürztraminer – Muri-Gries", price:27, img:"images/aa-gewurztraminer-muri-gries-2022.png", paese:"Italia", regione:"Alto Adige", gradazione:"14,5%", uve:"100% Gewürztraminer", colore:"Giallo paglierino chiaro", gusto:"Struttura piena e accessibile, elegante, giovane e di piacevole beva, con un finale aromatico fine", desc:"Aromi eleganti di petali di rosa, garofano e una leggera nota affumicata", vinif:"Affinamento: Acciaio inox", pairing:["formaggi","aperitivo","antipasto"] },
+  { id:"soave-latium-2021", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Soave (Garganega 100%) – Latium", price:18, img:"images/soave-latium-2021.png", paese:"Italia", regione:"Veneto", uve:"Garganega 100%", colore:"Giallo paglierino intenso e luminoso", gusto:"Al palato morbido, intenso ed avvolgente con una piacevole acidità sul finale", desc:"Profumi fruttati tendenti al maturo, pesca gialla, accenni di mela cotogna e bergamotto", pairing:["pesce","aperitivo","pasta","antipasto"] },
+  { id:"sauvignon", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Sauvignon", price:21, img:"images/sauvignon.png", paese:"Italia", regione:"Friuli Venezia Giulia", gradazione:"12%", uve:"Sauvignon", colore:"Colore giallo paglierino luminoso", desc:"Al gusto si presenta aromatico, delicato, asciutto", pairing:["pesce","aperitivo","pasta","antipasto"] },
+  { id:"andaras", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Vermentino di Sardegna \"Andaras\"", price:27, img:"images/andaras.png", paese:"Italia", regione:"Sardegna", gradazione:"13%", uve:"100% Vermentino", colore:"Giallo paglierino con riflessi dorati", gusto:"Fresco e sapido, con una piacevole mineralità e un finale persistente", desc:"Aromi di macchia mediterranea, agrumi e fiori bianchi, tipici del Vermentino sardo.", vinif:"Fermentazione a temperatura controllata in acciaio inox, breve permanenza sui lieviti.", pairing:["pesce","aperitivo","pasta","antipasto"] },
+  { id:"chardonnay-kreuth-terlan", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Chardonnay \"Kreuth\" – Cantina Terlan", price:37, img:"images/chardonnay-kreuth-terlan.png", paese:"Italia", regione:"Alto Adige", gradazione:"14%", uve:"100% Chardonnay", colore:"Giallo paglierino scintillante e accattivante", gusto:"Accattivante, con una struttura flessibile e compatta; sentori speziati, minerali e succosi che conferiscono un forte carattere del terroir", desc:"Profumo di frutta esotica come maracuja e carambola, agrumi, con una nota di pietra focaia dai tratti aromatici e minerali", vinif:"Vendemmia e selezione manuale delle uve. Fermentazione lenta a temperatura controllata in botti di rovere grandi, affinamento di 10 mesi sui lieviti, metà in acciaio e metà in legno", pairing:["pesce","formaggi","pasta"] },
+  { id:"bardolino-chiaretto", cat:"rosati", subcat:"Selezione vini rosati nazionali", name:"Bardolino Chiaretto Classico – Negrar Domìni Veneti", price:16, img:"images/bardolino-chiaretto-classico-domini-veneti-2021.png", sigla:"DOC Bardolino", paese:"Italia", regione:"Veneto", gradazione:"12,5%", uve:"Corvina, Rondinella E Molinara", colore:"Rosato splendente", gusto:"Pieno ed equilibrato, fresco, ricorda fragoline di bosco e lamponi", desc:"Al naso il profumo è delicato di frutti rossi, rosa tea e violetta. Un vino che si abbina molto bene a pesce alla griglia, carni bianche, salumi freschi e formaggi molli", pairing:["pesce","aperitivo","carne","antipasto"] },
+  { id:"pallido-capecci", cat:"rosati", subcat:"Selezione vini rosati nazionali", name:"Pallido – Capecci", price:27, img:"images/pallido-capecci.png", paese:"Italia", regione:"Marche", gradazione:"12%", uve:"Montepulciano", pairing:["pesce","aperitivo","carne","antipasto"] },
+  { id:"roccese-rose-masala", cat:"rosati", subcat:"Selezione vini rosati nazionali", name:"Roccese Rosè – Masala", price:39, img:"images/roccese-rose-masala.png", paese:"Italia", regione:"Liguria", uve:"Rossese E Altri Vitigni Autoctoni", desc:"Rosato ligure della cantina Masala, dal territorio roccioso di Dolceacqua", available:false, pairing:["pesce","aperitivo","carne"] },
+  { id:"maixei_rose_rosse", cat:"rosati", subcat:"Selezione vini rosati nazionali", name:"Maixei \"Rosé Rosse\" Vino Rosato", price:24, img:"images/maixei-rose.png", paese:"Italia", regione:"Liguria", gradazione:"12.5%", uve:"Uve locali a bacca rossa", colore:"Rosa cerasuolo brillante", gusto:"Fresco, fruttato, con note di fragolina e melograno", desc:"Rosato ligure dal profilo aromatico elegante, con sentori di frutta rossa e fiori.", vinif:"Vinificazione in acciaio a temperatura controllata per preservare freschezza e aromi.", pairing:["pesce","aperitivo","carne","antipasto"] },
+  { id:"castel_des_maures", cat:"rosati", subcat:"Selezione vini rosati nazionali", name:"Château Castel des Maures Rosé – Côtes de Provence (Bio)", price:18, img:"images/castel-maures.png", paese:"Francia", regione:"Provence", gradazione:"13%", uve:"Grenache, Cinsault, Syrah", colore:"Rosa pallido provenzale", gusto:"Elegante, secco, con note di pesca bianca, agrumi e fiori", desc:"Rosé biologico della Provenza, fine e aromatico, perfetto per piatti di pesce e aperitivi.", vinif:"Vinificazione biologica con fermentazione a bassa temperatura per esaltare freschezza e profumi.", pairing:["pesce","aperitivo","carne","antipasto"] },
+  { id:"barbaresco-biologico", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Barbaresco Biologico – Nada", price:59, img:"images/barbaresco-biologico-nada-2019.png", paese:"Italia", regione:"Piemonte", gradazione:"14%", uve:"100% Nebbiolo", colore:"Rosso granato brillante", gusto:"Elegante, sapido, con tannini levigati e una lunga persistenza", desc:"Intensi sentori floreali, con note di frutti rossi e spezie.", vinif:"Affinamento: 24 mesi in botti di rovere, seguito da 6 mesi in bottiglia", pairing:["carne","pasta"] },
+  { id:"barbera-pio-cesare", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Barbera d'Alba – Pio Cesare", price:32, img:"images/barbera-dalba-pio-cesare-2019.png", paese:"Italia", regione:"Piemonte", gradazione:"14,5%", uve:"Barbera Al 100%", colore:"Rosso rubino intenso con riflessi violacei", gusto:"Pieno e corposo, con una piacevole freschezza e tannini morbidi; finale persistente e armonioso", desc:"Bouquet complesso con note di frutti rossi maturi (ciliegie, prugne), sentori floreali (viola) e speziati (pepe nero).", pairing:["carne","formaggi","pasta"] },
+  { id:"barbera-clavesana", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Barbera d'Alba – Clavesana", price:24, img:"images/barbera-dalba-clavesana-2019.png", paese:"Italia", regione:"Piemonte", gradazione:"14,5%", uve:"100% Barbera", colore:"Rosso rubino intenso", gusto:"Morbido, elegante, con una piacevole acidità e un finale persistente", desc:"Note di frutta rossa (ciliegia, prugna) e spezie.", pairing:["carne","formaggi","pasta"] },
+  { id:"barolo-palladino", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Barolo Serralunga – Palladino", price:64, img:"images/barolo-serralunga-palladino-2019.png", paese:"Italia", regione:"Piemonte", gradazione:"14,5%", uve:"Nebbiolo 100%", colore:"Rosso rubino con riflessi granata", gusto:"Morbido, strutturato, con tannini ben integrati e una lunga persistenza", desc:"Note di frutti rossi maturi, spezie, liquirizia e una leggera nota floreale.", vinif:"Affinamento: 24 mesi in grandi botti di rovere, seguito da 6 mesi in cemento", pairing:["carne","pasta"] },
+  { id:"dolcetto-palladino", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Dolcetto d'Alba – Palladino", price:24, img:"images/dolcetto-dalba-palladino-2022.png", paese:"Italia", regione:"Piemonte", gradazione:"13%", uve:"100% Dolcetto", colore:"Rosso rubino intenso", gusto:"Asciutto, armonico, equilibrato, con tannini fini e finale fresco", desc:"Fruttato, con note di lampone, prugna e violette.", pairing:["carne","formaggi","pasta"] },
+  { id:"nebbiolo-clavesana", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Nebbiolo d'Alba Nhe – Clavesana", price:24, img:"images/nebbiolo-dalba-nhe-clavesana-2021.png", paese:"Italia", regione:"Piemonte", gradazione:"14%", uve:"100% Nebbiolo", colore:"Rosso rubino con riflessi granata", gusto:"Morbido, con tannini ben integrati e una persistenza piacevole", desc:"Sentori di frutti rossi sotto spirito, note speziate e toni eterei.", pairing:["carne","formaggi","pasta"] },
+  { id:"amarone-latium", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Amarone della Valpolicella Campo Leòn – Latium", price:92, img:"images/amarone-della-valpolicella-campo-leon-latium-2017.png", sigla:"DOCG", paese:"Italia", regione:"Veneto", uve:"Selezione Di Vitigni Tipici Della Valpolicella", colore:"Rosso granato intenso con riflessi rubino", gusto:"Gusto corposo, vellutato, con tannini maturi e ben integrati", desc:"Profumo ricco e complesso, con sentori di ciliegia sotto spirito, prugna matura, liquirizia, vaniglia, tabacco e spezie dolci.", vinif:"Le uve vengono sottoposte al tradizionale processo di appassimento, durante il quale perdono circa il 40% del loro peso", pairing:["carne","formaggi","pasta"] },
+  { id:"bellaja-bolgheri", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Bell'Aja Bolgheri – San Felice", price:44, img:"images/bellaja-bolgheri-san-felice-2021.png", sigla:"DOC", paese:"Italia", regione:"Toscana", uve:"90% Merlot, 10% Cabernet Sauvignon", colore:"Rosso rubino intenso con riflessi granati", gusto:"Strutturato e armonioso, con tannini levigati e una vivace acidità", desc:"Profumi di ciliegia matura, prugna, liquirizia, cioccolato fondente e spezie dolci.", pairing:["carne","formaggi"] },
+  { id:"brunello-campogiovanni", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Brunello di Montalcino Campogiovanni – San Felice", price:80, img:"images/brunello-campogiovanni-san-felice-2016.png", paese:"Italia", regione:"Toscana", uve:"100% Brunello", colore:"Rosso rubino profondo", gusto:"Strutturato e avvolgente, con tannini morbidi e una persistenza dolce e speziata", desc:"Ciliegia matura, cuoio, tabacco dolce, erbe mediterranee, liquirizia e spezie.", pairing:["carne","pasta"] },
+  { id:"chianti-classico-grigio", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Chianti Classico Riserva il Grigio da San Felice – San Felice", price:33, img:"images/hianti-classico-riserva-grigio-2018.png", paese:"Italia", regione:"Toscana", gradazione:"13,5%", uve:"100% Sangiovese", colore:"Rosso rubino profondo", gusto:"Corposo e austero, con tannini succosi e una fresca acidità", desc:"Aroma intenso e persistente, con note di viola mammola e frutti di bosco.", pairing:["carne","formaggi","pasta"] },
+  { id:"chianti-classico-berardenga", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Chianti Classico – Berardenga", price:33, img:"images/chianti-classico-berardenga.png", sigla:"DOCG", paese:"Italia", regione:"Toscana", uve:"Sangiovese", desc:"Chianti Classico della cantina Berardenga", pairing:["carne","formaggi","pasta"] },
+  { id:"le-volte-ornellaia", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Le Volte dell'Ornellaia – Tenuta dell'Ornellaia", price:43, img:"images/le-volte-dellornellaia-2021.png", sigla:"IGT Toscana", paese:"Italia", regione:"Toscana", gradazione:"13,5%", uve:"70% Merlot, 15% Sangiovese, 15% Cabernet Sauvignon", colore:"Rosso rubino intenso, con riflessi violacei", gusto:"Equilibrato e rotondo: tannini morbidi ma presenti", desc:"Note fruttate di ciliegia matura, mora, ribes nero.", pairing:["carne","formaggi","pasta"] },
+  { id:"rosso-montalcino-casanova", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Rosso di Montalcino – Casanova di Neri", price:45, img:"images/rosso-montalcino-casanova-neri-2021.png", paese:"Italia", regione:"Toscana", gradazione:"14,5%", uve:"100% Sangiovese", colore:"Rosso intenso e vivace", gusto:"Rotondo e generoso, con tannini morbidi e vellutati", desc:"Note intriganti di frutta rossa scura, in particolare ciliegie e mirtilli, con sfumature speziate e floreali", pairing:["carne","formaggi"] },
+  { id:"rosso-montalcino-scopone", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Rosso di Montalcino – Scopone", price:33, img:"images/rosso-montalcino-scopone.png", paese:"Italia", regione:"Toscana", uve:"100% Sangiovese", desc:"Rosso di Montalcino della cantina Scopone", pairing:["carne","formaggi"] },
+  { id:"nobile-montepulciano-barbicaia", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Nobile di Montepulciano – Barbicaia", price:40, img:"images/nobile-montepulciano-barbicaia.png", sigla:"DOCG", paese:"Italia", regione:"Toscana", uve:"Sangiovese (Prugnolo Gentile)", desc:"Vino Nobile di Montepulciano della cantina Barbicaia", pairing:["carne","formaggi"] },
+  { id:"i-tirreni-bolgheri-hydra", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"I Tirreni Bolgheri – Hydra", price:43, img:"images/i-tirreni-bolgheri-hydra.png", sigla:"DOC Bolgheri", paese:"Italia", regione:"Toscana", desc:"Bolgheri \"Hydra\" della cantina I Tirreni", pairing:["carne","formaggi"] },
+  { id:"rosso-montepulciano-sabazio", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Rosso di Montepulciano Sabazio – La Braccesca", price:21, img:"images/rosso-montepulciano-sabazio-2021.png", paese:"Italia", regione:"Toscana", gradazione:"14%", uve:"Sangiovese E Merlot", colore:"Rosso rubino brillante", gusto:"Morbido e fresco, con tannini vellutati e un finale sapido", desc:"Note fruttate di amarena, lampone, fragola e ciliegia, con accenni floreali e balsamici", pairing:["carne","formaggi","pasta"] },
+  { id:"ruit-hora-bolgheri", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Ruit Hora Bolgheri – Caccia al Piano", price:63, img:"images/ruit-hora-bolgheri-caccia-al-piano-2020.png", gradazione:"14%", uve:"60% Merlot, 30% Cabernet Sauvignon, 5% Petit Verdot, 5% Syrah", colore:"Rosso rubino intenso e brillante", gusto:"Tannini setosi, struttura equilibrata e un finale persistente con sentori fruttati", desc:"Note di ciliegie mature, petali di rosa e un accenno di spezie.", pairing:["carne","formaggi","pasta"] },
+  { id:"promis-ca-marcanda-gaja-2023", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Promis – Ca' Marcanda Gaja", price:45, img:"images/promis-ca-marcanda-gaja-2023.png", sigla:"Toscana IGT", paese:"Italia", regione:"Toscana", uve:"55% Merlot, 35% Syrah, 10% Sangiovese", colore:"Rosso rubino brillante e intenso", gusto:"Caldo e corposo, avvolgente, con freschezza e tannino ben presenti; finale lungo e persistente", desc:"Frutta rossa matura e drupe a polpa scura, con sentori tostati, speziati, liquirizia e goudron. Firmato dalla famiglia Gaja nella tenuta di Bolgheri", vinif:"Affinamento in barrique per circa 12 mesi", pairing:["carne","formaggi","pasta"] },
+  { id:"grottaia-caccia-al-piano-2023", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Grottaia – Caccia al Piano 1868", price:34, img:"images/grottaia-caccia-al-piano-2023.png", sigla:"Toscana IGT", paese:"Italia", regione:"Toscana", gradazione:"13,5%", uve:"50% Cabernet Sauvignon, 50% Merlot", colore:"Rosso rubino brillante", gusto:"Fresco e accattivante, di pronta beva, con un leggero tannino giovane", desc:"Profumi freschi di frutti rossi e violetta. Vinificato dai vigneti più giovani della tenuta nella Costa Toscana, vicino a Bolgheri", vinif:"Macerazione e fermentazione a temperatura controllata in vasche d'acciaio; affinamento esclusivamente in acciaio", pairing:["carne","formaggi"] },
+  { id:"tignanello-antinori", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Tignanello – Marchesi Antinori", price:170, img:"images/tignanello-antinori-2016.png", gradazione:"14%", uve:"80% Sangiovese, 15% Cabernet Sauvignon, 5% Cabernet Franc", colore:"Rosso rubino intenso con riflessi porpora", gusto:"Vibrante, con tannini setosi e raffinati. Equilibrato e intenso, con un finale lungo", desc:"Note di frutta rossa matura, mora fresca e frutti di bosco, con aromi di vaniglia, cioccolato amaro e leggere spezie", vinif:"Affinato per circa 14–16 mesi in barrique", pairing:["carne","pasta"] },
+  { id:"montepulciano-abruzzo", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Montepulciano d'Abruzzo – Masciarelli", price:19, img:"images/montepulciano-abruzzo-masciarelli-2020.png", sigla:"DOC Montepulciano", paese:"Italia", regione:"Abruzzo", gradazione:"13,5%", uve:"100% Montepulciano", colore:"Rosso rubino intenso", gusto:"Corposo e succoso, con sapori di frutti rossi maturi, ciliegie e prugne", desc:"Note complesse di ciliegie nere mature, prugne, violette e un accenno di tabacco", pairing:["carne","formaggi","pasta"] },
+  { id:"aglianico-neromora", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Aglianico Neromora – Vinosia", price:21, img:"images/aglianico-neromora-vinosia-2019.png", paese:"Italia", regione:"Campania", gradazione:"13,5%", uve:"100% Aglianico", colore:"Rosso rubino intenso, con riflessi violacei quando è giovane", gusto:"In bocca è secco, avvolgente, con tannini ben integrati e un finale persistente", desc:"Un vino elegante ma ancora profondamente territoriale.", pairing:["carne","formaggi"] },
+  { id:"mora-aglianico-campania", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"\"Mora\" – Aglianico Campania IGP", price:21, img:"images/mora-aglianico-campania.png", paese:"Italia", regione:"Campania", uve:"100% Aglianico", colore:"Rosso rubino intenso", gusto:"Asciutto, caldo, armonico e ben tannico, di buon corpo", desc:"Profumo fragrante con sentori di mora, amarena e frutti di bosco, accompagnati da note speziate e minerali", vinif:"Fermentazione e affinamento in vasche di acciaio inox", pairing:["carne","formaggi"] },
+  { id:"primitivo-salento", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Primitivo Salento Orus – Vinosia", price:18, img:"images/primitivo-salento-orus-vinosia-2022.png", sigla:"Salento IGT", paese:"Italia", regione:"Puglia", gradazione:"13,5%", uve:"100% Primitivo", colore:"Rosso rubino profondo con riflessi violacei", gusto:"Vellutato e concentrato, con tannini morbidi e una buona acidità che conferisce equilibrio", desc:"Intenso e fruttato, con note di amarene, more, mirtilli e un accenno di liquirizia", pairing:["carne","formaggi"] },
+  { id:"nero-davola", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Nero d'Avola – Musita", price:22, img:"images/nero-davola-musita-2022.png", paese:"Italia", regione:"Sicilia", gradazione:"14%", uve:"Nero D'Avola Al 100%", colore:"Colore rosso rubino carico", gusto:"Al palato, si distingue per l'eleganza e l'armonia dei tannini", desc:"Il Musita Nero d'Avola 2022 presenta un colore rosso rubino carico e un bouquet olfattivo che richiama note di ciliegia e marasca", pairing:["carne","formaggi"] },
+  { id:"brunello-poggio-oro", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Brunello di Montalcino \"Poggio all' Oro\"", price:180, img:"images/brunello-poggio-alloro-2007.png", paese:"Italia", regione:"Toscana", gradazione:"15%", uve:"Sangiovese 100%", colore:"Rosso rubino intenso", desc:"Sapore: pieno, austero, vellutato e giustamente tannico", vinif:"La macerazione si svolge a temperatura controllata per 12-14 giorni. Maturato in barriques 2 anni e mezzo, si affina in bottiglia per almeno 12-18 mesi", pairing:["carne","pasta"] },
+  { id:"5050-avignonesi", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"50 & 50 – Capannelle Avignonesi", price:170, img:"images/50-50-capannelle-avignonesi-2015.png", sigla:"Toscana IGT 50 & 50 Avignones", paese:"Italia", regione:"Toscana", gradazione:"13,5%", uve:"Merlot 50%, Sangiovese 50%", desc:"Questo vino racchiude l'anima di due tra le più antiche e rinomate aree vitivinicole della Toscana", vinif:"AFFINAMENTO: Barrique", pairing:["carne","formaggi","pasta"] },
+  { id:"lambrusco-ambasciatori", cat:"rossi", subcat:"Vini Frizzanti", name:"Ambasciatori Lambrusco Emilia IGT Amabile", price:18, img:"images/lambrusco-sierra.png", sigla:"IGT Emilia", paese:"Italia", regione:"Emilia-Romagna", gradazione:"8%", uve:"Lambrusco", colore:"Rosso rubino brillante con spuma rosata", gusto:"Amabile, morbido, fruttato con piacevole freschezza", desc:"Un Lambrusco frizzante vivace con note di ciliegia, mora e piccoli frutti rossi. La leggera dolcezza lo rende ideale come aperitivo o abbinato a salumi, formaggi emiliani, pizza e dessert leggeri", pairing:["aperitivo","formaggi","dolci"] },
+  { id:"barbera-asti-la-villa", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Barbera d'Asti \"La Villa\" - Tenuta Olim Bauda", price:27, img:"images/barbera-asti-la-villa.png", paese:"Italia", regione:"Piemonte", gradazione:"14,5%", uve:"100% Barbera", colore:"Rosso rubino intenso con riflessi violacei", gusto:"Pieno e corposo, con tannini morbidi e una piacevole freschezza", desc:"Note di frutta rossa matura, una leggera speziatura e un finale persistente, tipico della Barbera d'Asti.", vinif:"Fermentazione in acciaio inox, seguita da un affinamento in acciaio per alcuni mesi.", pairing:["carne","formaggi","pasta"] },
+  { id:"dogliani-terra", cat:"rossi", subcat:"Selezione vini Rossi Nazionali", name:"Dogliani \"Terra\" - Produttori in Clavesana", price:24, img:"images/dogliani-terra.png", paese:"Italia", regione:"Piemonte", gradazione:"13,5%", uve:"100% Dolcetto", colore:"Rosso rubino intenso con riflessi violacei", gusto:"Asciutto, armonico, con tannini morbidi e una buona freschezza", desc:"Aromi di frutti rossi maturi e una leggera nota floreale, tipici del Dolcetto di Dogliani.", vinif:"Fermentazione e affinamento in acciaio inox, senza passaggi in legno.", pairing:["carne","formaggi","pasta"] },
+  { id:"vermentino-masala", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Vermentino – Masala", price:48, img:"images/vermentino-masala.png", paese:"Italia", regione:"Liguria", uve:"Vermentino", desc:"Vermentino della cantina Masala", available:false, pairing:["pesce","aperitivo"] },
 ];
 
 // ── CATEGORIES CONFIG ─────────────────────────────────────────
@@ -872,6 +1108,154 @@ const CATS = [
 let openCats = new Set();
 let searchQ = '';
 let sortMode = 'default'; // 'default' | 'asc' | 'desc'
+let activePairing = null;
+let activeDish = null; // dish id
+
+// ── DISH PAIRINGS DATA ────────────────────────────────────────
+const DISH_PAIRINGS = {
+  // ANTIPASTI
+  antipasto_tipico:{ label:'Antipasto Tipico del Lago Bin', cat:'antipasti', icon:'🥗',
+    wines:['prosecco-valdobbiadene','prosecco-rose','bollicine-lago','bolle-lago','vermentino-poggio-elmo','vermentino-foresti','lago-bianco'] },
+  salumiere:{ label:'Assortimento del Salumiere', cat:'antipasti', icon:'🥗',
+    wines:['prosecco-valdobbiadene','barbera-clavesana','dolcetto-palladino','rossese-foresti-2022','rossese-cima-tramontina','vermentino-foresti','dogliani-terra'] },
+  prosciutto:{ label:'Prosciutto di Parma', cat:'antipasti', icon:'🥗',
+    wines:['prosecco-valdobbiadene','prosecco-rose','vermentino-poggio-elmo','vermentino-foresti','lago-bianco','bolle-lago'] },
+  lumache:{ label:'Lumache in Umido', cat:'antipasti', icon:'🥗',
+    wines:['rossese-foresti-2022','rossese-cima-tramontina','rossese-poggi-elmo-2022','barbera-clavesana','rossese-crespi','rossese-beragna-ka-mancine'] },
+  brandacujan:{ label:'Brandacujan', cat:'antipasti', icon:'🥗',
+    wines:['vermentino-poggio-elmo','vermentino-terre-bianche','vermentino-foresti','pigato-soli-foresti','pigato-nemu','tabaka-ka-mancine','vermentino-trecoli-lombardi','pigato-cygnus'] },
+  tartare_manzo:{ label:'Tartare di Manzo al Coltello', cat:'antipasti', icon:'🥗',
+    wines:['barbera-pio-cesare','barbera-clavesana','dolcetto-palladino','nebbiolo-clavesana','rossese-galeae-2022','chianti-classico-grigio','rossese-ange-2024'] },
+  tomino:{ label:'Tomino d\'Alpeggio Caldo', cat:'antipasti', icon:'🥗',
+    wines:['gewurztraminer-2022','barbera-clavesana','dolcetto-palladino','rossese-foresti-2022','prosecco-valdobbiadene','rossese-crespi'] },
+  tartare_pesce:{ label:'Tartare di Pesce', cat:'antipasti', icon:'🥗',
+    wines:['vermentino-poggio-elmo','vermentino-terre-bianche','pigato-soli-foresti','sauvignon','prosecco-valdobbiadene','chardonnay-kreuth-terlan','pigato-cygnus'] },
+  antipasto_mare:{ label:'Antipasto Misto di Mare', cat:'antipasti', icon:'🥗',
+    wines:['prosecco-valdobbiadene','vermentino-poggio-elmo','vermentino-terre-bianche','pigato-soli-foresti','pigato-cygnus','sauvignon','andaras'] },
+
+  // PRIMI
+  ravioli_pomodoro:{ label:'Ravioli della Nonna (Pomodoro / Burro e Salvia)', cat:'primi', icon:'🍝',
+    wines:['vermentino-foresti','barbera-clavesana','dolcetto-palladino','rossese-foresti-2022','rossese-cima-tramontina','lago-bianco','dogliani-terra'] },
+  ravioli_coniglio:{ label:'Ravioli al Coniglio', cat:'primi', icon:'🍝',
+    wines:['rossese-foresti-2022','rossese-poggi-elmo-2022','rossese-cima-tramontina','rossese-beragna-ka-mancine','barbera-clavesana','dolcetto-palladino','nebbiolo-clavesana'] },
+  tagliatelle_selvaggina:{ label:'Tagliatelle alla Selvaggina', cat:'primi', icon:'🍝',
+    wines:['barolo-palladino','barbaresco-biologico','brunello-campogiovanni','amarone-latium','tignanello-antinori','rossese-pini-2022','rossese-superiore-nemu-2021','brunello-poggio-oro'] },
+  tagliatelle_funghi:{ label:'Tagliatelle ai Funghi', cat:'primi', icon:'🍝',
+    wines:['barbera-pio-cesare','barbera-clavesana','dolcetto-palladino','nebbiolo-clavesana','rossese-galeae-2022','chianti-classico-grigio','barbera-asti-la-villa','dogliani-terra'] },
+  tagliatelle_pesto:{ label:'Tagliatelle al Pesto Fresco', cat:'primi', icon:'🍝',
+    wines:['vermentino-poggio-elmo','vermentino-terre-bianche','pigato-soli-foresti','pigato-cygnus','tabaka-ka-mancine','vermentino-trecoli-lombardi','pigato-nemu','flavia-foresti'] },
+  tagliatelle_mare:{ label:'Tagliatelle ai Frutti di Mare', cat:'primi', icon:'🍝',
+    wines:['vermentino-poggio-elmo','vermentino-terre-bianche','pigato-soli-foresti','sauvignon','soave-latium-2021','chardonnay-kreuth-terlan','andaras','pigato-cygnus'] },
+  mezzelune:{ label:'Mezzelune di Magro al Burro e Salvia / Noci', cat:'primi', icon:'🍝',
+    wines:['gewurztraminer-2022','chardonnay-kreuth-terlan','vermentino-terre-bianche','pigato-cygnus','falanghina-2022','soave-latium-2021'] },
+  troffie_pesto:{ label:'Troffie al Pesto Fresco / Primavera', cat:'primi', icon:'🍝',
+    wines:['vermentino-poggio-elmo','vermentino-terre-bianche','vermentino-foresti','pigato-soli-foresti','pigato-nemu','tabaka-ka-mancine','vermentino-trecoli-lombardi','flavia-foresti','pigato-cygnus'] },
+  troffie_gamberetti:{ label:'Troffie con Gamberetti e Zucchine', cat:'primi', icon:'🍝',
+    wines:['vermentino-poggio-elmo','vermentino-terre-bianche','pigato-soli-foresti','sauvignon','prosecco-valdobbiadene','pigato-cygnus','andaras'] },
+  gnocchi_funghi:{ label:'Gnocchi ai Funghi', cat:'primi', icon:'🍝',
+    wines:['barbera-clavesana','dolcetto-palladino','nebbiolo-clavesana','rossese-foresti-2022','barbera-asti-la-villa','dogliani-terra','rossese-cima-tramontina'] },
+  gnocchi_formaggi:{ label:'Gnocchi ai Formaggi con Gorgonzola', cat:'primi', icon:'🍝',
+    wines:['gewurztraminer-2022','barbera-clavesana','dolcetto-palladino','barbera-pio-cesare','amarone-latium','barbera-asti-la-villa'] },
+  risotto_mare:{ label:'Risotto ai Frutti di Mare', cat:'primi', icon:'🍝',
+    wines:['vermentino-terre-bianche','pigato-cygnus','chardonnay-kreuth-terlan','soave-latium-2021','andaras','sauvignon','pigato-soli-foresti'] },
+
+  // SECONDI
+  coniglio:{ label:'Coniglio alla Rocchettina', cat:'secondi', icon:'🥩',
+    wines:['rossese-foresti-2022','rossese-poggi-elmo-2022','rossese-cima-tramontina','rossese-beragna-ka-mancine','barbera-clavesana','dolcetto-palladino','rossese-crespi','rossese-maccario-ringenberg'] },
+  selvaggina:{ label:'Selvaggina al Vino Rosso', cat:'secondi', icon:'🥩',
+    wines:['barolo-palladino','barbaresco-biologico','brunello-campogiovanni','amarone-latium','tignanello-antinori','rossese-pini-2022','rossese-superiore-nemu-2021','brunello-poggio-oro','5050-avignonesi'] },
+  agnello:{ label:'Costine di Agnello alla Griglia', cat:'secondi', icon:'🥩',
+    wines:['barolo-palladino','barbaresco-biologico','rossese-pini-2022','nebbiolo-clavesana','rossese-galeae-2022','aglianico-neromora','mora-aglianico-campania','rossese-ange-2024'] },
+  grigliata_carne:{ label:'Grigliata Mista di Carne', cat:'secondi', icon:'🥩',
+    wines:['barolo-palladino','barbera-pio-cesare','rossese-pini-2022','rossese-galeae-2022','rossese-ange-2024','amarone-latium','chianti-classico-grigio','montepulciano-abruzzo','primitivo-salento'] },
+  roastbeef:{ label:'Roast Beef', cat:'secondi', icon:'🥩',
+    wines:['barolo-palladino','barbaresco-biologico','chianti-classico-grigio','chianti-classico-berardenga','tignanello-antinori','le-volte-ornellaia','rosso-montalcino-casanova','rosso-montalcino-scopone'] },
+  filetto:{ label:'Filetto di Manzo', cat:'secondi', icon:'🥩',
+    wines:['barolo-palladino','brunello-campogiovanni','barbaresco-biologico','tignanello-antinori','amarone-latium','brunello-poggio-oro','5050-avignonesi','ruit-hora-bolgheri','promis-ca-marcanda-gaja-2023'] },
+  pescato:{ label:'Pescato / Gamberoni', cat:'secondi', icon:'🥩',
+    wines:['vermentino-terre-bianche','pigato-cygnus','vermentino-poggio-elmo','pigato-soli-foresti','chardonnay-kreuth-terlan','soave-latium-2021','sauvignon','andaras'] },
+  grigliata_pesce:{ label:'Grigliata Mista di Pesce', cat:'secondi', icon:'🥩',
+    wines:['vermentino-terre-bianche','pigato-cygnus','vermentino-poggio-elmo','sauvignon','chardonnay-kreuth-terlan','andaras','soave-latium-2021','tabaka-ka-mancine'] },
+};
+
+let activeDishCat = 'antipasti';
+
+function openDishModal() {
+  setDishCat(activeDishCat, document.querySelector('.dish-cat-tab'));
+  document.getElementById('dishOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDishModal() {
+  document.getElementById('dishOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeDishModalOutside(e) {
+  if (e.target === document.getElementById('dishOverlay')) closeDishModal();
+}
+
+function setDishCat(cat, el) {
+  activeDishCat = cat;
+  document.querySelectorAll('.dish-cat-tab').forEach(t => t.classList.remove('active'));
+  // find and activate clicked tab
+  document.querySelectorAll('.dish-cat-tab').forEach(t => {
+    if (t.getAttribute('onclick').includes("'" + cat + "'")) t.classList.add('active');
+  });
+  const list = document.getElementById('dishList');
+  const dishes = Object.entries(DISH_PAIRINGS).filter(([,d]) => d.cat === cat);
+  list.innerHTML = dishes.map(([id, d]) => `
+    <button class="dish-btn${activeDish===id?' active':''}" onclick="selectDish('${id}')">
+      <span>${d.label}</span>
+      <span class="dish-btn-wines">${d.wines.length} vini</span>
+    </button>`).join('');
+}
+
+function selectDish(id) {
+  activeDish = activeDish === id ? null : id;
+  // clear chip filter
+  activePairing = null;
+  document.querySelectorAll('.pairing-chip').forEach(b => b.classList.remove('active'));
+  closeDishModal();
+  updateDishBar();
+  renderAll();
+}
+
+function clearDish() {
+  activeDish = null;
+  activePairing = null;
+  document.querySelectorAll('.pairing-chip').forEach(b => b.classList.remove('active'));
+  updateDishBar();
+  renderAll();
+}
+
+function updateDishBar() {
+  const btn = document.getElementById('dishOpenBtn');
+  const label = document.getElementById('dishBtnLabel');
+  const clearBtn = document.getElementById('dishClearBtn');
+  if (activeDish) {
+    btn.classList.add('active');
+    label.textContent = DISH_PAIRINGS[activeDish].label;
+    clearBtn.classList.add('visible');
+  } else {
+    btn.classList.remove('active');
+    label.textContent = 'Abbina al tuo piatto';
+    clearBtn.classList.remove('visible');
+  }
+}
+
+function togglePairing(pair) {
+  // clear dish filter if chip selected
+  if (activeDish) {
+    activeDish = null;
+    updateDishBar();
+  }
+  activePairing = activePairing === pair ? null : pair;
+  document.querySelectorAll('.pairing-chip').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.pair === activePairing);
+  });
+  renderAll();
+}
 
 function cycleSort() {
   sortMode = sortMode === 'default' ? 'asc' : sortMode === 'asc' ? 'desc' : 'default';
@@ -893,19 +1277,42 @@ function sortWines(arr) {
 }
 
 // ── RENDER ────────────────────────────────────────────────────
+function matchesPairing(w) {
+  if (activeDish) {
+    const dishWines = DISH_PAIRINGS[activeDish]?.wines || [];
+    return dishWines.includes(w.id);
+  }
+  if (activePairing) {
+    return (w.pairing || []).includes(activePairing);
+  }
+  return true;
+}
+
 function renderAll() {
   const main = document.getElementById('mainContent');
   const isSearch = searchQ.trim().length > 0;
+  const isFlatMode = isSearch || activeDish || activePairing;
 
-  if (isSearch) {
-    const results = sortWines(getFilteredWines());
+  if (isFlatMode) {
+    let results = getFilteredWines().filter(matchesPairing);
+    if (activeDish) {
+      const order = DISH_PAIRINGS[activeDish].wines;
+      results = results.sort((a,b) => order.indexOf(a.id) - order.indexOf(b.id));
+    } else {
+      results = sortWines(results);
+    }
     if (results.length === 0) {
       main.innerHTML = `<div class="no-results"><p>Nessun vino trovato</p></div>`;
       return;
     }
+    const chipLabels = { antipasto:'🥗 Antipasto', pasta:'🍝 Pasta', carne:'🥩 Carne', pesce:'🐟 Pesce', aperitivo:'🍸 Aperitivo' };
+    const headerLabel = activeDish
+      ? `🍽️ ${DISH_PAIRINGS[activeDish].label}`
+      : isSearch ? '🔍 Risultati ricerca'
+      : chipLabels[activePairing] || '✦ Risultati';
     let html = `<div class="search-box">
       <div class="search-box-header">
-        <span>🔍 Risultati ricerca</span>
+        <span>${headerLabel}</span>
         <span class="search-box-count">${results.length}</span>
       </div>`;
     results.forEach(w => { html += wineRow(w); });
@@ -979,7 +1386,7 @@ function getFilteredWines() {
 function wineRow(w) {
   const subLabel = [w.uve, w.regione ? w.regione : w.paese].filter(Boolean).join(' · ');
   const imgHtml = w.img
-    ? `<div class="wine-row-img-placeholder img-shimmer"></div><img src="${w.img}" alt="${w.name}" style="display:none" onload="this.style.display='block';this.previousElementSibling.style.display='none'" onerror="this.style.display='none';this.previousElementSibling.classList.remove('img-shimmer');this.previousElementSibling.style.opacity='0.25';this.previousElementSibling.style.backgroundImage='none';this.previousElementSibling.style.background='linear-gradient(180deg,var(--gold) 0%,var(--burg) 100%)';">`
+    ? `<div class="wine-row-img-placeholder img-shimmer"></div><img src="${w.img}" alt="${w.name}" loading="lazy" style="display:none" onload="this.style.display='block';this.previousElementSibling.style.display='none'" onerror="this.style.display='none';this.previousElementSibling.classList.remove('img-shimmer');this.previousElementSibling.style.opacity='0.25';this.previousElementSibling.style.backgroundImage='none';this.previousElementSibling.style.background='linear-gradient(180deg,var(--gold) 0%,var(--burg) 100%)';">`
     : `<div class="wine-row-img-placeholder"></div>`;
   return `
   <div class="wine-row" onclick="openModal('${w.id}')">
