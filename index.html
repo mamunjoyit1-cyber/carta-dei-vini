@@ -930,17 +930,30 @@ body{top:0!important}
 
 <div class="pairing-bar" id="pairingBar">
   <div class="pairing-bar-inner">
-    <div class="pairing-hint">🍷 Con cosa lo abbini? Scegli e ti suggerisco il vino</div>
+    <div class="pairing-hint"
+      data-it="🍷 Con cosa lo abbini? Scegli e ti suggerisco il vino"
+      data-en="🍷 What are you having? Choose a dish and we'll suggest the wine"
+      data-fr="🍷 Avec quoi l'accompagner? Choisissez et nous suggérons le vin"
+      data-de="🍷 Womit kombinieren? Wähle ein Gericht und wir empfehlen den Wein">🍷 Con cosa lo abbini? Scegli e ti suggerisco il vino</div>
     <div class="pairing-chips-row">
-      <button class="pairing-chip" data-pair="antipasto" onclick="togglePairing('antipasto')">🥗 Antipasto</button>
-      <button class="pairing-chip" data-pair="pasta" onclick="togglePairing('pasta')">🍝 Pasta</button>
-      <button class="pairing-chip" data-pair="carne" onclick="togglePairing('carne')">🥩 Carne</button>
-      <button class="pairing-chip" data-pair="pesce" onclick="togglePairing('pesce')">🐟 Pesce</button>
-      <button class="pairing-chip" data-pair="aperitivo" onclick="togglePairing('aperitivo')">🍸 Aperitivo</button>
+      <button class="pairing-chip" data-pair="antipasto" onclick="togglePairing('antipasto')"
+        data-it="🥗 Antipasto" data-en="🥗 Starters" data-fr="🥗 Entrées" data-de="🥗 Vorspeisen">🥗 Antipasto</button>
+      <button class="pairing-chip" data-pair="pasta" onclick="togglePairing('pasta')"
+        data-it="🍝 Pasta" data-en="🍝 Pasta" data-fr="🍝 Pâtes" data-de="🍝 Pasta">🍝 Pasta</button>
+      <button class="pairing-chip" data-pair="carne" onclick="togglePairing('carne')"
+        data-it="🥩 Carne" data-en="🥩 Meat" data-fr="🥩 Viande" data-de="🥩 Fleisch">🥩 Carne</button>
+      <button class="pairing-chip" data-pair="pesce" onclick="togglePairing('pesce')"
+        data-it="🐟 Pesce" data-en="🐟 Fish" data-fr="🐟 Poisson" data-de="🐟 Fisch">🐟 Pesce</button>
+      <button class="pairing-chip" data-pair="aperitivo" onclick="togglePairing('aperitivo')"
+        data-it="🍸 Aperitivo" data-en="🍸 Aperitif" data-fr="🍸 Apéritif" data-de="🍸 Aperitif">🍸 Aperitivo</button>
     </div>
     <div class="pairing-dish-row">
       <button class="dish-open-btn" id="dishOpenBtn" onclick="openDishModal()">
-        🍽️ <span id="dishBtnLabel">Abbina al tuo piatto</span>
+        🍽️ <span id="dishBtnLabel"
+          data-it="Abbina al tuo piatto"
+          data-en="Match to your dish"
+          data-fr="Associer à votre plat"
+          data-de="Zum Gericht kombinieren">Abbina al tuo piatto</span>
       </button>
       <button class="dish-clear-btn" id="dishClearBtn" onclick="clearDish()" title="Rimuovi filtro">✕</button>
     </div>
@@ -1395,7 +1408,7 @@ function getFilteredWines() {
 function wineRow(w) {
   const subLabel = [w.uve, w.regione ? w.regione : w.paese].filter(Boolean).join(' · ');
   const imgHtml = w.img
-    ? `<div class="wine-row-img-placeholder img-shimmer"></div><img src="${w.img}" alt="${w.name}" loading="lazy" style="display:none" onload="this.style.display='block';this.previousElementSibling.style.display='none'" onerror="this.style.display='none';this.previousElementSibling.classList.remove('img-shimmer');this.previousElementSibling.style.opacity='0.25';this.previousElementSibling.style.backgroundImage='none';this.previousElementSibling.style.background='linear-gradient(180deg,var(--gold) 0%,var(--burg) 100%)';">`
+    ? `<div class="wine-row-img-placeholder img-shimmer"></div><img src="${w.img}" alt="${w.name}" loading="lazy" width="32" height="64" decoding="async" style="display:none" onload="this.style.display='block';this.previousElementSibling.style.display='none'" onerror="this.style.display='none';this.previousElementSibling.classList.remove('img-shimmer');this.previousElementSibling.style.opacity='0.25';this.previousElementSibling.style.backgroundImage='none';this.previousElementSibling.style.background='linear-gradient(180deg,var(--gold) 0%,var(--burg) 100%)';">`
     : `<div class="wine-row-img-placeholder"></div>`;
   return `
   <div class="wine-row" onclick="openModal('${w.id}')">
@@ -1529,6 +1542,21 @@ document.addEventListener('keydown', e => {
 
 // ── LANGUAGE SWITCHER ─────────────────────────────────────────
 function setLang(langCode) {
+  // Translate pairing UI elements
+  const lang = ['it','en','fr','de'].includes(langCode) ? langCode : 'it';
+  document.querySelectorAll('[data-it][data-en]').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (val !== null) el.textContent = val;
+  });
+  // Update dish button label if no dish selected
+  if (!activeDish) {
+    const label = document.getElementById('dishBtnLabel');
+    if (label) {
+      const val = label.getAttribute('data-' + lang);
+      if (val) label.textContent = val;
+    }
+  }
+
   if (langCode === 'it') {
     const domain = location.hostname;
     document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain;
