@@ -946,7 +946,6 @@ body{top:0!important}
       <button class="pairing-chip" data-pair="pasta" onclick="togglePairing('pasta')">🍝 Pasta</button>
       <button class="pairing-chip" data-pair="carne" onclick="togglePairing('carne')">🥩 Carne</button>
       <button class="pairing-chip" data-pair="pesce" onclick="togglePairing('pesce')">🐟 Pesce</button>
-      <button class="pairing-chip" data-pair="aperitivo" onclick="togglePairing('aperitivo')">🍸 Aperitivo</button>
     </div>
     <div class="pairing-dish-row">
       <button class="dish-open-btn" id="dishOpenBtn" onclick="openDishModal()">
@@ -1577,10 +1576,10 @@ function setLang(langCode) {
 
 // ── CHIP LABELS ───────────────────────────────────────────────
 const CHIP_LABELS = {
-  it: { antipasto:'🥗 Antipasto', pasta:'🍝 Pasta', carne:'🥩 Carne', pesce:'🐟 Pesce', aperitivo:'🍸 Aperitivo' },
-  en: { antipasto:'🥗 Starters',  pasta:'🍝 Pasta', carne:'🥩 Meat',  pesce:'🐟 Fish',   aperitivo:'🍸 Aperitif' },
-  fr: { antipasto:'🥗 Entrées',   pasta:'🍝 Pâtes', carne:'🥩 Viande',pesce:'🐟 Poisson',aperitivo:'🍸 Apéritif' },
-  de: { antipasto:'🥗 Vorspeisen',pasta:'🍝 Pasta', carne:'🥩 Fleisch',pesce:'🐟 Fisch',  aperitivo:'🍸 Aperitif' },
+  it: { antipasto:'🥗 Antipasto', pasta:'🍝 Pasta', carne:'🥩 Carne', pesce:'🐟 Pesce' },
+  en: { antipasto:'🥗 Starters',  pasta:'🍝 Pasta', carne:'🥩 Meat',  pesce:'🐟 Fish'   },
+  fr: { antipasto:'🥗 Entrées',   pasta:'🍝 Pâtes', carne:'🥩 Viande',pesce:'🐟 Poisson' },
+  de: { antipasto:'🥗 Vorspeisen',pasta:'🍝 Pasta', carne:'🥩 Fleisch',pesce:'🐟 Fisch'  },
 };
 
 function applyChipLabels(langCode) {
