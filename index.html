@@ -9,13 +9,19 @@
 <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<!-- Reset language to Italian on every page load -->
+<!-- Reset language to Italian on manual refresh only -->
 <script>
 (function(){
-  var d = location.hostname;
-  document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + d;
-  document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
-  document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + d;
+  if (!sessionStorage.getItem('langSwitch')) {
+    // manual refresh — clear GT cookie → Italian
+    var d = location.hostname;
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + d;
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + d;
+  } else {
+    // language-switch reload — keep cookie, clear flag
+    sessionStorage.removeItem('langSwitch');
+  }
 })();
 </script>
 
@@ -1545,6 +1551,7 @@ function setLang(langCode) {
     document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain;
     document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
     document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + domain;
+    sessionStorage.setItem('langSwitch', 'it');
     location.reload();
     return;
   }
@@ -1560,6 +1567,7 @@ function setLang(langCode) {
     sel.value = langCode;
     sel.dispatchEvent(new Event('change'));
   } else {
+    sessionStorage.setItem('langSwitch', langCode);
     location.reload();
   }
 }
