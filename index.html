@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hotel Ristorante Lago Bin – Carta dei Vini</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%237a1010'/%3E%3Ctext x='50' y='68' font-family='Georgia,Palatino,serif' font-size='48' font-weight='700' fill='%23ffffff' text-anchor='middle'%3ELB%3C/text%3E%3C/svg%3E"> <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%237a1010'/%3E%3Ctext x='50' y='68' font-family='Georgia,Palatino,serif' font-size='48' font-weight='700' fill='%23ffffff' text-anchor='middle'%3ELB%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <!-- Reset language to Italian on manual refresh only -->
@@ -903,7 +905,7 @@ body{top:0!important}
        onerror="this.style.display='none';document.getElementById('logoFb').style.display='flex'">
   <div class="hero-logo-fb" id="logoFb">LB</div>
   <div class="hero-eyebrow">✦ Hotel Ristorante ✦</div>
-  <div class="hero-title notranslate">LAGO BIN</div>
+  <div class="hero-title">LAGO BIN</div>
   <div class="hero-divider"></div>
   <div class="hero-subtitle">Carta dei Vini</div>
 </div>
@@ -1069,6 +1071,7 @@ const WINES = [
   { id:"rossese-rosato-poggi-elmo", cat:"territorio", subcat:"Vini Rosati del Territorio", name:"Rossese di Dolceacqua Rosato – Poggi dell' Elmo", price:21, img:"images/rossese-rosato-poggi-del-elmo.png", paese:"Italia", regione:"Liguria", colore:"Rosa tenue", gusto:"Delicato con profumi di rosa", desc:"Morbido e sapido", vinif:"Uva rossa vinificata in bianco, 12 ore di macerazione a contatto con le bucce", pairing:["pesce","aperitivo","carne","antipasto"] },
   { id:"rosato-postu-da-ve-lombardi", cat:"territorio", subcat:"Vini Rosati del Territorio", name:"Rosato \"Postu da Vé\" – Lombardi", price:28, img:"images/rosato-postu-da-ve-lombardi.png", paese:"Italia", regione:"Liguria", uve:"80% Rossese, 20% Granaccia", colore:"Rosa cipria pallido", gusto:"Fresco, asciutto, sapido e mediamente strutturato", desc:"Di media intensità olfattiva, con sentori di piccoli frutti di bosco e accenni d'agrumi", vinif:"Vinificazione in bianco con batonnage, affinamento in vasche d'acciaio per quattro mesi con ripetuti batonnage", pairing:["pesce","aperitivo","carne","antipasto"] },
   { id:"rossese-crespi", cat:"territorio", subcat:"Vini Rossi del Territorio", name:"Rossese di Dolceacqua – Crespi", price:21, img:"images/crespi.png", paese:"Italia", regione:"Liguria", gradazione:"13%", colore:"Rosso rubino con riflessi violacei", gusto:"Asciutto, sapido, con tannini eleganti e una buona persistenza", desc:"Note di frutti rossi maturi, erbe mediterranee e una leggera sfumatura speziata. Un Rossese elegante e tipico del territorio di Dolceacqua.", vinif:"Fermentazione in acciaio con macerazione sulle bucce, affinamento in acciaio per alcuni mesi.", pairing:["carne","formaggi","pasta","antipasto"] },
+  { id:"crespi-rosato", cat:"territorio", subcat:"Vini Rosati del Territorio", name:"Rosato – Crespi", price:23, img:"images/crespi-rosato.png", paese:"Italia", regione:"Liguria", uve:"Rossese", colore:"Rosa con riflessi ramati", gusto:"Fresco, elegante, con note di piccoli frutti rossi e una piacevole sapidità", desc:"Rosato ligure della cantina Crespi, dal carattere delicato e fruttato.", pairing:["pesce","antipasto"] },
   { id:"roero-arneis-2023", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Roero Arneis Ero – Clavesana", price:23, img:"images/clavesana-roero-arneis-ero-2023.png", sigla:"Roero DOCG", paese:"Italia", regione:"Piemonte", gradazione:"13%", uve:"Arneis 100%", colore:"Giallo paglierino, con riflessi verdognoli", desc:"Al naso si esprime con sentori fruttati, note floreali e cenni vegetali. Al palato si rivela fresco, di piacevole sapidità ed equilibrato", pairing:["pesce","aperitivo","pasta","antipasto"] },
   { id:"falanghina-2022", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Falanghina Beneventano – Vinosia", price:18, img:"images/vinosia-falanghina-beneventano-2022.png", sigla:"Falanghina IGT", gradazione:"12,5%", uve:"Falanghina", colore:"Giallo paglierino intenso", gusto:"Buon corpo, rotondo, con un sorso perfettamente equilibrato.", desc:"Note fruttate, anche esotici, sentori di banana, ananas, kiwi", pairing:["pesce","aperitivo","pasta","antipasto"] },
   { id:"greco-di-tufo-vinosia", cat:"bianchi", subcat:"Selezione vini Bianchi Nazionali", name:"Greco di Tufo – Vinosia", price:21, img:"images/greco-di-tufo-vinosia.png", paese:"Italia", regione:"Campania", uve:"100% Greco", desc:"Bianco campano fresco e minerale, tipico della zona di Tufo", pairing:["pesce","aperitivo","antipasto"] },
