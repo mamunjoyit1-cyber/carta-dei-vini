@@ -1835,6 +1835,9 @@ window.addEventListener('message', function(event){
 function changeWineQty(id, delta) {
   const w = WINES.find(x => x.id === id);
   if (!w) return;
+  wineCartQty[id] = Math.max(0, (wineCartQty[id]||0) + (delta>0?1:-1));
+  const qd = document.getElementById('wqty-' + id);
+  if (qd) qd.textContent = wineCartQty[id];
   try {
     if (window.parent && window.parent !== window) {
       window.parent.postMessage({ type: 'wineCartUpdate', id: w.id, name: w.name, price: w.price, delta: delta > 0 ? 1 : -1 }, '*');
