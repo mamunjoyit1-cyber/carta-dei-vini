@@ -64,24 +64,29 @@ img{display:block}
 
 .hero{
   background:
-    linear-gradient(135deg, rgba(58,6,9,0.90) 0%, rgba(26,2,6,0.93) 55%, rgba(26,2,6,0.97) 100%),
-    url('images/carta-vini-hero-mobile.jpg') center/cover no-repeat;
-  padding: 36px 20px 28px;
+    linear-gradient(180deg, rgba(20,3,6,0.42) 0%, rgba(20,3,6,0.30) 45%, rgba(20,3,6,0.72) 100%),
+    url('images/carta-vini-hero-mobile.jpg') center 32%/cover no-repeat;
+  padding: 44px 20px 32px;
+  min-height: 220px;
   text-align: center;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 @media(min-width:561px){
   .hero{
     background:
-      linear-gradient(135deg, rgba(58,6,9,0.90) 0%, rgba(26,2,6,0.93) 55%, rgba(26,2,6,0.97) 100%),
-      url('images/carta-vini-hero.jpg') center/cover no-repeat;
+      linear-gradient(180deg, rgba(20,3,6,0.38) 0%, rgba(20,3,6,0.26) 45%, rgba(20,3,6,0.68) 100%),
+      url('images/carta-vini-hero.jpg') center 32%/cover no-repeat;
+    min-height: 300px;
   }
 }
 .hero::before{
   content:'';
   position:absolute;inset:0;
-  background: radial-gradient(ellipse at 50% 100%, rgba(201,168,76,0.08) 0%, transparent 65%);
+  background: linear-gradient(180deg, rgba(58,6,9,0.15) 0%, transparent 40%, rgba(26,2,6,0.35) 100%);
   pointer-events:none;
 }
 .hero-logo{
@@ -91,6 +96,7 @@ img{display:block}
   border:2px solid rgba(201,168,76,0.5);
   margin:0 auto 16px;
   display:block;
+  box-shadow:0 4px 14px rgba(0,0,0,0.5);
 }
 .hero-logo-fb{
   width:70px;height:70px;
@@ -109,7 +115,8 @@ img{display:block}
   color:var(--gold);
   text-transform:uppercase;
   margin-bottom:10px;
-  opacity:0.85;
+  opacity:0.9;
+  text-shadow:0 2px 6px rgba(0,0,0,0.7);
 }
 .hero-eyebrow span{margin:0 8px;opacity:0.5}
 .hero-title{
@@ -121,6 +128,7 @@ img{display:block}
   text-transform:uppercase;
   line-height:1.05;
   margin-bottom:12px;
+  text-shadow:0 3px 10px rgba(0,0,0,0.75);
 }
 .hero-divider{
   width:60px;height:1px;
@@ -132,8 +140,9 @@ img{display:block}
   font-style:italic;
   font-size:18px;
   color:var(--gold3);
-  opacity:0.8;
+  opacity:0.9;
   letter-spacing:0.12em;
+  text-shadow:0 2px 6px rgba(0,0,0,0.7);
 }
 
 .controls{
@@ -1597,18 +1606,25 @@ function wineRow(w) {
 }
 
 // ── VINO DELLA CASA (SFUSO) ─────────────────────────────────
+function csT(key, fallback){
+  const lang = window._currentLang || 'it';
+  return (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) || fallback;
+}
+
 const CASA_SIMPLE_WINES = {
-  prosecco:   { name:'Prosecco DOC', price:5 },
-  bollicine:  { name:'Bollicine', price:5, uve:'Chardonnay Veneto' },
-  rossese:    { name:'Rossese', price:5, uve:'Rossese di Dolceacqua' },
-  vermentino: { name:'Vermentino', price:5, uve:'Vermentino' },
-  pigato:     { name:'Pigato', price:5, uve:'Pigato' }
+  prosecco:   { name:'Prosecco DOC', price:5, group:'bollicine' },
+  bollicine:  { name:'Bollicine', price:5, uve:'Chardonnay Veneto', group:'bollicine' },
+  rossese:    { name:'Rossese', price:5, uve:'Rossese di Dolceacqua', group:'territorio' },
+  vermentino: { name:'Vermentino', price:5, uve:'Vermentino', group:'territorio' },
+  pigato:     { name:'Pigato', price:5, uve:'Pigato', group:'territorio' }
 };
 let casaSimpleQty = { prosecco:0, bollicine:0, rossese:0, vermentino:0, pigato:0 };
 
 const HOUSE_WINE_KIND_PRICES = { calice:3, '0.5':8, '0.25':6 };
 const HOUSE_WINE_UVE = { rosso:'Barbera', bianco:'Pinot Grigio', rosato:'Raboso' };
-const HOUSE_COLOR_LABELS = { rosso:'🍷 Rosso', bianco:'🥂 Bianco', rosato:'🌸 Rosato' };
+function houseColorLabel(color){
+  return csT('color_'+color, { rosso:'🍷 Rosso', bianco:'🥂 Bianco', rosato:'🌸 Rosato' }[color]);
+}
 let houseWineSize = 'calice';
 let houseWineQty = { calice:{rosso:0,bianco:0,rosato:0}, '0.5':{rosso:0,bianco:0,rosato:0}, '0.25':{rosso:0,bianco:0,rosato:0} };
 
@@ -1617,7 +1633,7 @@ function renderCasaSection(isOpen){
     <div class="cat-header" onclick="toggleCat('casa')">
       <div class="cat-header-left">
         <span class="cat-icon">🥂</span>
-        <span class="cat-label">${(window._catLabels && window._catLabels.casa) || 'Vini al Calice'}</span>
+        <span class="cat-label">${(window._catLabels && window._catLabels.casa) || csT('cat_casa','Vini al Calice')}</span>
       </div>
       <span class="cat-arrow">▾</span>
     </div>
@@ -1625,12 +1641,11 @@ function renderCasaSection(isOpen){
       <img class="casa-banner" src="images/vino-sfuso-banner.jpg" alt="Vino Sfuso" loading="lazy" onerror="this.style.display='none'">
       <div class="subcat-header">Vino della Casa</div>
       <div class="casa-size-tabs">
-        <button class="casa-size-tab active" onclick="setHouseWineSize('calice',this)">Calice</button>
-        <button class="casa-size-tab" onclick="setHouseWineSize('0.5',this)">Bottiglia 0,5L</button>
-        <button class="casa-size-tab" onclick="setHouseWineSize('0.25',this)">Bottiglia 0,25L</button>
+        <button class="casa-size-tab active" onclick="setHouseWineSize('calice',this)">${csT('size_calice','Calice')}</button>
+        <button class="casa-size-tab" onclick="setHouseWineSize('0.5',this)">${csT('size_carafe_05','Caraffa 0,5L')}</button>
+        <button class="casa-size-tab" onclick="setHouseWineSize('0.25',this)">${csT('size_carafe_025','Caraffa 0,25L')}</button>
       </div>
       <div id="houseWineRows" style="padding:6px 14px 14px"></div>
-      <div class="subcat-header">Altri al Calice</div>
       <div id="calicebar-rows" style="padding:6px 14px 14px"></div>
     </div>
   </div>`;
@@ -1639,17 +1654,26 @@ function renderCasaSection(isOpen){
 function renderCaliceBarRows(){
   const box = document.getElementById('calicebar-rows');
   if(!box) return;
-  box.innerHTML = Object.entries(CASA_SIMPLE_WINES).map(([id,w])=>{
+  const uveLabel = csT('detail_uve','Uve');
+  let html = '', lastGroup = null;
+  Object.entries(CASA_SIMPLE_WINES).forEach(([id,w])=>{
+    if (w.group !== lastGroup) {
+      lastGroup = w.group;
+      if (w.group === 'territorio') {
+        html += `<div class="subcat-header" style="margin:6px -14px 0">${csT('subcat_casa_territorio','Selezione del Territorio')}</div>`;
+      }
+    }
     const q = casaSimpleQty[id];
-    return `<div class="hb-row${q>0?' has-qty':''}">
-      <div class="hb-label">🥂 ${w.name}<span class="hb-price">${w.uve?('Uve: '+w.uve+' · '):''}€${w.price}</span></div>
+    html += `<div class="hb-row${q>0?' has-qty':''}">
+      <div class="hb-label">🥂 ${w.name}<span class="hb-price">${w.uve?(uveLabel+': '+w.uve+' · '):''}€${w.price}</span></div>
       <div class="hb-qty-row">
         <button class="hb-qty-btn" onclick="changeCasaSimpleQty('${id}',-1)">−</button>
         <span class="hb-qty-num">${q}</span>
         <button class="hb-qty-btn" onclick="changeCasaSimpleQty('${id}',1)">+</button>
       </div>
     </div>`;
-  }).join('');
+  });
+  box.innerHTML = html;
 }
 
 function changeCasaSimpleQty(id, delta){
@@ -1677,10 +1701,11 @@ function renderHouseWineRows(){
   const box = document.getElementById('houseWineRows');
   if(!box) return;
   const price = HOUSE_WINE_KIND_PRICES[houseWineSize];
+  const uveLabel = csT('detail_uve','Uve');
   box.innerHTML = ['rosso','bianco','rosato'].map(color=>{
     const q = houseWineQty[houseWineSize][color];
     return `<div class="hb-row${q>0?' has-qty':''}">
-      <div class="hb-label">${HOUSE_COLOR_LABELS[color]}<span class="hb-price">Uve: ${HOUSE_WINE_UVE[color]} · €${price}</span></div>
+      <div class="hb-label">${houseColorLabel(color)}<span class="hb-price">${uveLabel}: ${HOUSE_WINE_UVE[color]} · €${price}</span></div>
       <div class="hb-qty-row">
         <button class="hb-qty-btn" onclick="changeHouseWineQty('${color}',-1)">−</button>
         <span class="hb-qty-num">${q}</span>
@@ -1697,7 +1722,7 @@ function changeHouseWineQty(color, delta){
   renderHouseWineRows();
   const price = HOUSE_WINE_KIND_PRICES[size];
   const itemId = size==='calice' ? 'housewine_'+color : 'housebottle_'+size+'_'+color;
-  const sizeLabel = size==='calice' ? 'Calice' : (size==='0.5'?'0,5L':'0,25L');
+  const sizeLabel = size==='calice' ? csT('size_calice','Calice') : (size==='0.5'?csT('size_carafe_05','Caraffa 0,5L'):csT('size_carafe_025','Caraffa 0,25L'));
   const nameMap = { rosso:'Vino Rosso della Casa', bianco:'Vino Bianco della Casa', rosato:'Vino Rosato della Casa' };
   try {
     if (window.parent && window.parent !== window) {
