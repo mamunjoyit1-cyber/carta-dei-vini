@@ -63,16 +63,30 @@ body{
 img{display:block}
 
 .hero{
-  background: radial-gradient(ellipse at 60% 0%, var(--burg-mid) 0%, var(--burg-dark) 55%, #1a0206 100%);
-  padding: 36px 20px 28px;
+  background:
+    linear-gradient(180deg, rgba(20,3,6,0.42) 0%, rgba(20,3,6,0.30) 45%, rgba(20,3,6,0.72) 100%),
+    url('images/carta-vini-hero-mobile.jpg') center 32%/cover no-repeat;
+  padding: 44px 20px 32px;
+  min-height: 220px;
   text-align: center;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+@media(min-width:561px){
+  .hero{
+    background:
+      linear-gradient(180deg, rgba(20,3,6,0.38) 0%, rgba(20,3,6,0.26) 45%, rgba(20,3,6,0.68) 100%),
+      url('images/carta-vini-hero.jpg') center 32%/cover no-repeat;
+    min-height: 300px;
+  }
 }
 .hero::before{
   content:'';
   position:absolute;inset:0;
-  background: radial-gradient(ellipse at 50% 100%, rgba(201,168,76,0.08) 0%, transparent 65%);
+  background: linear-gradient(180deg, rgba(58,6,9,0.15) 0%, transparent 40%, rgba(26,2,6,0.35) 100%);
   pointer-events:none;
 }
 .hero-logo{
@@ -82,6 +96,7 @@ img{display:block}
   border:2px solid rgba(201,168,76,0.5);
   margin:0 auto 16px;
   display:block;
+  box-shadow:0 4px 14px rgba(0,0,0,0.5);
 }
 .hero-logo-fb{
   width:70px;height:70px;
@@ -100,7 +115,8 @@ img{display:block}
   color:var(--gold);
   text-transform:uppercase;
   margin-bottom:10px;
-  opacity:0.85;
+  opacity:0.9;
+  text-shadow:0 2px 6px rgba(0,0,0,0.7);
 }
 .hero-eyebrow span{margin:0 8px;opacity:0.5}
 .hero-title{
@@ -112,6 +128,7 @@ img{display:block}
   text-transform:uppercase;
   line-height:1.05;
   margin-bottom:12px;
+  text-shadow:0 3px 10px rgba(0,0,0,0.75);
 }
 .hero-divider{
   width:60px;height:1px;
@@ -123,8 +140,9 @@ img{display:block}
   font-style:italic;
   font-size:18px;
   color:var(--gold3);
-  opacity:0.8;
+  opacity:0.9;
   letter-spacing:0.12em;
+  text-shadow:0 2px 6px rgba(0,0,0,0.7);
 }
 
 .controls{
@@ -968,6 +986,23 @@ img{display:block}
 }
 #langSelect:focus{border-color:var(--gold);background:rgba(255,255,255,0.13)}
 #langSelect option{background:#3d0609;color:#f0d898}
+
+.hb-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:8px;border:1px solid var(--line-cream);background:var(--cream3);margin-bottom:6px}
+.hb-row.has-qty{border-color:var(--gold);background:#fdf5e8}
+.hb-label{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:600;color:var(--text-dark);display:flex;flex-direction:column;gap:2px}
+.hb-price{font-family:'Montserrat',sans-serif;font-size:10px;color:var(--text-lite);font-weight:400}
+.hb-qty-row{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.hb-qty-btn{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--gold);background:var(--white);color:var(--burg);font-size:16px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent}
+.hb-qty-num{font-size:14px;font-weight:700;color:var(--burg);min-width:18px;text-align:center}
+.casa-size-tabs{display:flex;gap:6px;padding:10px 14px 4px}
+.casa-size-tab{flex:1;padding:8px;border-radius:20px;border:1px solid var(--line-cream);background:var(--cream3);color:var(--text-mid);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;cursor:pointer;text-align:center;-webkit-tap-highlight-color:transparent}
+.casa-size-tab.active{background:var(--burg);color:var(--gold2);border-color:var(--burg)}
+.casa-banner{
+  width:100%;
+  height:120px;
+  object-fit:cover;
+  display:block;
+}
 </style>
 </head>
 <body>
@@ -1212,6 +1247,7 @@ const CATS = [
   { id:'bianchi',    label:'Vini Bianchi',          icon:'🍋' },
   { id:'rosati',     label:'Vini Rosati',           icon:'🌸' },
   { id:'rossi',      label:'Vini Rossi',            icon:'🍷' },
+  { id:'casa',       label:'Vini al Calice',        icon:'🥂' },
 ];
 
 // ── STATE ─────────────────────────────────────────────────────
@@ -1479,6 +1515,10 @@ function renderAll() {
 
   let html = '';
   CATS.forEach(cat => {
+    if (cat.id === 'casa') {
+      html += renderCasaSection(openCats.has('casa'));
+      return;
+    }
     const wines = WINES.filter(w => w.cat === cat.id && (typeof unavailableWineIds === 'undefined' || !unavailableWineIds.has(w.id)));
     if (wines.length === 0) return;
     const isOpen = openCats.has(cat.id);
@@ -1510,6 +1550,8 @@ function renderAll() {
   });
 
   main.innerHTML = html;
+  if (document.getElementById('houseWineRows')) renderHouseWineRows();
+  if (document.getElementById('calicebar-rows')) renderCaliceBarRows();
 }
 
 function toggleCat(id) {
@@ -1561,6 +1603,135 @@ function wineRow(w) {
       </div>
     </div>
   </div>`;
+}
+
+// ── VINO DELLA CASA (SFUSO) ─────────────────────────────────
+function csT(key, fallback){
+  const lang = window._currentLang || 'it';
+  return (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) || fallback;
+}
+
+const CASA_SIMPLE_WINES = {
+  prosecco:   { name:'Prosecco DOC', price:5, group:'bollicine' },
+  bollicine:  { name:'Bollicine', price:5, uve:'Chardonnay Veneto', group:'bollicine' },
+  rossese:    { name:'Rossese', price:5, uve:'Rossese di Dolceacqua', group:'territorio' },
+  vermentino: { name:'Vermentino', price:5, uve:'Vermentino', group:'territorio' },
+  pigato:     { name:'Pigato', price:5, uve:'Pigato', group:'territorio' }
+};
+let casaSimpleQty = { prosecco:0, bollicine:0, rossese:0, vermentino:0, pigato:0 };
+
+const HOUSE_WINE_KIND_PRICES = { calice:3, '0.5':8, '0.25':6 };
+const HOUSE_WINE_UVE = { rosso:'Barbera', bianco:'Pinot Grigio', rosato:'Raboso' };
+function houseColorLabel(color){
+  return csT('color_'+color, { rosso:'🍷 Rosso', bianco:'🥂 Bianco', rosato:'🌸 Rosato' }[color]);
+}
+let houseWineSize = 'calice';
+let houseWineQty = { calice:{rosso:0,bianco:0,rosato:0}, '0.5':{rosso:0,bianco:0,rosato:0}, '0.25':{rosso:0,bianco:0,rosato:0} };
+
+function renderCasaSection(isOpen){
+  return `<div class="cat-section${isOpen?' open':''}" id="cat-casa">
+    <div class="cat-header" onclick="toggleCat('casa')">
+      <div class="cat-header-left">
+        <span class="cat-icon">🥂</span>
+        <span class="cat-label">${(window._catLabels && window._catLabels.casa) || csT('cat_casa','Vini al Calice')}</span>
+      </div>
+      <span class="cat-arrow">▾</span>
+    </div>
+    <div class="cat-body">
+      <img class="casa-banner" src="images/vino-sfuso-banner.jpg" alt="Vino Sfuso" loading="lazy" onerror="this.style.display='none'">
+      <div class="subcat-header">Vino della Casa</div>
+      <div class="casa-size-tabs">
+        <button class="casa-size-tab active" onclick="setHouseWineSize('calice',this)">${csT('size_calice','Calice')}</button>
+        <button class="casa-size-tab" onclick="setHouseWineSize('0.5',this)">${csT('size_carafe_05','Caraffa 0,5L')}</button>
+        <button class="casa-size-tab" onclick="setHouseWineSize('0.25',this)">${csT('size_carafe_025','Caraffa 0,25L')}</button>
+      </div>
+      <div id="houseWineRows" style="padding:6px 14px 14px"></div>
+      <div id="calicebar-rows" style="padding:6px 14px 14px"></div>
+    </div>
+  </div>`;
+}
+
+function renderCaliceBarRows(){
+  const box = document.getElementById('calicebar-rows');
+  if(!box) return;
+  const uveLabel = csT('detail_uve','Uve');
+  let html = '', lastGroup = null;
+  Object.entries(CASA_SIMPLE_WINES).forEach(([id,w])=>{
+    if (w.group !== lastGroup) {
+      lastGroup = w.group;
+      if (w.group === 'territorio') {
+        html += `<div class="subcat-header" style="margin:6px -14px 0">${csT('subcat_casa_territorio','Selezione del Territorio')}</div>`;
+      }
+    }
+    const q = casaSimpleQty[id];
+    html += `<div class="hb-row${q>0?' has-qty':''}">
+      <div class="hb-label">🥂 ${w.name}<span class="hb-price">${w.uve?(uveLabel+': '+w.uve+' · '):''}€${w.price}</span></div>
+      <div class="hb-qty-row">
+        <button class="hb-qty-btn" onclick="changeCasaSimpleQty('${id}',-1)">−</button>
+        <span class="hb-qty-num">${q}</span>
+        <button class="hb-qty-btn" onclick="changeCasaSimpleQty('${id}',1)">+</button>
+      </div>
+    </div>`;
+  });
+  box.innerHTML = html;
+}
+
+function changeCasaSimpleQty(id, delta){
+  const w = CASA_SIMPLE_WINES[id];
+  casaSimpleQty[id] = Math.max(0, casaSimpleQty[id] + delta);
+  renderCaliceBarRows();
+  try {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({
+        type:'houseWineCartUpdate',
+        itemId:'housewine_'+id, name:w.name, price:w.price, detail:'Calice', delta: delta>0?1:-1
+      }, '*');
+    }
+  } catch(e){}
+}
+
+function setHouseWineSize(size, el){
+  houseWineSize = size;
+  document.querySelectorAll('.casa-size-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderHouseWineRows();
+}
+
+function renderHouseWineRows(){
+  const box = document.getElementById('houseWineRows');
+  if(!box) return;
+  const price = HOUSE_WINE_KIND_PRICES[houseWineSize];
+  const uveLabel = csT('detail_uve','Uve');
+  box.innerHTML = ['rosso','bianco','rosato'].map(color=>{
+    const q = houseWineQty[houseWineSize][color];
+    return `<div class="hb-row${q>0?' has-qty':''}">
+      <div class="hb-label">${houseColorLabel(color)}<span class="hb-price">${uveLabel}: ${HOUSE_WINE_UVE[color]} · €${price}</span></div>
+      <div class="hb-qty-row">
+        <button class="hb-qty-btn" onclick="changeHouseWineQty('${color}',-1)">−</button>
+        <span class="hb-qty-num">${q}</span>
+        <button class="hb-qty-btn" onclick="changeHouseWineQty('${color}',1)">+</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function changeHouseWineQty(color, delta){
+  const size = houseWineSize;
+  const q = houseWineQty[size];
+  q[color] = Math.max(0, q[color] + delta);
+  renderHouseWineRows();
+  const price = HOUSE_WINE_KIND_PRICES[size];
+  const itemId = size==='calice' ? 'housewine_'+color : 'housebottle_'+size+'_'+color;
+  const sizeLabel = size==='calice' ? csT('size_calice','Calice') : (size==='0.5'?csT('size_carafe_05','Caraffa 0,5L'):csT('size_carafe_025','Caraffa 0,25L'));
+  const nameMap = { rosso:'Vino Rosso della Casa', bianco:'Vino Bianco della Casa', rosato:'Vino Rosato della Casa' };
+  try {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({
+        type:'houseWineCartUpdate',
+        itemId, name:nameMap[color], price, detail:sizeLabel, delta: delta>0?1:-1
+      }, '*');
+    }
+  } catch(e){}
 }
 
 // ── SIMILAR WINES ─────────────────────────────────────────────
@@ -1829,6 +2000,17 @@ window.addEventListener('message', function(event){
     const qd = document.getElementById('wqty-'+w.id);
     if(qd) qd.textContent = count;
   });
+  ['prosecco','bollicine','rossese','vermentino','pigato'].forEach(id=>{
+    casaSimpleQty[id] = externalCart.filter(c=>c.itemId==='housewine_'+id).length;
+  });
+  ['calice','0.5','0.25'].forEach(size=>{
+    ['rosso','bianco','rosato'].forEach(color=>{
+      const itemId = size==='calice' ? 'housewine_'+color : 'housebottle_'+size+'_'+color;
+      houseWineQty[size][color] = externalCart.filter(c=>c.itemId===itemId).length;
+    });
+  });
+  renderCaliceBarRows();
+  renderHouseWineRows();
   updateWineCart();
 });
 
