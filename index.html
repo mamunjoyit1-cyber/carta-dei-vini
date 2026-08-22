@@ -84,7 +84,8 @@ img{display:block}
   .hero{
     background:
       linear-gradient(180deg, rgba(20,3,6,0.38) 0%, rgba(20,3,6,0.26) 45%, rgba(20,3,6,0.68) 100%),
-      url('images/carta-vini-hero.jpg') center 32%/cover no-repeat;
+      url('images/carta-vini-hero.jpg') center center/contain no-repeat;
+    background-color: #1a0206;
     min-height: clamp(260px, 20vw, 420px);
   }
 }
@@ -2121,6 +2122,5 @@ applyWineAvailability();
   applyChipLabels('it');
 }());
 </script>
-<script src="carta-vini-prices-patch.js"></script>
 </body>
 </html>
